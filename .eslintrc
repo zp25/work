@@ -1,0 +1,15 @@
+{
+  "root": true,
+  "env": {
+    "browser": true
+  },
+  "globals": {
+    // plugins
+    "md5": false,
+    // common
+    "Base": false,
+    "buildAPI": false,
+    "imagePath": false
+  },
+  "extends": "google"
+}

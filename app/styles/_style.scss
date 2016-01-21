@@ -1,0 +1,47 @@
+// font-size(px): 12, 14, 16, 20, 34
+$font-light: 12px;
+$font: 14px;
+$font-bold: 16px;
+$font-bolder: 20px;
+
+$line-height: $font + 10;
+
+*,
+*:before,
+*:after {
+  box-sizing: border-box;
+  -webkit-tap-highlight-color: rgba(0,0,0,0);
+  -webkit-tap-highlight-color: transparent;  // for some Androids
+}
+
+html, button, input, textarea, select {
+  outline: none;
+  padding: 0;
+  margin: 0;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+a:link,
+a:hover,
+a:active,
+a:visited {
+  text-decoration: none;
+}
+
+// clear fix
+.cf:after {
+  content: '';
+  display: table;
+  clear: both;
+}
+
+html {
+  height: 100%;
+
+  body {
+    height: 100%;
+    font-size: $font;
+    line-height: $line-height;
+  }
+}

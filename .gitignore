@@ -1,0 +1,4 @@
+.tmp/
+assets/
+dist/
+node_modules/
