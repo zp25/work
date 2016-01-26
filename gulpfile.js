@@ -76,7 +76,18 @@ function scripts() {
 // HTML
 function html() {
   return gulp.src('app/**/*.html')
-    .pipe($.useref({ searchPath: '{.tmp,app}' }))
+    .pipe($.useref({searchPath: '{.tmp,app}'}))
+    .pipe($.if('*.html', $.htmlmin({
+      removeComments: true,
+      collapseWhitespace: true,
+      collapseBooleanAttributes: true,
+      removeAttributeQuotes: true,
+      removeRedundantAttributes: true,
+      removeEmptyAttributes: true,
+      removeScriptTypeAttributes: true,
+      removeStyleLinkTypeAttributes: true,
+      removeOptionalTags: true
+    })))
     .pipe($.if('*.html', $.size({title: 'html', showFiles: true})))
     .pipe(gulp.dest('dist'));
 }
@@ -85,7 +96,7 @@ function html() {
 function serve() {
   bs.init({
     notify: false,
-    logPrefix: 'Template',
+    logPrefix: 'work',
     server: {
       baseDir: ['.tmp', 'app']
     },
@@ -102,7 +113,7 @@ function serve() {
 function serveDist() {
   bs.init({
     notify: false,
-    logPrefix: 'Rens Chat',
+    logPrefix: 'work',
     server: 'dist',
     port: 3001
   });
