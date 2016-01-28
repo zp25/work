@@ -126,7 +126,6 @@ function clean() {
 
 // Tasks
 gulp.task(clean);
-gulp.task(lint);
 
 // Clean cache
 gulp.task('clean:cache', function(cb) {
