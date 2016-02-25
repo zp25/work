@@ -33,6 +33,17 @@ function copy() {
 
 // Styles
 function sass() {
+  var AUTOPREFIXER_BROWSERS = [
+    'ie >= 10',
+    'ie_mob >= 10',
+    'ff >= 30',
+    'chrome >= 34',
+    'safari >= 7',
+    'opera >= 23',
+    'ios >= 7',
+    'android >= 4.4',
+    'bb >= 10'
+  ];
   var src = [
     'app/styles/**/*.scss',
     'app/styles/**/*.css'
@@ -44,6 +55,7 @@ function sass() {
       .pipe($.sass({precision: 10})
         .on('error', $.sass.logError)
       )
+    .pipe($.autoprefixer(AUTOPREFIXER_BROWSERS))
     .pipe($.sourcemaps.write())
     .pipe(gulp.dest('.tmp/styles'))
       .pipe($.if('*.css', $.cssnano()))
