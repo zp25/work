@@ -10,8 +10,7 @@ $line-height: $font + 10;
 *:before,
 *:after {
   box-sizing: border-box;
-  -webkit-tap-highlight-color: rgba(0,0,0,0);
-  -webkit-tap-highlight-color: transparent;  // for some Androids
+  -webkit-tap-highlight-color: transparent;
 }
 
 html, button, input, textarea, select {
@@ -34,6 +33,16 @@ a:visited {
   content: '';
   display: table;
   clear: both;
+}
+
+/**
+ * mixins
+ */
+@mixin flexbox($direction:row, $wrap:nowrap, $justify-content:flex-start, $align-items:flex-start) {
+  display: flex;
+  flex-flow: $direction $wrap;
+  justify-content: $justify-content;
+  align-items: $align-items;
 }
 
 html {
