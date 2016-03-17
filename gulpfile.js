@@ -55,7 +55,7 @@ function sass() {
       .pipe($.sass({precision: 10})
         .on('error', $.sass.logError)
       )
-    .pipe($.autoprefixer(AUTOPREFIXER_BROWSERS))
+      .pipe($.autoprefixer(AUTOPREFIXER_BROWSERS))
     .pipe($.sourcemaps.write())
     .pipe(gulp.dest('.tmp/styles'))
       .pipe($.if('*.css', $.cssnano()))
