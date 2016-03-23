@@ -4,10 +4,15 @@ var bs = require('browser-sync').create();
 var gulpLoadPlugins = require('gulp-load-plugins');
 
 var $ = gulpLoadPlugins();
+var excludeJs = ['!app/scripts/md5.min.js'];
 
 // Lint JavaScript
 function lint() {
-  return gulp.src(['app/scripts/**/*.js'])
+  var src = ['app/scripts/**/*.js'];
+
+  src = src.concat(excludeJs);
+
+  return gulp.src(src)
     .pipe($.eslint())
     .pipe($.eslint.format())
     .pipe($.if(!bs.active, $.eslint.failOnError()));
@@ -68,9 +73,10 @@ function sass() {
 function scripts() {
   var src = [
     'app/scripts/common.js',
-    'app/scripts/main.js',
-    '!app/scripts/md5.min.js'
+    'app/scripts/main.js'
   ];
+
+  src = src.concat(excludeJs);
 
   return gulp.src(src)
     .pipe($.newer('.tmp/scripts'))
