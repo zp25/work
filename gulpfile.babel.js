@@ -38,7 +38,7 @@ function copy() {
 
 // Styles
 function sass() {
-  var AUTOPREFIXER_BROWSERS = [
+  const AUTOPREFIXER_BROWSERS = [
     'ie >= 10',
     'ie_mob >= 10',
     'ff >= 30',
@@ -49,7 +49,7 @@ function sass() {
     'android >= 4.4',
     'bb >= 10'
   ];
-  var src = [
+  const src = [
     'app/styles/**/*.scss',
     'app/styles/**/*.css'
   ];
@@ -71,7 +71,7 @@ function sass() {
 
 // Scripts
 function scripts() {
-  var src = [
+  let src = [
     'app/scripts/common.js',
     'app/scripts/main.js'
   ];
