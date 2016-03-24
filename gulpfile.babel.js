@@ -1,21 +1,21 @@
-var gulp = require('gulp');
-var del = require('del');
-var bs = require('browser-sync').create();
-var gulpLoadPlugins = require('gulp-load-plugins');
+import gulp from 'gulp';
+import del from 'del';
+import browserSync from 'browser-sync';
+import gulpLoadPlugins from 'gulp-load-plugins';
 
-var $ = gulpLoadPlugins();
-var excludeJs = ['!app/scripts/md5.min.js'];
+const bs = browserSync.create();
+const $ = gulpLoadPlugins();
+
+const excludeJs = [
+  '!app/scripts/md5.min.js'
+];
 
 // Lint JavaScript
 function lint() {
-  var src = ['app/scripts/**/*.js'];
-
-  src = src.concat(excludeJs);
-
-  return gulp.src(src)
+  return gulp.src(['app/scripts/**/*.js'].concat(excludeJs))
     .pipe($.eslint())
     .pipe($.eslint.format())
-    .pipe($.if(!bs.active, $.eslint.failOnError()));
+    .pipe($.if(!bs.active, $.eslint.failOnError()))
 }
 
 // Image Optimazation
@@ -146,9 +146,7 @@ function clean() {
 gulp.task(clean);
 
 // Clean cache
-gulp.task('clean:cache', function(cb) {
-  return $.cache.clearAll(cb);
-});
+gulp.task('clean:cache', (cb) => $.cache.clearAll(cb));
 
 // Build production files, the default task
 gulp.task('default',
