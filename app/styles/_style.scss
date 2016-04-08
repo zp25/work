@@ -29,7 +29,7 @@ a:visited {
 }
 
 // clear fix
-.cf:after {
+.cf::after {
   content: '';
   display: table;
   clear: both;
@@ -38,7 +38,7 @@ a:visited {
 /**
  * mixins
  */
-@mixin flexbox($direction:row, $wrap:nowrap, $justify-content:flex-start, $align-items:flex-start) {
+@mixin flexbox($direction:row, $wrap:nowrap, $justify-content:flex-start, $align-items:stretch) {
   display: flex;
   flex-flow: $direction $wrap;
   justify-content: $justify-content;
