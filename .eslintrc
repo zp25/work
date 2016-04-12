@@ -2,11 +2,10 @@
   "root": true,
   "env": {
     "browser": true,
+    "jquery": true,
     "es6": true
   },
   "globals": {
-    // plugins
-    "md5": false,
     // common
     "Base": false,
     "buildAPI": false,
