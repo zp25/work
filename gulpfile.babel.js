@@ -7,7 +7,7 @@ const bs = browserSync.create();
 const $ = gulpLoadPlugins();
 
 const excludeJs = [
-  '!app/scripts/jquery-2.2.3.min.js'
+  '!app/scripts/jquery.min.js'
 ];
 
 // Lint JavaScript
