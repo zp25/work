@@ -3,13 +3,11 @@
   "env": {
     "browser": true,
     "jquery": true,
-    "es6": true
+    "es6": true,
   },
   "globals": {
-    // common
+    "$": false,
     "Base": false,
-    "buildAPI": false,
-    "imagePath": false
   },
-  "extends": "google"
+  "extends": "airbnb-base",
 }

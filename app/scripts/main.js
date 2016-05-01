@@ -3,6 +3,6 @@
 // });
 
 /** Onload Event */
-window.addEventListener('load', function() {
-  document.querySelector('main').innerHTML = 'Hello World!';
+window.addEventListener('load', () => {
+  document.querySelector('main').innerHTML = Base.text;
 });
