@@ -8,17 +8,33 @@ import gulpLoadPlugins from 'gulp-load-plugins';
 const $ = gulpLoadPlugins();
 const BS = browserSync.create();
 const AUTOPREFIXER_CONFIG = { browsers: ['last 2 versions'] };
-const HTML_SRC = 'app/**/*.html';
-const STYLE_SRC = 'app/styles/**/*.{scss,css}';
-const JS_SRC = [
-  'app/scripts/**/*.js',
-  '!app/scripts/jquery.min.js',
-];
-const IMAGE_SRC = 'app/images/**/*';
+const PATHS = {
+  html: {
+    src: 'app/**/*.html',
+    dest: 'dist',
+  },
+  styles: {
+    src: 'app/styles/**/*.{scss,css}',
+    tmp: '.tmp/styles',
+    dest: 'dist/styles',
+  },
+  scripts: {
+    src: [
+      'app/scripts/**/*.js',
+      '!app/scripts/jquery.min.js',
+    ],
+    tmp: '.tmp/scripts',
+    dest: 'dist/scripts',
+  },
+  images: {
+    src: 'app/images/**/*',
+    dest: 'dist/images',
+  },
+};
 
 // Lint JavaScript
 function lint() {
-  return gulp.src(JS_SRC)
+  return gulp.src(PATHS.scripts.src)
     .pipe($.eslint())
     .pipe($.eslint.format())
     .pipe($.if(!BS.active, $.eslint.failOnError()))
@@ -26,12 +42,12 @@ function lint() {
 
 // Image Optimazation
 function images() {
-  return gulp.src(IMAGE_SRC)
+  return gulp.src(PATHS.images.src)
     .pipe($.cache($.imagemin({
       progressive: true,
       interlaced: true,
     })))
-    .pipe(gulp.dest('dist/images'))
+    .pipe(gulp.dest(PATHS.images.dest))
     .pipe($.size({ title: 'images' }));
 }
 
@@ -48,15 +64,16 @@ function tmpSass() {
     autoprefixer(AUTOPREFIXER_CONFIG)
   ];
 
-  return gulp.src(STYLE_SRC)
-    .pipe($.newer('.tmp/styles'))
+  return gulp.src(PATHS.styles.src)
+    .pipe($.newer(PATHS.styles.tmp))
     .pipe($.sourcemaps.init())
       .pipe($.sass({ precision: 10 })
         .on('error', $.sass.logError)
       )
       .pipe($.postcss(processors))
     .pipe($.sourcemaps.write())
-    .pipe(gulp.dest('.tmp/styles'));
+    .pipe(gulp.dest(PATHS.styles.tmp))
+    .pipe(BS.stream({ once: true }));
 }
 
 function sass() {
@@ -65,7 +82,7 @@ function sass() {
     cssnano()
   ];
 
-  return gulp.src(STYLE_SRC)
+  return gulp.src(PATHS.styles.src)
     .pipe($.sourcemaps.init())
       .pipe($.sass({ precision: 10 })
         .on('error', $.sass.logError)
@@ -73,33 +90,34 @@ function sass() {
       .pipe($.postcss(processors))
       .pipe($.size({ title: 'styles' }))
     .pipe($.sourcemaps.write('.'))
-    .pipe(gulp.dest('dist/styles'));
+    .pipe(gulp.dest(PATHS.styles.dest));
 }
 
 // Scripts
 function tmpScripts() {
-  return gulp.src(JS_SRC)
-    .pipe($.newer('.tmp/scripts'))
+  return gulp.src(PATHS.scripts.src)
+    .pipe($.newer(PATHS.scripts.tmp))
     .pipe($.sourcemaps.init())
       .pipe($.babel())
     .pipe($.sourcemaps.write())
-    .pipe(gulp.dest('.tmp/scripts'));
+    .pipe(gulp.dest(PATHS.scripts.tmp))
+    .pipe(BS.stream({ once: true }));
 }
 
 function scripts() {
-  return gulp.src(JS_SRC)
+  return gulp.src(PATHS.scripts.src)
     .pipe($.sourcemaps.init())
       .pipe($.babel())
       .pipe($.concat('main.min.js'))
       .pipe($.uglify({ preserveComments: 'some' }))
       .pipe($.size({ title: 'scripts' }))
     .pipe($.sourcemaps.write('.'))
-    .pipe(gulp.dest('dist/scripts'));
+    .pipe(gulp.dest(PATHS.scripts.dest));
 }
 
 // HTML
 function html() {
-  return gulp.src(HTML_SRC)
+  return gulp.src(PATHS.html.src)
     .pipe($.useref({ searchPath: '{.tmp,app}' }))
     .pipe($.if('*.html', $.htmlmin({
       removeComments: true,
@@ -113,7 +131,7 @@ function html() {
       removeOptionalTags: true,
     })))
     .pipe($.if('*.html', $.size({ title: 'html', showFiles: true })))
-    .pipe(gulp.dest('dist'));
+    .pipe(gulp.dest(PATHS.html.dest));
 }
 
 // Serve
@@ -127,10 +145,10 @@ function serve() {
     port: 3000,
   });
 
-  gulp.watch(HTML_SRC, BS.reload);
-  gulp.watch(STYLE_SRC, gulp.parallel(tmpSass, BS.reload));
-  gulp.watch(JS_SRC, gulp.parallel(lint, tmpScripts, BS.reload));
-  gulp.watch(IMAGE_SRC, BS.reload);
+  gulp.watch(PATHS.html.src).on('change', BS.reload);
+  gulp.watch(PATHS.styles.src, tmpSass);
+  gulp.watch(PATHS.scripts.src, gulp.series(lint, tmpScripts));
+  gulp.watch(PATHS.images.src).on('change', BS.reload);
 }
 
 // Serve distribution
@@ -157,8 +175,8 @@ gulp.task('clean:cache', cb => $.cache.clearAll(cb));
 // Build production files, the default task
 gulp.task('default',
   gulp.series(
-    clean, html,
-    gulp.parallel(lint, scripts, sass, images, copy)
+    clean, lint, html,
+    gulp.parallel(scripts, sass, images, copy)
   )
 );
 
