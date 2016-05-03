@@ -8,15 +8,13 @@ import gulpLoadPlugins from 'gulp-load-plugins';
 const $ = gulpLoadPlugins();
 const BS = browserSync.create();
 const AUTOPREFIXER_CONFIG = { browsers: ['last 2 versions'] };
-const STYLE_SRC = [
-  'app/styles/**/*.scss',
-  'app/styles/**/*.css',
-];
+const HTML_SRC = 'app/**/*.html';
+const STYLE_SRC = 'app/styles/**/*.{scss,css}';
 const JS_SRC = [
-  'app/scripts/common.js',
-  'app/scripts/main.js',
+  'app/scripts/**/*.js',
   '!app/scripts/jquery.min.js',
 ];
+const IMAGE_SRC = 'app/images/**/*';
 
 // Lint JavaScript
 function lint() {
@@ -28,7 +26,7 @@ function lint() {
 
 // Image Optimazation
 function images() {
-  return gulp.src('app/images/**/*')
+  return gulp.src(IMAGE_SRC)
     .pipe($.cache($.imagemin({
       progressive: true,
       interlaced: true,
@@ -101,7 +99,7 @@ function scripts() {
 
 // HTML
 function html() {
-  return gulp.src('app/**/*.html')
+  return gulp.src(HTML_SRC)
     .pipe($.useref({ searchPath: '{.tmp,app}' }))
     .pipe($.if('*.html', $.htmlmin({
       removeComments: true,
@@ -129,10 +127,10 @@ function serve() {
     port: 3000,
   });
 
-  gulp.watch('app/**/*.html', BS.reload);
-  gulp.watch('app/styles/**/*.{scss,css}', gulp.parallel(tmpSass, BS.reload));
-  gulp.watch('app/scripts/**/*.js', gulp.parallel(lint, tmpScripts, BS.reload));
-  gulp.watch('app/images/**/*', BS.reload);
+  gulp.watch(HTML_SRC, BS.reload);
+  gulp.watch(STYLE_SRC, gulp.parallel(tmpSass, BS.reload));
+  gulp.watch(JS_SRC, gulp.parallel(lint, tmpScripts, BS.reload));
+  gulp.watch(IMAGE_SRC, BS.reload);
 }
 
 // Serve distribution
