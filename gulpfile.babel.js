@@ -46,6 +46,7 @@ function images() {
     .pipe($.cache($.imagemin({
       progressive: true,
       interlaced: true,
+      multipass: true,
     })))
     .pipe(gulp.dest(PATHS.images.dest))
     .pipe($.size({ title: 'images' }));
@@ -109,7 +110,7 @@ function scripts() {
     .pipe($.sourcemaps.init())
       .pipe($.babel())
       .pipe($.concat('main.min.js'))
-      .pipe($.uglify({ preserveComments: 'some' }))
+      .pipe($.uglify({ preserveComments: 'license' }))
       .pipe($.size({ title: 'scripts' }))
     .pipe($.sourcemaps.write('.'))
     .pipe(gulp.dest(PATHS.scripts.dest));
@@ -120,15 +121,15 @@ function html() {
   return gulp.src(PATHS.html.src)
     .pipe($.useref({ searchPath: '{.tmp,app}' }))
     .pipe($.if('*.html', $.htmlmin({
-      removeComments: true,
       collapseWhitespace: true,
       collapseBooleanAttributes: true,
       removeAttributeQuotes: true,
-      removeRedundantAttributes: true,
+      removeComments: true,
       removeEmptyAttributes: true,
+      removeOptionalTags: true,
+      removeRedundantAttributes: true,
       removeScriptTypeAttributes: true,
       removeStyleLinkTypeAttributes: true,
-      removeOptionalTags: true,
     })))
     .pipe($.if('*.html', $.size({ title: 'html', showFiles: true })))
     .pipe(gulp.dest(PATHS.html.dest));
