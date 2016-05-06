@@ -21,7 +21,10 @@ const PATHS = {
   scripts: {
     src: [
       'app/scripts/**/*.js',
-      '!app/scripts/jquery.min.js',
+      '!app/scripts/jquery.min.js'
+    ],
+    concat: [
+      '!app/scripts/debug.js'
     ],
     tmp: '.tmp/scripts',
     dest: 'dist/scripts',
@@ -106,11 +109,18 @@ function tmpScripts() {
 }
 
 function scripts() {
-  return gulp.src(PATHS.scripts.src)
+  return gulp.src(PATHS.scripts.src.concat(PATHS.scripts.concat))
     .pipe($.sourcemaps.init())
       .pipe($.babel())
       .pipe($.concat('main.min.js'))
-      .pipe($.uglify({ preserveComments: 'license' }))
+      .pipe($.uglify({
+        // preserveComments: 'license',
+        compress: {
+          global_defs: {
+            'DEBUG': false,
+          },
+        },
+      }))
       .pipe($.size({ title: 'scripts' }))
     .pipe($.sourcemaps.write('.'))
     .pipe(gulp.dest(PATHS.scripts.dest));
@@ -148,7 +158,7 @@ function serve() {
 
   gulp.watch(PATHS.html.src).on('change', BS.reload);
   gulp.watch(PATHS.styles.src, tmpSass);
-  gulp.watch(PATHS.scripts.src, gulp.series(lint, tmpScripts));
+  gulp.watch(PATHS.scripts.src, gulp.parallel(lint, tmpScripts));
   gulp.watch(PATHS.images.src).on('change', BS.reload);
 }
 
@@ -176,8 +186,8 @@ gulp.task('clean:cache', cb => $.cache.clearAll(cb));
 // Build production files, the default task
 gulp.task('default',
   gulp.series(
-    clean, lint, html,
-    gulp.parallel(scripts, sass, images, copy)
+    clean, html,
+    gulp.parallel(lint, scripts, sass, images, copy)
   )
 );
 

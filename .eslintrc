@@ -6,8 +6,10 @@
     "es6": true,
   },
   "globals": {
+    "DEBUG": true,
     "$": false,
     "Base": false,
+    "Console": false,
   },
   "extends": "airbnb-base",
 }
