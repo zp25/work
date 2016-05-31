@@ -3,13 +3,19 @@
   "env": {
     "browser": true,
     "jquery": true,
-    "es6": true,
+    "es6": true
   },
   "globals": {
     "DEBUG": true,
     "$": false,
     "Base": false,
-    "Console": false,
+    "Console": false
   },
-  "extends": "airbnb-base",
+  "rules": {
+    "no-cond-assign": ["error", "except-parens"],
+    "no-param-reassign": [
+      "error", { "props": false }
+    ]
+  },
+  "extends": "airbnb-base"
 }
