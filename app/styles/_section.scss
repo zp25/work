@@ -1,7 +1,9 @@
-body {
-  @include flexbox(row, nowrap, space-around, flex-start);
+main {
+  flex: 1 1 auto;
+  @extend .page-wrap;
+}
 
-  main {
-    flex: 0 1 1000px;
-  }
+footer {
+  flex: 0 0 50px;
+  @extend .page-wrap;
 }
