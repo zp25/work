@@ -21,7 +21,6 @@ const PATHS = {
   scripts: {
     src: [
       'app/scripts/**/*.js',
-      '!app/scripts/jquery.min.js'
     ],
     concat: [
       '!app/scripts/debug.js'
@@ -33,6 +32,7 @@ const PATHS = {
     src: 'app/images/**/*',
     dest: 'dist/images',
   },
+  assets: ['.tmp', 'app', 'node_modules'],
 };
 
 // Lint JavaScript
@@ -129,7 +129,7 @@ function scripts() {
 // HTML
 function html() {
   return gulp.src(PATHS.html.src)
-    .pipe($.useref({ searchPath: '{.tmp,app}' }))
+    .pipe($.useref({ searchPath: PATHS.assets }))
     .pipe($.if('*.html', $.htmlmin({
       collapseWhitespace: true,
       collapseBooleanAttributes: true,
@@ -151,7 +151,7 @@ function serve() {
     notify: false,
     logPrefix: 'work',
     server: {
-      baseDir: ['.tmp', 'app'],
+      baseDir: PATHS.assets,
     },
     port: 3000,
   });

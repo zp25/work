@@ -3,5 +3,4 @@ assets/
 dist/
 node_modules/
 npm-debug.log
-app/scripts/jquery.min.js
 .DS_Store
