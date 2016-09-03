@@ -1,5 +1,11 @@
 main {
-  flex: 1 1 auto;
+  flex: 0 0 50px;
+  @extend .page-wrap;
+}
+
+picture {
+  flex: 1 0 350px;
+  @include flexbox(column, nowrap, center, center);
   @extend .page-wrap;
 }
 

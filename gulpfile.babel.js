@@ -30,6 +30,7 @@ const PATHS = {
   },
   images: {
     src: 'app/images/**/*',
+    tmp: '.tmp/images',
     dest: 'dist/images',
   },
   assets: ['.tmp', 'app', 'node_modules'],
@@ -44,15 +45,33 @@ function lint() {
 }
 
 // Image Optimazation
+const makeHashKey = entry => file => [file.contents.toString('utf8'), entry].join('');
+
 function images() {
   return gulp.src(PATHS.images.src)
     .pipe($.cache($.imagemin({
       progressive: true,
       interlaced: true,
       multipass: true,
-    })))
+    }), {
+      key: makeHashKey('images'),
+    }))
     .pipe(gulp.dest(PATHS.images.dest))
     .pipe($.size({ title: 'images' }));
+}
+
+function tmpWebp() {
+  return gulp.src(PATHS.images.src)
+    .pipe($.cache($.webp({ quality: 75 }), { key: makeHashKey('webp') }))
+    .pipe(gulp.dest(PATHS.images.tmp))
+    .pipe(BS.stream({ once: true }));
+}
+
+function webp() {
+  return gulp.src(PATHS.images.src)
+    .pipe($.cache($.webp({ quality: 75 }), { key: makeHashKey('webp') }))
+    .pipe(gulp.dest(PATHS.images.dest))
+    .pipe($.size({ title: 'webp' }));
 }
 
 // Copy
@@ -159,7 +178,7 @@ function serve() {
   gulp.watch(PATHS.html.src).on('change', BS.reload);
   gulp.watch(PATHS.styles.src, tmpSass);
   gulp.watch(PATHS.scripts.src, gulp.parallel(lint, tmpScripts));
-  gulp.watch(PATHS.images.src).on('change', BS.reload);
+  gulp.watch(PATHS.images.src, tmpWebp);
 }
 
 // Serve distribution
@@ -187,14 +206,14 @@ gulp.task('clean:cache', cb => $.cache.clearAll(cb));
 gulp.task('default',
   gulp.series(
     clean, html,
-    gulp.parallel(lint, scripts, sass, images, copy)
+    gulp.parallel(lint, scripts, sass, images, webp, copy)
   )
 );
 
 // run scripts, sass first and run browserSync before watch
 gulp.task('serve',
   gulp.series(
-    gulp.parallel(tmpScripts, tmpSass),
+    gulp.parallel(tmpScripts, tmpSass, tmpWebp),
     serve
   )
 );
