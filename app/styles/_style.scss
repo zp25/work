@@ -37,7 +37,7 @@ html {
   body {
     height: 100%;
     @include flexbox(column, nowrap, flex-start, center);
-    font-size: $font;
-    line-height: $line-height;
+    font-size: fontSize();
+    line-height: 1.5;
   }
 }

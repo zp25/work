@@ -1,10 +1,19 @@
 // font-size(px): 12, 14, 16, 20, 34
-$font-light: 12px;
-$font: 14px;
-$font-bold: 16px;
-$font-bolder: 20px;
+$sizeMap: (
+  light: 12px,
+  normal: 14px,
+  bold: 16px,
+  bolder: 20px,
+);
 
-$line-height: $font + 10;
+@function fontSize($key: normal) {
+  @if map-has-key($sizeMap, $key) {
+    @return map-get($sizeMap, $key);
+  }
+
+  @warn 'Unknown `#{$key}` in $sizeMap.';
+  @return null;
+}
 
 .page-wrap {
   width: 100%;
