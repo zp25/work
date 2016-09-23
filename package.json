@@ -4,6 +4,7 @@
   "description": "Work",
   "main": "index.js",
   "scripts": {
+    "postinstall": "node copyindex",
     "gulp": "gulp",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
@@ -13,14 +14,20 @@
   ],
   "author": "zp25",
   "license": "MIT",
+  "dependencies": {
+    "jquery": "^3.1.1"
+  },
   "devDependencies": {
     "autoprefixer": "^6.4.1",
     "babel-core": "^6.14.0",
     "babel-preset-es2015": "^6.14.0",
     "babel-preset-stage-2": "^6.13.0",
+    "babelify": "^7.3.0",
     "browser-sync": "^2.16.0",
+    "browserify": "^13.1.0",
     "cssnano": "^3.7.5",
     "del": "^2.2.2",
+    "dotenv": "^2.0.0",
     "eslint": "^3.5.0",
     "eslint-config-airbnb-base": "^7.1.0",
     "eslint-plugin-import": "^1.15.0",
@@ -40,8 +47,13 @@
     "gulp-sourcemaps": "^1.6.0",
     "gulp-uglify": "^2.0.0",
     "gulp-useref": "^3.1.2",
+    "gulp-util": "^3.0.7",
     "gulp-webp": "^2.3.0",
-    "jquery": "^3.1.1"
+    "handlebars": "^4.0.5",
+    "stripify": "^6.0.0",
+    "vinyl-buffer": "^1.0.0",
+    "vinyl-source-stream": "^1.1.0",
+    "watchify": "^3.7.0"
   },
   "engines": {
     "node": ">=6.0.0"
