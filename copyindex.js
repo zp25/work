@@ -5,8 +5,8 @@ const dotenv = require('dotenv');
 
 dotenv.config({ silent: true });
 
-const layout = path.resolve(__dirname, 'views', 'layouts/main.handlebars');
-const viewFrom = path.resolve(__dirname, 'views', `${process.env.SCRIPT}.handlebars`);
+const layout = path.resolve(__dirname, 'views', 'layouts/main.hbs');
+const viewFrom = path.resolve(__dirname, 'views', `${process.env.SCRIPT}.hbs`);
 const indexTo = 'app/index.html';
 
 const source = fs.readFileSync(layout, 'utf8');
