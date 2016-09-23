@@ -4,10 +4,16 @@ import autoprefixer from 'autoprefixer';
 import cssnano from 'cssnano';
 import browserSync from 'browser-sync';
 import gulpLoadPlugins from 'gulp-load-plugins';
+import dotenv from 'dotenv';
+import { tmpConcat, concat } from './gulpfile.concat.babel';
+import { tmpBundle, bundle } from './gulpfile.bundle.babel';
+
+dotenv.config({ silent: true });
 
 const $ = gulpLoadPlugins();
 const BS = browserSync.create();
 const AUTOPREFIXER_CONFIG = { browsers: ['last 2 versions'] };
+const BUNDLE = process.env.SCRIPT === 'bundle';
 const PATHS = {
   html: {
     src: 'app/**/*.html',
@@ -22,11 +28,6 @@ const PATHS = {
     src: [
       'app/scripts/**/*.js',
     ],
-    concat: [
-      '!app/scripts/debug.js'
-    ],
-    tmp: '.tmp/scripts',
-    dest: 'dist/scripts',
   },
   images: {
     src: 'app/images/**/*',
@@ -116,35 +117,6 @@ function sass() {
     .pipe(gulp.dest(PATHS.styles.dest));
 }
 
-// Scripts
-function tmpScripts() {
-  return gulp.src(PATHS.scripts.src)
-    .pipe($.newer(PATHS.scripts.tmp))
-    .pipe($.sourcemaps.init())
-      .pipe($.babel())
-    .pipe($.sourcemaps.write())
-    .pipe(gulp.dest(PATHS.scripts.tmp))
-    .pipe(BS.stream({ once: true }));
-}
-
-function scripts() {
-  return gulp.src(PATHS.scripts.src.concat(PATHS.scripts.concat))
-    .pipe($.sourcemaps.init())
-      .pipe($.babel())
-      .pipe($.concat('main.min.js'))
-      .pipe($.uglify({
-        // preserveComments: 'license',
-        compress: {
-          global_defs: {
-            'DEBUG': false,
-          },
-        },
-      }))
-      .pipe($.size({ title: 'scripts' }))
-    .pipe($.sourcemaps.write('.'))
-    .pipe(gulp.dest(PATHS.scripts.dest));
-}
-
 // HTML
 function html() {
   return gulp.src(PATHS.html.src)
@@ -177,8 +149,13 @@ function serve() {
 
   gulp.watch(PATHS.html.src).on('change', BS.reload);
   gulp.watch(PATHS.styles.src, tmpSass);
-  gulp.watch(PATHS.scripts.src, gulp.parallel(lint, tmpScripts));
   gulp.watch(PATHS.images.src, tmpWebp);
+
+  if (BUNDLE) {
+    gulp.watch(PATHS.scripts.src, lint);
+  } else {
+    gulp.watch(PATHS.scripts.src, gulp.parallel(lint, 'tmpScript'));
+  }
 }
 
 // Serve distribution
@@ -198,6 +175,8 @@ function clean() {
 
 // Tasks
 gulp.task(clean);
+gulp.task('tmpScript', (BUNDLE ? tmpBundle(BS) : tmpConcat(BS)));
+gulp.task('script', (BUNDLE ? bundle : concat));
 
 // Clean cache
 gulp.task('clean:cache', cb => $.cache.clearAll(cb));
@@ -206,14 +185,14 @@ gulp.task('clean:cache', cb => $.cache.clearAll(cb));
 gulp.task('default',
   gulp.series(
     clean, html,
-    gulp.parallel(lint, scripts, sass, images, webp, copy)
+    gulp.parallel(lint, 'script', sass, images, webp, copy)
   )
 );
 
 // run scripts, sass first and run browserSync before watch
 gulp.task('serve',
   gulp.series(
-    gulp.parallel(tmpScripts, tmpSass, tmpWebp),
+    gulp.parallel('tmpScript', tmpSass, tmpWebp),
     serve
   )
 );

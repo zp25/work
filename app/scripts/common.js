@@ -4,3 +4,5 @@
 const Base = {
   text: 'Hello World!',
 };
+
+export default Base;

@@ -8,11 +8,10 @@
   "globals": {
     "DEBUG": true,
     "$": false,
-    "Base": false,
-    "Console": false
+    "Base": false
   },
   "rules": {
-    "no-console": 0,
+    "no-console": 1,
     "no-cond-assign": ["error", "except-parens"],
     "no-param-reassign": [
       "error", { "props": false }
