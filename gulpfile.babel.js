@@ -6,7 +6,7 @@ import browserSync from 'browser-sync';
 import gulpLoadPlugins from 'gulp-load-plugins';
 import dotenv from 'dotenv';
 import { tmpConcat, concat } from './gulpfile.concat.babel';
-import { tmpBundle, bundle } from './gulpfile.bundle.babel';
+import { tmpBundle, bundle, vendor } from './gulpfile.bundle.babel';
 
 dotenv.config({ silent: true });
 
@@ -174,17 +174,17 @@ function clean() {
 }
 
 // Tasks
-gulp.task(clean);
 gulp.task('tmpScript', (BUNDLE ? tmpBundle(BS) : tmpConcat(BS)));
 gulp.task('script', (BUNDLE ? bundle : concat));
+gulp.task(vendor);
 
-// Clean cache
+gulp.task('clean:all', (BUNDLE ? gulp.series(clean, vendor) : clean));
 gulp.task('clean:cache', cb => $.cache.clearAll(cb));
 
 // Build production files, the default task
 gulp.task('default',
   gulp.series(
-    clean, html,
+    'clean:all', html,
     gulp.parallel(lint, 'script', sass, images, webp, copy)
   )
 );

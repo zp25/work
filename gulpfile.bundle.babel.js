@@ -15,6 +15,7 @@ const PATHS = {
   tmp: '.tmp/scripts',
   dest: 'dist/scripts',
 };
+const VENDOR = ['babel-polyfill', 'jquery'];
 
 const tmpBundle = BS => () => {
   const b = browserify({
@@ -24,6 +25,11 @@ const tmpBundle = BS => () => {
     transform: [babelify],
     plugin: [watchify],
     debug: true,
+  });
+
+  // exclude vendor
+  VENDOR.forEach((lib) => {
+    b.exclude(lib);
   });
 
   // 只有执行bundle()后watchify才能监听update事件
@@ -39,6 +45,11 @@ const bundle = () => {
     cache: {},
     packageCache: {},
     transform: [babelify, stripify],
+  });
+
+  // exclude vendor
+  VENDOR.forEach((lib) => {
+    b.exclude(lib);
   });
 
   b.on('log', $.util.log);
@@ -67,4 +78,27 @@ function production(b) {
     .pipe(gulp.dest(PATHS.dest));
 }
 
-export { tmpBundle, bundle };
+function vendor() {
+  const b = browserify({
+    debug: true,
+  });
+
+  VENDOR.forEach((lib) => {
+    b.require(lib);
+  });
+
+  b.on('log', $.util.log);
+
+  return b.bundle()
+    .on('error', $.util.log.bind($.util, 'Browserify Error'))
+    .pipe(source('vendor.js'))
+    .pipe(buffer())
+    .pipe(gulp.dest(PATHS.tmp))
+    .pipe($.sourcemaps.init({ loadMaps: true }))
+      .pipe($.uglify())
+      .pipe($.size({ title: 'vendor' }))
+    .pipe($.sourcemaps.write('.'))
+    .pipe(gulp.dest(PATHS.dest));
+}
+
+export { tmpBundle, bundle, vendor };
