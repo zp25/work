@@ -3,7 +3,6 @@ import gulpLoadPlugins from 'gulp-load-plugins';
 import browserify from 'browserify';
 import watchify from 'watchify';
 import babelify from 'babelify';
-import stripify from 'stripify';
 import source from 'vinyl-source-stream';
 import buffer from 'vinyl-buffer';
 
@@ -44,7 +43,7 @@ const bundle = () => {
     entries: PATHS.entries,
     cache: {},
     packageCache: {},
-    transform: [babelify, stripify],
+    transform: [babelify],
   });
 
   // exclude vendor
@@ -72,7 +71,14 @@ function production(b) {
     .pipe(source('bundle.js'))
     .pipe(buffer())
     .pipe($.sourcemaps.init({ loadMaps: true }))
-      .pipe($.uglify())
+      .pipe($.uglify({
+        // preserveComments: 'license',
+        compress: {
+          global_defs: {
+            'DEBUG': false,
+          },
+        },
+      }))
       .pipe($.size({ title: 'scripts' }))
     .pipe($.sourcemaps.write('.'))
     .pipe(gulp.dest(PATHS.dest));

@@ -16,5 +16,7 @@ function useJquery() {
 window.addEventListener('load', () => {
   useJquery();
 
-  console.log('Development Mode');
+  if (DEBUG) {
+    console.log('Development Mode');
+  }
 });
