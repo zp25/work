@@ -1,12 +1,4 @@
-import $ from 'jquery';
 import Base from './common';
-
-/**
- * 使用jquery的函数
- */
-function useJquery() {
-  $('main').html(Base.text);
-}
 
 /** DOMContentLoaded Event */
 // document.addEventListener('DOMContentLoaded', function() {
@@ -14,7 +6,8 @@ function useJquery() {
 
 /** Onload Event */
 window.addEventListener('load', () => {
-  useJquery();
+  const elem = document.querySelector('main');
+  elem.insertAdjacentHTML('afterbegin', Base.text);
 
   if (DEV) {
     console.log('Development Mode');
