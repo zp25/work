@@ -6,9 +6,7 @@
     "es6": true
   },
   "globals": {
-    "DEBUG": true,
-    "$": false,
-    "Base": false
+    "DEV": true
   },
   "rules": {
     "no-console": 1,

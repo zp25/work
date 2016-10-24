@@ -35,7 +35,7 @@ const concat = () => {
         // preserveComments: 'license',
         compress: {
           global_defs: {
-            'DEBUG': false,
+            'DEV': false,
           },
         },
       }))

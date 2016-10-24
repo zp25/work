@@ -75,7 +75,7 @@ function production(b) {
         // preserveComments: 'license',
         compress: {
           global_defs: {
-            'DEBUG': false,
+            'DEV': false,
           },
         },
       }))
