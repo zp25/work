@@ -4,7 +4,9 @@
   "description": "Work",
   "main": "index.js",
   "scripts": {
-    "postinstall": "node copyindex",
+    "copyindex": "node copyindex",
+    "postinstall": "npm run copyindex",
+    "compile": "handlebars ./views/precompile/*.hbs -k each -k if | uglifyjs -o ./app/scripts/templates.min.js",
     "gulp": "gulp",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
@@ -53,6 +55,8 @@
     "gulp-webp": "^2.3.0",
     "handlebars": "^4.0.5",
     "md5": "^2.2.1",
+    "normalize.css": "^5.0.0",
+    "uglify-js": "^2.7.4",
     "vinyl-buffer": "^1.0.0",
     "vinyl-source-stream": "^1.1.0",
     "watchify": "^3.7.0"
