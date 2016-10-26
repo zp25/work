@@ -3137,7 +3137,7 @@ gzip-size@^3.0.0:
   dependencies:
     duplexer "^0.1.1"
 
-handlebars@^4.0.5:
+handlebars:
   version "4.0.5"
   resolved "http://registry.npm.taobao.org/handlebars/download/handlebars-4.0.5.tgz#92c6ed6bb164110c50d4d8d0fbddc70806c6f8e7"
   dependencies:
@@ -4509,6 +4509,10 @@ normalize-url@^1.4.0:
     prepend-http "^1.0.0"
     query-string "^4.1.0"
     sort-keys "^1.0.0"
+
+normalize.css:
+  version "5.0.0"
+  resolved "http://registry.npm.taobao.org/normalize.css/download/normalize.css-5.0.0.tgz#7cec875ce8178a5333c4de80b68ea9c18b9d7c37"
 
 now-and-later@^1.0.0:
   version "1.0.0"
@@ -6219,7 +6223,7 @@ ua-parser-js@0.7.10:
   version "0.7.10"
   resolved "http://registry.npm.taobao.org/ua-parser-js/download/ua-parser-js-0.7.10.tgz#917559ddcce07cbc09ece7d80495e4c268f4ef9f"
 
-uglify-js@^2.6, uglify-js@2.7.x:
+uglify-js, uglify-js@^2.6, uglify-js@2.7.x:
   version "2.7.4"
   resolved "http://registry.npm.taobao.org/uglify-js/download/uglify-js-2.7.4.tgz#a295a0de12b6a650c031c40deb0dc40b14568bd2"
   dependencies:
