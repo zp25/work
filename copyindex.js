@@ -20,7 +20,7 @@ const context = {
   anchors: [
     {
       title: 'Home',
-      path: 'https//zp25.ninja',
+      path: 'https://zp25.ninja',
     },
     {
       title: 'Blog',
