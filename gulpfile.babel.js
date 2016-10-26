@@ -28,6 +28,13 @@ const PATHS = {
     src: [
       'app/scripts/**/*.js',
     ],
+    exclude: [
+      '!app/scripts/templates.min.js',
+    ],
+    watch: [
+      'app/scripts/dev.js',
+      'app/scripts/templates.min.js',
+    ],
   },
   images: {
     src: 'app/images/**/*',
@@ -39,7 +46,7 @@ const PATHS = {
 
 // Lint JavaScript
 function lint() {
-  return gulp.src(PATHS.scripts.src)
+  return gulp.src(PATHS.scripts.src.concat(PATHS.scripts.exclude))
     .pipe($.eslint())
     .pipe($.eslint.format())
     .pipe($.if(!BS.active, $.eslint.failOnError()))
@@ -119,6 +126,10 @@ function sass() {
 
 // HTML
 function html() {
+  const processors = [
+    cssnano()
+  ];
+
   return gulp.src(PATHS.html.src)
     .pipe($.useref({ searchPath: PATHS.assets }))
     .pipe($.if('*.html', $.htmlmin({
@@ -133,6 +144,7 @@ function html() {
       removeStyleLinkTypeAttributes: true,
     })))
     .pipe($.if('*.html', $.size({ title: 'html', showFiles: true })))
+    .pipe($.if('*.css', $.postcss(processors)))
     .pipe(gulp.dest(PATHS.html.dest));
 }
 
@@ -153,6 +165,8 @@ function serve() {
 
   if (BUNDLE) {
     gulp.watch(PATHS.scripts.src, lint);
+    // 不打包PATHS.scripts.watch中文件，不会触发reload
+    gulp.watch(PATHS.scripts.watch).on('change', BS.reload);
   } else {
     gulp.watch(PATHS.scripts.src, gulp.parallel(lint, 'tmpScript'));
   }

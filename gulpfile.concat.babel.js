@@ -6,9 +6,8 @@ const PATHS = {
   scripts: {
     src: [
       'app/scripts/**/*.js',
-    ],
-    concat: [
-      '!app/scripts/debug.js'
+      '!app/scripts/dev.js',
+      '!app/scripts/templates.min.js',
     ],
     tmp: '.tmp/scripts',
     dest: 'dist/scripts',
@@ -27,7 +26,7 @@ const tmpConcat = BS => () => {
 }
 
 const concat = () => {
-  return gulp.src(PATHS.scripts.src.concat(PATHS.scripts.concat))
+  return gulp.src(PATHS.scripts.src)
     .pipe($.sourcemaps.init())
       .pipe($.babel())
       .pipe($.concat('main.min.js'))
