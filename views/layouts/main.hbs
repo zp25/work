@@ -17,13 +17,19 @@
   <link rel="stylesheet" href="styles/main.css">
 </head>
 <body>
-  <main></main>
+  <div class="app">
+    <header class="header"></header>
 
-  <picture>
-    <source srcset="images/zp.webp" type="image/webp">
-    <img src="images/zp.jpg" alt="zp">
-  </picture>
+    <picture class="zp">
+      <source srcset="images/zp.webp" type="image/webp">
+      <img src="images/zp.jpg" alt="zp">
+    </picture>
 
-{{{scripts}}}
+    <ul class="anchors">
+      {{> Anchors anchors=anchors}}
+    </ul>
+  </div>
+
+{{> Scripts}}
 </body>
 </html>

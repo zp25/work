@@ -1,15 +1,23 @@
-main {
-  flex: 0 0 50px;
-  @extend .page-wrap;
-}
+.app {
+  width: 100%;
+  height: 100%;
+  @include flexbox(column, nowrap, flex-start, center);
 
-picture {
-  flex: 1 0 350px;
-  @include flexbox(column, nowrap, center, center);
-  @extend .page-wrap;
-}
+  .header {
+    flex: 0 0 auto;
+    @extend .page-wrap;
+    padding: 5px;
+  }
 
-footer {
-  flex: 0 0 50px;
-  @extend .page-wrap;
+  .zp {
+    flex: 1 0 350px;
+    @include flexbox(column, nowrap, center, center);
+    @extend .page-wrap;
+  }
+
+  .anchors {
+    flex: 0 0 auto;
+    @extend .page-wrap;
+    padding: 5px;
+  }
 }

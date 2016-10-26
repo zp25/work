@@ -6,7 +6,7 @@ import Base from './common';
 
 /** Onload Event */
 window.addEventListener('load', () => {
-  const elem = document.querySelector('main');
+  const elem = document.querySelector('.header');
   elem.insertAdjacentHTML('afterbegin', Base.text);
 
   if (DEV) {
