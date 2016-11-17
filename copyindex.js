@@ -1,6 +1,7 @@
 const path = require('path');
 const fs = require('fs');
 const Handlebars = require('handlebars');
+const shortid = require('shortid');
 const dotenv = require('dotenv');
 
 dotenv.config({ silent: true });
@@ -17,6 +18,7 @@ const partials = [
 ];
 
 const context = {
+  version: shortid.generate(),
   anchors: [
     {
       title: 'Home',
