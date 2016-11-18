@@ -23,7 +23,7 @@ const tmpConcat = BS => () => {
     .pipe($.sourcemaps.write())
     .pipe(gulp.dest(PATHS.scripts.tmp))
     .pipe(BS.stream({ once: true }));
-}
+};
 
 const concat = () => {
   return gulp.src(PATHS.scripts.src)
