@@ -1,5 +1,6 @@
 $colorMap: (
   black: #222,
+  black-hole: #010101,
   grey-light: #f5f5f5,
 );
 
@@ -28,10 +29,6 @@ $sizeMap: (
   @return null;
 }
 
-@function lineHeight($key: normal, $space: 6px) {
-  @return fontSize($key) + 2 * $space;
-}
-
 .page-wrap {
   width: 100%;
   max-width: 1000px;
@@ -45,4 +42,10 @@ $sizeMap: (
   flex-flow: $direction $wrap;
   justify-content: $justify-content;
   align-items: $align-items;
+}
+
+@mixin imageSet($x2, $x3) {
+  background-image: url($x2);
+  background-image: -webkit-image-set(url($x2) 2x, url($x3) 3x);
+  background-image: image-set(url($x2) 2x, url($x3) 3x);
 }
