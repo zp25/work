@@ -14,7 +14,7 @@ const PATHS = {
   tmp: '.tmp/scripts',
   dest: 'dist/scripts',
 };
-const VENDOR = ['babel-polyfill', 'md5'];
+const VENDOR = ['babel-polyfill'];
 
 const tmpBundle = BS => () => {
   const b = browserify({
