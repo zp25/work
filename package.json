@@ -21,6 +21,9 @@
   "author": "zp25",
   "license": "MIT",
   "dependencies": {
+    "normalize.css": "^5.0.0"
+  },
+  "devDependencies": {
     "autoprefixer": "^6.5.3",
     "babel-core": "^6.18.2",
     "babel-polyfill": "^6.16.0",
@@ -54,7 +57,6 @@
     "gulp-util": "^3.0.7",
     "gulp-webp": "^2.3.0",
     "handlebars": "^4.0.6",
-    "normalize.css": "^5.0.0",
     "shortid": "^2.2.6",
     "uglify-js": "^2.7.4",
     "vinyl-buffer": "^1.0.0",
