@@ -85,9 +85,7 @@ function production(b) {
 }
 
 function vendor() {
-  const b = browserify({
-    debug: true,
-  });
+  const b = browserify();
 
   VENDOR.forEach((lib) => {
     b.require(lib);
@@ -100,10 +98,8 @@ function vendor() {
     .pipe(source('vendor.js'))
     .pipe(buffer())
     .pipe(gulp.dest(PATHS.tmp))
-    .pipe($.sourcemaps.init({ loadMaps: true }))
-      .pipe($.uglify())
-      .pipe($.size({ title: 'vendor' }))
-    .pipe($.sourcemaps.write('.'))
+    .pipe($.uglify())
+    .pipe($.size({ title: 'vendor' }))
     .pipe(gulp.dest(PATHS.dest));
 }
 
