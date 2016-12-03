@@ -1,10 +1,8 @@
-import Base from './common';
+import Base from './base';
 
-/** DOMContentLoaded Event */
-// document.addEventListener('DOMContentLoaded', function() {
+// document.addEventListener('DOMContentLoaded', () => {
 // });
 
-/** Onload Event */
 window.addEventListener('load', () => {
   const elem = document.querySelector('.header');
   elem.insertAdjacentHTML('afterbegin', Base.text);

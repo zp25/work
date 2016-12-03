@@ -9,13 +9,37 @@ import buffer from 'vinyl-buffer';
 const $ = gulpLoadPlugins();
 const PATHS = {
   entries: [
-    'app/scripts/entry.js',
+    'app/scripts/index.js',
   ],
   tmp: '.tmp/scripts',
   dest: 'dist/scripts',
 };
 const VENDOR = ['babel-polyfill'];
 
+const development = (b, BS) => b.bundle()
+  .on('error', $.util.log.bind($.util, 'Browserify Error'))
+  .pipe(source('bundle.js'))
+  .pipe(gulp.dest(PATHS.tmp))
+  .pipe(BS.stream({ once: true }));
+
+const production = b => b.bundle()
+  .on('error', $.util.log.bind($.util, 'Browserify Error'))
+  .pipe(source('bundle.js'))
+  .pipe(buffer())
+  .pipe($.sourcemaps.init({ loadMaps: true }))
+    .pipe($.uglify({
+      // preserveComments: 'license',
+      compress: {
+        global_defs: {
+          'DEV': false,
+        },
+      },
+    }))
+    .pipe($.size({ title: 'scripts' }))
+  .pipe($.sourcemaps.write('.'))
+  .pipe(gulp.dest(PATHS.dest));
+
+// Scripts
 const tmpBundle = BS => () => {
   const b = browserify({
     entries: PATHS.entries,
@@ -56,35 +80,7 @@ const bundle = () => {
   return production(b);
 };
 
-// Scripts
-function development(b, BS) {
-  return b.bundle()
-    .on('error', $.util.log.bind($.util, 'Browserify Error'))
-    .pipe(source('bundle.js'))
-    .pipe(gulp.dest(PATHS.tmp))
-    .pipe(BS.stream({ once: true }));
-}
-
-function production(b) {
-  return b.bundle()
-    .on('error', $.util.log.bind($.util, 'Browserify Error'))
-    .pipe(source('bundle.js'))
-    .pipe(buffer())
-    .pipe($.sourcemaps.init({ loadMaps: true }))
-      .pipe($.uglify({
-        // preserveComments: 'license',
-        compress: {
-          global_defs: {
-            'DEV': false,
-          },
-        },
-      }))
-      .pipe($.size({ title: 'scripts' }))
-    .pipe($.sourcemaps.write('.'))
-    .pipe(gulp.dest(PATHS.dest));
-}
-
-function vendor() {
+const vendor = () => {
   const b = browserify();
 
   VENDOR.forEach((lib) => {
@@ -101,6 +97,6 @@ function vendor() {
     .pipe($.uglify())
     .pipe($.size({ title: 'vendor' }))
     .pipe(gulp.dest(PATHS.dest));
-}
+};
 
 export { tmpBundle, bundle, vendor };
