@@ -7,8 +7,7 @@
     "copyindex": "node copyindex",
     "postinstall": "npm run copyindex",
     "compile": "handlebars ./views/precompile/*.hbs -k each -k if | uglifyjs -o ./app/scripts/templates.min.js",
-    "gulp": "gulp",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "gulp": "gulp"
   },
   "repository": {
     "type": "git",
@@ -32,10 +31,10 @@
     "babelify": "^7.3.0",
     "browser-sync": "^2.18.2",
     "browserify": "^13.1.1",
-    "cssnano": "^3.8.0",
+    "cssnano": "^3.8.1",
     "del": "^2.2.2",
     "dotenv": "^2.0.0",
-    "eslint": "^3.10.2",
+    "eslint": "^3.11.1",
     "eslint-config-airbnb-base": "^10.0.1",
     "eslint-plugin-import": "^2.2.0",
     "gulp": "github:gulpjs/gulp#4.0",
@@ -58,7 +57,7 @@
     "gulp-webp": "^2.3.0",
     "handlebars": "^4.0.6",
     "shortid": "^2.2.6",
-    "uglify-js": "^2.7.4",
+    "uglify-js": "^2.7.5",
     "vinyl-buffer": "^1.0.0",
     "vinyl-source-stream": "^1.1.0",
     "watchify": "^3.7.0"
