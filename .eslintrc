@@ -8,8 +8,6 @@
     "DEV": true
   },
   "rules": {
-    "no-await-in-loop": 0,
-    "no-console": 1,
     "no-cond-assign": ["error", "except-parens"],
     "no-param-reassign": [
       "error", { "props": false }

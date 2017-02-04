@@ -8,6 +8,6 @@ window.addEventListener('load', () => {
   elem.insertAdjacentHTML('afterbegin', Base.text);
 
   if (DEV) {
-    console.log('Development Mode');
+    console.log('Development Mode'); // eslint-disable-line no-console
   }
 });
