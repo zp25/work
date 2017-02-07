@@ -32,13 +32,9 @@ acorn-object-spread@^1.0.0:
   dependencies:
     acorn "^3.1.0"
 
-acorn@4.0.4:
+acorn@4.0.4, acorn@4.X:
   version "4.0.4"
   resolved "http://registry.npm.taobao.org/acorn/download/acorn-4.0.4.tgz#17a8d6a7a6c4ef538b814ec9abac2779293bf30a"
-
-acorn@4.X, acorn@^4.0.1:
-  version "4.0.3"
-  resolved "http://r.cnpmjs.org/acorn/download/acorn-4.0.3.tgz#1a3e850b428e73ba6b09d1cc527f5aaad4d03ef1"
 
 acorn@^1.0.3:
   version "1.2.2"
@@ -267,18 +263,7 @@ atob@~1.1.0:
   version "1.1.3"
   resolved "http://r.cnpmjs.org/atob/download/atob-1.1.3.tgz#95f13629b12c3a51a5d215abdce2aa9f32f80773"
 
-autoprefixer@^6.3.1:
-  version "6.6.1"
-  resolved "http://registry.npm.taobao.org/autoprefixer/download/autoprefixer-6.6.1.tgz#11a4077abb4b313253ec2f6e1adb91ad84253519"
-  dependencies:
-    browserslist "~1.5.1"
-    caniuse-db "^1.0.30000604"
-    normalize-range "^0.1.2"
-    num2fraction "^1.2.2"
-    postcss "^5.2.8"
-    postcss-value-parser "^3.2.3"
-
-autoprefixer@^6.7.2:
+autoprefixer@^6.3.1, autoprefixer@^6.7.2:
   version "6.7.2"
   resolved "http://registry.npm.taobao.org/autoprefixer/download/autoprefixer-6.7.2.tgz#172ab07b998ae9b957530928a59a40be54a45023"
   dependencies:
@@ -1254,12 +1239,6 @@ browserslist@^1.7.1:
     caniuse-db "^1.0.30000617"
     electron-to-chromium "^1.2.1"
 
-browserslist@~1.5.1:
-  version "1.5.2"
-  resolved "http://registry.npm.taobao.org/browserslist/download/browserslist-1.5.2.tgz#1c82fde0ee8693e6d15c49b7bff209dc06298c56"
-  dependencies:
-    caniuse-db "^1.0.30000604"
-
 bs-recipes@1.3.4:
   version "1.3.4"
   resolved "http://registry.npm.taobao.org/bs-recipes/download/bs-recipes-1.3.4.tgz#0d2d4d48a718c8c044769fdc4f89592dc8b69585"
@@ -1377,10 +1356,6 @@ camelcase@^2.0.0:
 camelcase@^3.0.0:
   version "3.0.0"
   resolved "http://r.cnpmjs.org/camelcase/download/camelcase-3.0.0.tgz#32fc4b9fcdaf845fcdf7e73bb97cac2261f0ab0a"
-
-caniuse-db@^1.0.30000604:
-  version "1.0.30000613"
-  resolved "http://registry.npm.taobao.org/caniuse-db/download/caniuse-db-1.0.30000613.tgz#639133b7a5380c1416f9701d23d54d093dd68299"
 
 caniuse-db@^1.0.30000617, caniuse-db@^1.0.30000618:
   version "1.0.30000619"
@@ -1700,6 +1675,10 @@ contains-path@^0.1.0:
   version "0.1.0"
   resolved "http://r.cnpmjs.org/contains-path/download/contains-path-0.1.0.tgz#fe8cf184ff6670b6baef01a9d4861a5cbec4120a"
 
+conventional-commit-types@^2.0.0:
+  version "2.1.0"
+  resolved "http://registry.npm.taobao.org/conventional-commit-types/download/conventional-commit-types-2.1.0.tgz#45d860386c9a2e6537ee91d8a1b61bd0411b3d04"
+
 convert-source-map@1.X, convert-source-map@^1.1.0, convert-source-map@^1.1.1:
   version "1.3.0"
   resolved "http://r.cnpmjs.org/convert-source-map/download/convert-source-map-1.3.0.tgz#e9f3e9c6e2728efc2676696a70eb382f73106a67"
@@ -1866,6 +1845,17 @@ cwebp-bin@^3.1.0:
     bin-wrapper "^3.0.1"
     logalot "^2.0.0"
 
+cz-conventional-changelog@^1.2.0:
+  version "1.2.0"
+  resolved "http://registry.npm.taobao.org/cz-conventional-changelog/download/cz-conventional-changelog-1.2.0.tgz#2bca04964c8919b23f3fd6a89ef5e6008b31b3f8"
+  dependencies:
+    conventional-commit-types "^2.0.0"
+    lodash.map "^4.5.1"
+    longest "^1.0.1"
+    pad-right "^0.2.2"
+    right-pad "^1.0.1"
+    word-wrap "^1.0.3"
+
 d@^0.1.1, d@~0.1.1:
   version "0.1.1"
   resolved "http://r.cnpmjs.org/d/download/d-0.1.1.tgz#da184c535d18d8ee7ba2aa229b914009fae11309"
@@ -1900,13 +1890,13 @@ debug@2.2.0, debug@~2.2.0:
   dependencies:
     ms "0.7.1"
 
-debug@2.3.3:
+debug@2.3.3, debug@2.X:
   version "2.3.3"
   resolved "http://r.cnpmjs.org/debug/download/debug-2.3.3.tgz#40c453e67e6e13c901ddec317af8986cda9eff8c"
   dependencies:
     ms "0.7.2"
 
-debug@2.X, debug@^2.1.1, debug@^2.2.0:
+debug@^2.1.1, debug@^2.2.0:
   version "2.3.2"
   resolved "http://r.cnpmjs.org/debug/download/debug-2.3.2.tgz#94cb466ef7d6d2c7e5245cdd6e4104f2d0d70d30"
   dependencies:
@@ -2313,9 +2303,9 @@ escope@^3.6.0:
     esrecurse "^4.1.0"
     estraverse "^4.1.1"
 
-eslint-config-airbnb-base@^11.0.1:
-  version "11.0.1"
-  resolved "http://registry.npm.taobao.org/eslint-config-airbnb-base/download/eslint-config-airbnb-base-11.0.1.tgz#5401dba284c6b7d7c8fb1c2ee19aba018f9dfa21"
+eslint-config-airbnb-base@^11.1.0:
+  version "11.1.0"
+  resolved "http://registry.npm.taobao.org/eslint-config-airbnb-base/download/eslint-config-airbnb-base-11.1.0.tgz#dc9b3ec70b8c74dcbe6d6257c9da3992c39ca2ca"
 
 eslint-import-resolver-node@^0.2.0:
   version "0.2.3"
@@ -2347,46 +2337,7 @@ eslint-plugin-import@^2.2.0:
     minimatch "^3.0.3"
     pkg-up "^1.0.0"
 
-eslint@^3.0.0:
-  version "3.13.1"
-  resolved "http://registry.npm.taobao.org/eslint/download/eslint-3.13.1.tgz#564d2646b5efded85df96985332edd91a23bff25"
-  dependencies:
-    babel-code-frame "^6.16.0"
-    chalk "^1.1.3"
-    concat-stream "^1.4.6"
-    debug "^2.1.1"
-    doctrine "^1.2.2"
-    escope "^3.6.0"
-    espree "^3.3.1"
-    estraverse "^4.2.0"
-    esutils "^2.0.2"
-    file-entry-cache "^2.0.0"
-    glob "^7.0.3"
-    globals "^9.14.0"
-    ignore "^3.2.0"
-    imurmurhash "^0.1.4"
-    inquirer "^0.12.0"
-    is-my-json-valid "^2.10.0"
-    is-resolvable "^1.0.0"
-    js-yaml "^3.5.1"
-    json-stable-stringify "^1.0.0"
-    levn "^0.3.0"
-    lodash "^4.0.0"
-    mkdirp "^0.5.0"
-    natural-compare "^1.4.0"
-    optionator "^0.8.2"
-    path-is-inside "^1.0.1"
-    pluralize "^1.2.1"
-    progress "^1.1.8"
-    require-uncached "^1.0.2"
-    shelljs "^0.7.5"
-    strip-bom "^3.0.0"
-    strip-json-comments "~2.0.1"
-    table "^3.7.8"
-    text-table "~0.2.0"
-    user-home "^2.0.0"
-
-eslint@^3.15.0:
+eslint@^3.0.0, eslint@^3.15.0:
   version "3.15.0"
   resolved "http://registry.npm.taobao.org/eslint/download/eslint-3.15.0.tgz#bdcc6a6c5ffe08160e7b93c066695362a91e30f2"
   dependencies:
@@ -2424,13 +2375,6 @@ eslint@^3.15.0:
     table "^3.7.8"
     text-table "~0.2.0"
     user-home "^2.0.0"
-
-espree@^3.3.1:
-  version "3.3.2"
-  resolved "http://r.cnpmjs.org/espree/download/espree-3.3.2.tgz#dbf3fadeb4ecb4d4778303e50103b3d36c88b89c"
-  dependencies:
-    acorn "^4.0.1"
-    acorn-jsx "^3.0.0"
 
 espree@^3.4.0:
   version "3.4.0"
@@ -3195,9 +3139,9 @@ gulp-sourcemaps@1.6.0:
     through2 "^2.0.0"
     vinyl "^1.0.0"
 
-gulp-sourcemaps@^2.4.0:
-  version "2.4.0"
-  resolved "http://registry.npm.taobao.org/gulp-sourcemaps/download/gulp-sourcemaps-2.4.0.tgz#9ce8fcf9ab29769819dff04ca781976072838979"
+gulp-sourcemaps@^2.4.1:
+  version "2.4.1"
+  resolved "http://registry.npm.taobao.org/gulp-sourcemaps/download/gulp-sourcemaps-2.4.1.tgz#8f65dc5c0d07b2fd5c88bc60ec7f13e56716bf74"
   dependencies:
     acorn "4.X"
     convert-source-map "1.X"
@@ -4233,9 +4177,9 @@ lodash.last@^3.0.0:
   version "3.0.0"
   resolved "http://r.cnpmjs.org/lodash.last/download/lodash.last-3.0.0.tgz#242f663112dd4c6e63728c60a3c909d1bdadbd4c"
 
-lodash.map@^4.1.0:
+lodash.map@^4.1.0, lodash.map@^4.5.1:
   version "4.6.0"
-  resolved "http://r.cnpmjs.org/lodash.map/download/lodash.map-4.6.0.tgz#771ec7839e3473d9c4cde28b19394c3562f4f6d3"
+  resolved "http://registry.npm.taobao.org/lodash.map/download/lodash.map-4.6.0.tgz#771ec7839e3473d9c4cde28b19394c3562f4f6d3"
 
 lodash.mapvalues@^4.4.0:
   version "4.6.0"
@@ -4859,6 +4803,12 @@ p-finally@^1.0.0:
   version "1.0.0"
   resolved "http://r.cnpmjs.org/p-finally/download/p-finally-1.0.0.tgz#3fbcfb15b899a44123b34b6dcc18b724336a2cae"
 
+pad-right@^0.2.2:
+  version "0.2.2"
+  resolved "http://registry.npm.taobao.org/pad-right/download/pad-right-0.2.2.tgz#6fbc924045d244f2a2a244503060d3bfc6009774"
+  dependencies:
+    repeat-string "^1.5.2"
+
 pako@~0.2.0:
   version "0.2.9"
   resolved "http://r.cnpmjs.org/pako/download/pako-0.2.9.tgz#f3f7522f4ef782348da8161bad9ecfd51bf83a75"
@@ -5277,16 +5227,7 @@ postcss-zindex@^2.0.1:
     postcss "^5.0.4"
     uniqs "^2.0.0"
 
-postcss@^5.0.10, postcss@^5.0.11, postcss@^5.0.12, postcss@^5.0.13, postcss@^5.0.14, postcss@^5.0.16, postcss@^5.0.2, postcss@^5.0.4, postcss@^5.0.5, postcss@^5.0.8, postcss@^5.2.10, postcss@^5.2.8:
-  version "5.2.10"
-  resolved "http://registry.npm.taobao.org/postcss/download/postcss-5.2.10.tgz#b58b64e04f66f838b7bc7cb41f7dac168568a945"
-  dependencies:
-    chalk "^1.1.3"
-    js-base64 "^2.1.9"
-    source-map "^0.5.6"
-    supports-color "^3.1.2"
-
-postcss@^5.2.11:
+postcss@^5.0.10, postcss@^5.0.11, postcss@^5.0.12, postcss@^5.0.13, postcss@^5.0.14, postcss@^5.0.16, postcss@^5.0.2, postcss@^5.0.4, postcss@^5.0.5, postcss@^5.0.8, postcss@^5.2.10, postcss@^5.2.11:
   version "5.2.11"
   resolved "http://registry.npm.taobao.org/postcss/download/postcss-5.2.11.tgz#ff29bcd6d2efb98bfe08a022055ec599bbe7b761"
   dependencies:
@@ -5700,6 +5641,10 @@ right-align@^0.1.1:
   resolved "http://r.cnpmjs.org/right-align/download/right-align-0.1.3.tgz#61339b722fe6a3515689210d24e14c96148613ef"
   dependencies:
     align-text "^0.1.1"
+
+right-pad@^1.0.1:
+  version "1.0.1"
+  resolved "http://registry.npm.taobao.org/right-pad/download/right-pad-1.0.1.tgz#8ca08c2cbb5b55e74dafa96bf7fd1a27d568c8d0"
 
 rimraf@2, rimraf@^2.2.6, rimraf@^2.2.8, rimraf@^2.4.0, rimraf@^2.5.4, rimraf@~2.5.1, rimraf@~2.5.4:
   version "2.5.4"
@@ -6198,12 +6143,6 @@ sum-up@^1.0.1:
 supports-color@^2.0.0:
   version "2.0.0"
   resolved "http://r.cnpmjs.org/supports-color/download/supports-color-2.0.0.tgz#535d045ce6b6363fa40117084629995e9df324c7"
-
-supports-color@^3.1.2:
-  version "3.1.2"
-  resolved "http://r.cnpmjs.org/supports-color/download/supports-color-3.1.2.tgz#72a262894d9d408b956ca05ff37b2ed8a6e2a2d5"
-  dependencies:
-    has-flag "^1.0.0"
 
 supports-color@^3.2.3:
   version "3.2.3"
@@ -6756,6 +6695,10 @@ window-size@^0.1.2:
 window-size@^0.2.0:
   version "0.2.0"
   resolved "http://r.cnpmjs.org/window-size/download/window-size-0.2.0.tgz#b4315bb4214a3d7058ebeee892e13fa24d98b075"
+
+word-wrap@^1.0.3:
+  version "1.2.1"
+  resolved "http://registry.npm.taobao.org/word-wrap/download/word-wrap-1.2.1.tgz#248f459b465d179a17bc407c854d3151d07e45d8"
 
 wordwrap@0.0.2:
   version "0.0.2"
