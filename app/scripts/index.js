@@ -4,8 +4,12 @@ import Base from './base';
 // });
 
 window.addEventListener('load', () => {
+  const result = Template.index.header({
+    header: { title: Base.text },
+  });
+
   const elem = document.querySelector('.header');
-  elem.insertAdjacentHTML('afterbegin', Base.text);
+  elem.insertAdjacentHTML('afterbegin', result);
 
   if (DEV) {
     console.log('Development Mode'); // eslint-disable-line no-console

@@ -33,6 +33,7 @@ const context = {
       path: 'https://demo.zp25.ninja',
     }
   ],
+  templates: ['index'],
 };
 
 /**

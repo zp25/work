@@ -7,7 +7,6 @@ const PATHS = {
     src: [
       'app/scripts/**/*.js',
       '!app/scripts/dev.js',
-      '!app/scripts/templates.min.js',
     ],
     tmp: '.tmp/scripts',
     dest: 'dist/scripts',

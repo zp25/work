@@ -1,5 +1,11 @@
 <!-- build:remove -->
 <script src="scripts/dev.js"></script>
 <!-- endbuild -->
+<!-- build:js scripts/handlebars.runtime.min.js -->
+<script src="handlebars/dist/handlebars.runtime.min.js"></script>
+<!-- endbuild -->
 <script src="scripts/vendor.js?v={{version}}"></script>
+{{#each templates}}
+<script src="scripts/template.{{this}}.js?v={{../version}}"></script>
+{{/each}}
 <script src="scripts/bundle.js?v={{version}}"></script>

@@ -4,6 +4,8 @@ import autoprefixer from 'autoprefixer';
 import cssnano from 'cssnano';
 import browserSync from 'browser-sync';
 import gulpLoadPlugins from 'gulp-load-plugins';
+import Handlebars from 'handlebars';
+import es from 'event-stream';
 import dotenv from 'dotenv';
 import { tmpConcat, concat } from './gulpfile.concat.babel';
 import { tmpBundle, bundle, vendor } from './gulpfile.bundle.babel';
@@ -25,28 +27,28 @@ const PATHS = {
     dest: 'dist/styles',
   },
   scripts: {
-    src: [
-      'app/scripts/**/*.js',
-    ],
-    exclude: [
-      '!app/scripts/templates.min.js',
-    ],
+    src: 'app/scripts/**/*.js',
     watch: [
       'app/scripts/dev.js',
-      'app/scripts/templates.min.js',
     ],
+    tmp: '.tmp/scripts',
+    dest: 'dist/scripts',
   },
   images: {
     src: 'app/images/**/*',
     tmp: '.tmp/images',
     dest: 'dist/images',
   },
+  templates: {
+    index: 'app/templates/index/*.hbs',
+  },
+  copy: ['app/*', '!app/*.html', '!app/templates'],
   assets: ['.tmp', 'app', 'node_modules'],
 };
 
 // Lint JavaScript
 function lint() {
-  return gulp.src(PATHS.scripts.src.concat(PATHS.scripts.exclude))
+  return gulp.src(PATHS.scripts.src)
     .pipe($.eslint())
     .pipe($.eslint.format())
     .pipe($.if(!BS.active, $.eslint.failOnError()))
@@ -84,7 +86,7 @@ function webp() {
 
 // Copy
 function copy() {
-  return gulp.src(['app/*', '!app/*.html'])
+  return gulp.src(PATHS.copy)
     .pipe(gulp.dest('dist'))
     .pipe($.size({ title: 'copy' }));
 }
@@ -122,6 +124,50 @@ function sass() {
       .pipe($.size({ title: 'styles' }))
     .pipe($.sourcemaps.write('.'))
     .pipe(gulp.dest(PATHS.styles.dest));
+}
+
+// Templates
+function tmpTemplates(done) {
+  const tasks = Object.keys(PATHS.templates).map((key) => {
+    const fname = `template.${key}.js`;
+
+    return gulp.src(PATHS.templates[key])
+      .pipe($.newer(`${PATHS.scripts.tmp}/${fname}`))
+      .pipe($.handlebars({
+        handlebars: Handlebars,
+      }))
+      .pipe($.wrap('Handlebars.template(<%= contents %>)'))
+      .pipe($.declare({
+        namespace: `Template.${key}`,
+        noRedeclare: true,
+      }))
+      .pipe($.concat(fname))
+      .pipe(gulp.dest(PATHS.scripts.tmp))
+      .pipe(BS.stream({ once: true }));
+  });
+
+  es.merge(tasks).on('end', done);
+}
+
+function templates(done) {
+  const tasks = Object.keys(PATHS.templates).map((key) => {
+    const fname = `template.${key}.js`;
+
+    return gulp.src(PATHS.templates[key])
+      .pipe($.handlebars({
+        handlebars: Handlebars,
+      }))
+      .pipe($.wrap('Handlebars.template(<%= contents %>)'))
+      .pipe($.declare({
+        namespace: `Template.${key}`,
+        noRedeclare: true,
+      }))
+      .pipe($.concat(fname))
+      .pipe($.uglify())
+      .pipe(gulp.dest(PATHS.scripts.dest));
+  });
+
+  es.merge(tasks).on('end', done);
 }
 
 // HTML
@@ -162,6 +208,7 @@ function serve() {
   gulp.watch(PATHS.html.src).on('change', BS.reload);
   gulp.watch(PATHS.styles.src, tmpSass);
   gulp.watch(PATHS.images.src, tmpWebp);
+  gulp.watch(Object.values(PATHS.templates), tmpTemplates);
 
   if (BUNDLE) {
     gulp.watch(PATHS.scripts.src, lint);
@@ -193,20 +240,20 @@ gulp.task('script', (BUNDLE ? bundle : concat));
 gulp.task(vendor);
 
 gulp.task('clean:all', (BUNDLE ? gulp.series(clean, vendor) : clean));
-gulp.task('clean:cache', cb => $.cache.clearAll(cb));
+gulp.task('clean:cache', done => $.cache.clearAll(done));
 
 // Build production files, the default task
 gulp.task('default',
   gulp.series(
     'clean:all', html,
-    gulp.parallel(lint, 'script', sass, images, webp, copy)
+    gulp.parallel(lint, 'script', sass, images, webp, copy, templates)
   )
 );
 
 // run scripts, sass first and run browserSync before watch
 gulp.task('serve',
   gulp.series(
-    gulp.parallel('tmpScript', tmpSass, tmpWebp),
+    gulp.parallel('tmpScript', tmpSass, tmpWebp, tmpTemplates),
     serve
   )
 );
