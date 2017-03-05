@@ -1,3 +1,4 @@
+import path from 'path';
 import gulp from 'gulp';
 import del from 'del';
 import autoprefixer from 'autoprefixer';
@@ -7,44 +8,22 @@ import gulpLoadPlugins from 'gulp-load-plugins';
 import Handlebars from 'handlebars';
 import es from 'event-stream';
 import dotenv from 'dotenv';
+import {
+  AUTOPREFIXER_CONFIG,
+  PATHS,
+} from './constants';
 import { tmpConcat, concat } from './gulpfile.concat.babel';
 import { tmpBundle, bundle, vendor } from './gulpfile.bundle.babel';
 
 dotenv.config({ silent: true });
 
-const $ = gulpLoadPlugins();
+const $ = gulpLoadPlugins({
+  rename: {
+    'gulp-rev-replace': 'replace',
+  },
+});
 const BS = browserSync.create();
-const AUTOPREFIXER_CONFIG = { browsers: ['last 2 versions'] };
 const BUNDLE = process.env.SCRIPT === 'bundle';
-const PATHS = {
-  html: {
-    src: 'app/**/*.html',
-    dest: 'dist',
-  },
-  styles: {
-    src: 'app/styles/**/*.{scss,css}',
-    tmp: '.tmp/styles',
-    dest: 'dist/styles',
-  },
-  scripts: {
-    src: 'app/scripts/**/*.js',
-    watch: [
-      'app/scripts/dev.js',
-    ],
-    tmp: '.tmp/scripts',
-    dest: 'dist/scripts',
-  },
-  images: {
-    src: 'app/images/**/*',
-    tmp: '.tmp/images',
-    dest: 'dist/images',
-  },
-  templates: {
-    index: 'app/templates/index/*.hbs',
-  },
-  copy: ['app/*', '!app/*.html', '!app/templates'],
-  assets: ['.tmp', 'app', 'node_modules'],
-};
 
 // Lint JavaScript
 function lint() {
@@ -117,13 +96,23 @@ function sass() {
 
   return gulp.src(PATHS.styles.src)
     .pipe($.sourcemaps.init())
-      .pipe($.sass({ precision: 10 })
+      .pipe(
+        $.sass({
+          includePaths: ['node_modules/normalize.css'],
+          precision: 10,
+        })
         .on('error', $.sass.logError)
       )
       .pipe($.postcss(processors))
       .pipe($.size({ title: 'styles' }))
+      .pipe($.rev())
     .pipe($.sourcemaps.write('.'))
-    .pipe(gulp.dest(PATHS.styles.dest));
+    .pipe(gulp.dest(PATHS.styles.dest))
+    .pipe($.rev.manifest({
+      base: process.cwd(),
+      merge: true,
+    }))
+    .pipe(gulp.dest(PATHS.manifest));
 }
 
 // Templates
@@ -164,7 +153,13 @@ function templates(done) {
       }))
       .pipe($.concat(fname))
       .pipe($.uglify())
-      .pipe(gulp.dest(PATHS.scripts.dest));
+      .pipe($.rev())
+      .pipe(gulp.dest(PATHS.scripts.dest))
+      .pipe($.rev.manifest({
+        base: process.cwd(),
+        merge: true,
+      }))
+      .pipe(gulp.dest(PATHS.manifest));
   });
 
   es.merge(tasks).on('end', done);
@@ -191,6 +186,9 @@ function html() {
     })))
     .pipe($.if('*.html', $.size({ title: 'html', showFiles: true })))
     .pipe($.if('*.css', $.postcss(processors)))
+    .pipe($.replace({
+      manifest: gulp.src(path.resolve(PATHS.manifest, 'rev-manifest.json')),
+    }))
     .pipe(gulp.dest(PATHS.html.dest));
 }
 
@@ -245,8 +243,9 @@ gulp.task('clean:cache', done => $.cache.clearAll(done));
 // Build production files, the default task
 gulp.task('default',
   gulp.series(
-    'clean:all', html,
-    gulp.parallel(lint, 'script', sass, images, webp, copy, templates)
+    'clean:all',
+    gulp.parallel(lint, 'script', sass, images, webp, copy, templates),
+    html,
   )
 );
 

@@ -5,21 +5,17 @@ import watchify from 'watchify';
 import babelify from 'babelify';
 import source from 'vinyl-source-stream';
 import buffer from 'vinyl-buffer';
+import {
+  PATHS,
+  VENDOR,
+} from './constants';
 
 const $ = gulpLoadPlugins();
-const PATHS = {
-  entries: [
-    'app/scripts/index.js',
-  ],
-  tmp: '.tmp/scripts',
-  dest: 'dist/scripts',
-};
-const VENDOR = ['babel-polyfill'];
 
 const development = (b, BS) => b.bundle()
   .on('error', $.util.log.bind($.util, 'Browserify Error'))
   .pipe(source('bundle.js'))
-  .pipe(gulp.dest(PATHS.tmp))
+  .pipe(gulp.dest(PATHS.scripts.tmp))
   .pipe(BS.stream({ once: true }));
 
 const production = b => b.bundle()
@@ -36,13 +32,19 @@ const production = b => b.bundle()
       },
     }))
     .pipe($.size({ title: 'scripts' }))
+    .pipe($.rev())
   .pipe($.sourcemaps.write('.'))
-  .pipe(gulp.dest(PATHS.dest));
+  .pipe(gulp.dest(PATHS.scripts.dest))
+  .pipe($.rev.manifest({
+    base: process.cwd(),
+    merge: true,
+  }))
+  .pipe(gulp.dest(PATHS.manifest));
 
 // Scripts
 const tmpBundle = BS => () => {
   const b = browserify({
-    entries: PATHS.entries,
+    entries: PATHS.scripts.entries,
     cache: {},
     packageCache: {},
     transform: [babelify],
@@ -64,7 +66,7 @@ const tmpBundle = BS => () => {
 
 const bundle = () => {
   const b = browserify({
-    entries: PATHS.entries,
+    entries: PATHS.scripts.entries,
     cache: {},
     packageCache: {},
     transform: [babelify],
@@ -93,10 +95,16 @@ const vendor = () => {
     .on('error', $.util.log.bind($.util, 'Browserify Error'))
     .pipe(source('vendor.js'))
     .pipe(buffer())
-    .pipe(gulp.dest(PATHS.tmp))
+    .pipe(gulp.dest(PATHS.scripts.tmp))
     .pipe($.uglify())
     .pipe($.size({ title: 'vendor' }))
-    .pipe(gulp.dest(PATHS.dest));
+    .pipe($.rev())
+    .pipe(gulp.dest(PATHS.scripts.dest))
+    .pipe($.rev.manifest({
+      base: process.cwd(),
+      merge: true,
+    }))
+    .pipe(gulp.dest(PATHS.manifest));
 };
 
 export { tmpBundle, bundle, vendor };

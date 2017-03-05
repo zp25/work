@@ -2320,9 +2320,9 @@ escope@^3.6.0:
     esrecurse "^4.1.0"
     estraverse "^4.1.1"
 
-eslint-config-airbnb-base@^11.1.0:
-  version "11.1.0"
-  resolved "http://registry.npm.taobao.org/eslint-config-airbnb-base/download/eslint-config-airbnb-base-11.1.0.tgz#dc9b3ec70b8c74dcbe6d6257c9da3992c39ca2ca"
+eslint-config-airbnb-base@^11.1.1:
+  version "11.1.1"
+  resolved "http://registry.npm.taobao.org/eslint-config-airbnb-base/download/eslint-config-airbnb-base-11.1.1.tgz#61e9e89e4eb89f474f6913ac817be9fbb59063e0"
 
 eslint-import-resolver-node@^0.2.0:
   version "0.2.3"
@@ -2354,9 +2354,9 @@ eslint-plugin-import@^2.2.0:
     minimatch "^3.0.3"
     pkg-up "^1.0.0"
 
-eslint@^3.0.0, eslint@^3.16.1:
-  version "3.16.1"
-  resolved "http://registry.npm.taobao.org/eslint/download/eslint-3.16.1.tgz#9bc31fc7341692cf772e80607508f67d711c5609"
+eslint@^3.0.0, eslint@^3.17.0:
+  version "3.17.0"
+  resolved "http://registry.npm.taobao.org/eslint/download/eslint-3.17.0.tgz#e2704b09c5bae9fb49ee8bafeea3832c7257d498"
   dependencies:
     babel-code-frame "^6.16.0"
     chalk "^1.1.3"
@@ -3145,6 +3145,26 @@ gulp-postcss@^6.3.0:
 gulp-rename@^1.2.0:
   version "1.2.2"
   resolved "http://r.cnpmjs.org/gulp-rename/download/gulp-rename-1.2.2.tgz#3ad4428763f05e2764dec1c67d868db275687817"
+
+gulp-rev-replace@^0.4.3:
+  version "0.4.3"
+  resolved "http://registry.npm.taobao.org/gulp-rev-replace/download/gulp-rev-replace-0.4.3.tgz#72b51848f5f093ad4b77b1d2411081eb78acd46e"
+  dependencies:
+    gulp-util "^3.0.7"
+    through2 "^2.0.0"
+
+gulp-rev@^7.1.2:
+  version "7.1.2"
+  resolved "http://registry.npm.taobao.org/gulp-rev/download/gulp-rev-7.1.2.tgz#5e17cc229f6b45c74256f88ad3f2d3e9a3305829"
+  dependencies:
+    gulp-util "^3.0.0"
+    modify-filename "^1.1.0"
+    object-assign "^4.0.1"
+    rev-hash "^1.0.0"
+    rev-path "^1.0.0"
+    sort-keys "^1.0.0"
+    through2 "^2.0.0"
+    vinyl-file "^1.1.0"
 
 gulp-sass@^3.1.0:
   version "3.1.0"
@@ -4516,6 +4536,10 @@ modify-event@^1.0.0:
   version "1.0.1"
   resolved "http://r.cnpmjs.org/modify-event/download/modify-event-1.0.1.tgz#ea1314e13ff6e79389f20ad74192f621de658ad6"
 
+modify-filename@^1.0.0, modify-filename@^1.1.0:
+  version "1.1.0"
+  resolved "http://registry.npm.taobao.org/modify-filename/download/modify-filename-1.1.0.tgz#9a2dec83806fbb2d975f22beec859ca26b393aa1"
+
 module-deps@^4.0.8:
   version "4.0.8"
   resolved "http://r.cnpmjs.org/module-deps/download/module-deps-4.0.8.tgz#55fd70623399706c3288bef7a609ff1e8c0ed2bb"
@@ -5729,6 +5753,16 @@ restore-cursor@^1.0.1:
     exit-hook "^1.0.0"
     onetime "^1.0.0"
 
+rev-hash@^1.0.0:
+  version "1.0.0"
+  resolved "http://registry.npm.taobao.org/rev-hash/download/rev-hash-1.0.0.tgz#96993959ea9bfb1c59b13adf02ac2e34bb373603"
+
+rev-path@^1.0.0:
+  version "1.0.0"
+  resolved "http://registry.npm.taobao.org/rev-path/download/rev-path-1.0.0.tgz#d4ccb436ac3370c4607175ce88eafc5c65c5d653"
+  dependencies:
+    modify-filename "^1.0.0"
+
 right-align@^0.1.1:
   version "0.1.3"
   resolved "http://r.cnpmjs.org/right-align/download/right-align-0.1.3.tgz#61339b722fe6a3515689210d24e14c96148613ef"
@@ -6684,6 +6718,15 @@ vinyl-bufferstream@^1.0.1:
   resolved "http://registry.npm.taobao.org/vinyl-bufferstream/download/vinyl-bufferstream-1.0.1.tgz#0537869f580effa4ca45acb47579e4b9fe63081a"
   dependencies:
     bufferstreams "1.0.1"
+
+vinyl-file@^1.1.0:
+  version "1.3.0"
+  resolved "http://registry.npm.taobao.org/vinyl-file/download/vinyl-file-1.3.0.tgz#aa05634d3a867ba91447bedbb34afcb26f44f6e7"
+  dependencies:
+    graceful-fs "^4.1.2"
+    strip-bom "^2.0.0"
+    strip-bom-stream "^1.0.0"
+    vinyl "^1.1.0"
 
 vinyl-fs@^2.0.0, vinyl-fs@^2.2.0, vinyl-fs@^2.2.1:
   version "2.4.4"
