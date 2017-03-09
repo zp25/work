@@ -79,7 +79,11 @@ function tmpSass() {
   return gulp.src(PATHS.styles.src)
     .pipe($.newer(PATHS.styles.tmp))
     .pipe($.sourcemaps.init())
-      .pipe($.sass({ precision: 10 })
+      .pipe(
+        $.sass({
+          includePaths: ['node_modules/normalize.css'],
+          precision: 10,
+        })
         .on('error', $.sass.logError)
       )
       .pipe($.postcss(processors))

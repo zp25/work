@@ -12,9 +12,13 @@ const PATHS = {
   },
   scripts: {
     src: 'app/scripts/**/*.js',
+    // browserify
     entries: [
       'app/scripts/index.js',
     ],
+    // concat
+    concat: [],
+    // production不使用
     watch: [
       'app/scripts/dev.js',
     ],

@@ -1,20 +1,13 @@
 import gulp from 'gulp';
 import gulpLoadPlugins from 'gulp-load-plugins';
+import {
+  PATHS,
+} from './constants';
 
 const $ = gulpLoadPlugins();
-const PATHS = {
-  scripts: {
-    src: [
-      'app/scripts/**/*.js',
-      '!app/scripts/dev.js',
-    ],
-    tmp: '.tmp/scripts',
-    dest: 'dist/scripts',
-  },
-};
 
 // Scripts
-const tmpConcat = BS => () => gulp.src(PATHS.scripts.src)
+const tmpConcat = BS => () => gulp.src(PATHS.scripts.concat)
   .pipe($.newer(PATHS.scripts.tmp))
   .pipe($.sourcemaps.init())
     .pipe($.babel())
@@ -22,10 +15,10 @@ const tmpConcat = BS => () => gulp.src(PATHS.scripts.src)
   .pipe(gulp.dest(PATHS.scripts.tmp))
   .pipe(BS.stream({ once: true }));
 
-const concat = () => gulp.src(PATHS.scripts.src)
+const concat = () => gulp.src(PATHS.scripts.concat)
   .pipe($.sourcemaps.init())
     .pipe($.babel())
-    .pipe($.concat('main.min.js'))
+    .pipe($.concat('concat.min.js'))
     .pipe($.uglify({
       // preserveComments: 'license',
       compress: {

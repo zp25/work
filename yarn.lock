@@ -2354,9 +2354,9 @@ eslint-plugin-import@^2.2.0:
     minimatch "^3.0.3"
     pkg-up "^1.0.0"
 
-eslint@^3.0.0, eslint@^3.17.0:
-  version "3.17.0"
-  resolved "http://registry.npm.taobao.org/eslint/download/eslint-3.17.0.tgz#e2704b09c5bae9fb49ee8bafeea3832c7257d498"
+eslint@^3.0.0, eslint@^3.17.1:
+  version "3.17.1"
+  resolved "http://registry.npm.taobao.org/eslint/download/eslint-3.17.1.tgz#b80ae12d9c406d858406fccda627afce33ea10ea"
   dependencies:
     babel-code-frame "^6.16.0"
     chalk "^1.1.3"
@@ -3213,16 +3213,16 @@ gulp-sourcemaps@^2.4.1:
     through2 "2.X"
     vinyl "1.X"
 
-gulp-uglify@^2.0.1:
-  version "2.0.1"
-  resolved "http://registry.npm.taobao.org/gulp-uglify/download/gulp-uglify-2.0.1.tgz#e8cfb831014fc9ff2e055e33785861830d499365"
+gulp-uglify@^2.1.0:
+  version "2.1.0"
+  resolved "http://registry.npm.taobao.org/gulp-uglify/download/gulp-uglify-2.1.0.tgz#3b0e3e0d89151863d24627cf924aac070bbb5cb1"
   dependencies:
     gulplog "^1.0.0"
     has-gulplog "^0.1.0"
     lodash "^4.13.1"
     make-error-cause "^1.1.1"
     through2 "^2.0.0"
-    uglify-js "2.7.5"
+    uglify-js "~2.8.10"
     uglify-save-license "^0.4.1"
     vinyl-sourcemaps-apply "^0.2.0"
 
@@ -5932,9 +5932,9 @@ shelljs@^0.7.5:
     interpret "^1.0.0"
     rechoir "^0.6.2"
 
-shortid@^2.2.6:
-  version "2.2.6"
-  resolved "http://r.cnpmjs.org/shortid/download/shortid-2.2.6.tgz#3abbefc6c51074cf2c1f1e72f6216a1b45876d72"
+shortid@^2.2.8:
+  version "2.2.8"
+  resolved "http://registry.npm.taobao.org/shortid/download/shortid-2.2.8.tgz#033b117d6a2e975804f6f0969dbe7d3d0b355131"
 
 signal-exit@^3.0.0:
   version "3.0.1"
@@ -6507,7 +6507,7 @@ ua-parser-js@0.7.12:
   version "0.7.12"
   resolved "http://r.cnpmjs.org/ua-parser-js/download/ua-parser-js-0.7.12.tgz#04c81a99bdd5dc52263ea29d24c6bf8d4818a4bb"
 
-uglify-js@2.7.5, uglify-js@2.7.x, uglify-js@^2.6:
+uglify-js@2.7.x, uglify-js@^2.6:
   version "2.7.5"
   resolved "http://r.cnpmjs.org/uglify-js/download/uglify-js-2.7.5.tgz#4612c0c7baaee2ba7c487de4904ae122079f2ca8"
   dependencies:
@@ -6523,6 +6523,14 @@ uglify-js@~2.3:
     async "~0.2.6"
     optimist "~0.3.5"
     source-map "~0.1.7"
+
+uglify-js@~2.8.10:
+  version "2.8.10"
+  resolved "http://registry.npm.taobao.org/uglify-js/download/uglify-js-2.8.10.tgz#bd0be568369f7be8cad2a4161fa90ada118ef73a"
+  dependencies:
+    source-map "~0.5.1"
+    uglify-to-browserify "~1.0.0"
+    yargs "~3.10.0"
 
 uglify-save-license@^0.4.1:
   version "0.4.1"

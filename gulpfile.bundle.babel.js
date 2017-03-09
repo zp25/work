@@ -11,6 +11,7 @@ import {
 } from './constants';
 
 const $ = gulpLoadPlugins();
+const pwd = process.cwd();
 
 const development = (b, BS) => b.bundle()
   .on('error', $.util.log.bind($.util, 'Browserify Error'))
@@ -36,7 +37,7 @@ const production = b => b.bundle()
   .pipe($.sourcemaps.write('.'))
   .pipe(gulp.dest(PATHS.scripts.dest))
   .pipe($.rev.manifest({
-    base: process.cwd(),
+    base: pwd,
     merge: true,
   }))
   .pipe(gulp.dest(PATHS.manifest));
@@ -101,7 +102,7 @@ const vendor = () => {
     .pipe($.rev())
     .pipe(gulp.dest(PATHS.scripts.dest))
     .pipe($.rev.manifest({
-      base: process.cwd(),
+      base: pwd,
       merge: true,
     }))
     .pipe(gulp.dest(PATHS.manifest));
