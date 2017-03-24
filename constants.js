@@ -1,6 +1,7 @@
 const AUTOPREFIXER_CONFIG = { browsers: ['last 2 versions'] };
 
 const PATHS = {
+  root: './',
   html: {
     src: 'app/**/*.html',
     dest: 'dist',
@@ -34,7 +35,7 @@ const PATHS = {
     index: 'app/templates/index/*.hbs',
   },
   copy: ['app/*', '!app/*.html', '!app/templates'],
-  manifest: './',
+  manifest: './rev-manifest.json',
   assets: ['.tmp', 'app', 'node_modules'],
 };
 

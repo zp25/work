@@ -1,4 +1,3 @@
-import path from 'path';
 import gulp from 'gulp';
 import del from 'del';
 import autoprefixer from 'autoprefixer';
@@ -116,7 +115,7 @@ function sass() {
       base: process.cwd(),
       merge: true,
     }))
-    .pipe(gulp.dest(PATHS.manifest));
+    .pipe(gulp.dest(PATHS.root));
 }
 
 // Templates
@@ -158,15 +157,18 @@ function templates(done) {
       .pipe($.concat(fname))
       .pipe($.uglify())
       .pipe($.rev())
-      .pipe(gulp.dest(PATHS.scripts.dest))
-      .pipe($.rev.manifest({
-        base: process.cwd(),
-        merge: true,
-      }))
-      .pipe(gulp.dest(PATHS.manifest));
+      .pipe(gulp.dest(PATHS.scripts.dest));
   });
 
-  es.merge(tasks).on('end', done);
+  const manifest = gulp.src(PATHS.manifest);
+
+  es.merge(tasks.concat(manifest))
+    .pipe($.rev.manifest({
+      base: process.cwd(),
+      merge: true,
+    }))
+    .pipe(gulp.dest(PATHS.root))
+    .on('end', done);
 }
 
 // HTML
@@ -191,7 +193,7 @@ function html() {
     .pipe($.if('*.html', $.size({ title: 'html', showFiles: true })))
     .pipe($.if('*.css', $.postcss(processors)))
     .pipe($.replace({
-      manifest: gulp.src(path.resolve(PATHS.manifest, 'rev-manifest.json')),
+      manifest: gulp.src(PATHS.manifest),
     }))
     .pipe(gulp.dest(PATHS.html.dest));
 }
@@ -247,8 +249,8 @@ gulp.task('clean:cache', done => $.cache.clearAll(done));
 // Build production files, the default task
 gulp.task('default',
   gulp.series(
-    'clean:all',
-    gulp.parallel(lint, 'script', sass, images, webp, copy, templates),
+    'clean:all', lint,
+    gulp.parallel('script', sass, images, webp, copy, templates),
     html,
   )
 );

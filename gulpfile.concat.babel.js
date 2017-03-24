@@ -18,7 +18,10 @@ const tmpConcat = BS => () => gulp.src(PATHS.scripts.concat)
 const concat = () => gulp.src(PATHS.scripts.concat)
   .pipe($.sourcemaps.init())
     .pipe($.babel())
-    .pipe($.concat('concat.min.js'))
+    .pipe($.concat({
+      path: 'concat.js',
+      cwd: '',
+    }))
     .pipe($.uglify({
       // preserveComments: 'license',
       compress: {
@@ -28,7 +31,13 @@ const concat = () => gulp.src(PATHS.scripts.concat)
       },
     }))
     .pipe($.size({ title: 'scripts' }))
+    .pipe($.rev())
   .pipe($.sourcemaps.write('.'))
-  .pipe(gulp.dest(PATHS.scripts.dest));
+  .pipe(gulp.dest(PATHS.scripts.dest))
+  .pipe($.rev.manifest({
+    base: process.cwd(),
+    merge: true,
+  }))
+  .pipe(gulp.dest(PATHS.root));
 
 export { tmpConcat, concat };

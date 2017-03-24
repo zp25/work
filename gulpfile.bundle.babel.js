@@ -40,7 +40,7 @@ const production = b => b.bundle()
     base: pwd,
     merge: true,
   }))
-  .pipe(gulp.dest(PATHS.manifest));
+  .pipe(gulp.dest(PATHS.root));
 
 // Scripts
 const tmpBundle = BS => () => {
@@ -105,7 +105,7 @@ const vendor = () => {
       base: pwd,
       merge: true,
     }))
-    .pipe(gulp.dest(PATHS.manifest));
+    .pipe(gulp.dest(PATHS.root));
 };
 
 export { tmpBundle, bundle, vendor };
