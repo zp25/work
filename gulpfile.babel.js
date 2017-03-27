@@ -154,7 +154,10 @@ function templates(done) {
         namespace: `Template.${key}`,
         noRedeclare: true,
       }))
-      .pipe($.concat(fname))
+      .pipe($.concat({
+        path: fname,
+        cwd: '',
+      }))
       .pipe($.uglify())
       .pipe($.rev())
       .pipe(gulp.dest(PATHS.scripts.dest));
