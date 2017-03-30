@@ -6,23 +6,29 @@
   .header {
     flex: 0 0 auto;
     @extend .page-wrap;
-    padding: 0 5px;
+    padding: 0 torem(5px);
   }
 
   .zp {
-    flex: 1 0 350px;
+    flex: 1 0 torem(300px);
     @include flexbox(column, nowrap, center, center);
     @extend .page-wrap;
+    overflow: hidden;
+
+    img {
+      height: 100%;
+    }
   }
 
   .anchors {
     flex: 0 0 auto;
     @extend .page-wrap;
     list-style-position: inside;
-    padding: 0 5px;
+    padding: 0 torem(5px);
   }
 }
 
 .ᕦ⊙෴⊙ᕤ {
   opacity: 0;
+  margin: 0;
 }

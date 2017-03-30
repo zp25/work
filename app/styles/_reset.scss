@@ -1,0 +1,122 @@
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  // 取消点击链接高亮
+  -webkit-tap-highlight-color: transparent;
+}
+
+// http://www.outlinenone.com/
+:focus {
+  outline: none;
+}
+
+html, button, input, textarea, select {
+  padding: 0;
+  margin: 0;
+  // 文本平滑属性
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+a:link,
+a:hover,
+a:active,
+a:visited {
+  text-decoration: none;
+}
+
+a, img {
+  // 禁止长按链接与图片弹出菜单，例如禁止保存图片，仅Safari
+  -webkit-touch-callout: none;
+}
+
+// http://www.cssmojo.com/latest_new_clearfix_so_far/
+.cf::after {
+  content: '';
+  display: table;
+  clear: both;
+}
+
+html {
+  height: 100%;
+  font-size: 100px;
+  // 取消移动浏览器缩放字体算法(inflation algorithm)
+  text-size-adjust: none;
+  // user-select: none;
+
+  body {
+    height: 100%;
+    font-family: Helvetica, Tahoma, Arial, sans-serif;
+    font-size: fontSize();
+    line-height: 1.5;
+    // normalize.css@6移除
+    margin: 0;
+  }
+}
+
+// iphone5
+@media only screen and (min-width: 320px) and (max-width: 320px) and (orientation: portrait) {
+  html {
+    font-size: 85.33px !important;
+  }
+}
+
+// nexus4
+@media only screen and (min-width: 384px) and (orientation: portrait) {
+  html {
+    font-size: 106.67px !important;
+  }
+}
+
+// pixel/nexus
+@media only screen and (min-width: 412px) and (orientation: portrait) {
+  html {
+    font-size: 114.44px !important;
+  }
+}
+
+@media only screen and (min-width: 732px) and (orientation: landscape) {
+  html {
+    font-size: 114.44px !important;
+  }
+}
+
+// iphone6p
+@media only screen and (min-width: 414px) and (orientation: portrait) {
+  html {
+    font-size: 110.4px !important;
+  }
+}
+
+@media only screen and (min-width: 736px) and (orientation: landscape) {
+  html {
+    font-size: 110.4px !important;
+  }
+}
+
+// tablets
+@media only screen and (min-width: 600px) and (orientation: portrait) {
+  html {
+    font-size: 204.8px !important;
+  }
+}
+
+@media only screen and (min-width: 960px) and (orientation: landscape) {
+  html {
+    font-size: 204.8px !important;
+  }
+}
+
+// > ipad pro
+@media only screen and (min-width: 1025px) and (orientation: portrait) {
+  html {
+    font-size: 100px !important;
+  }
+}
+
+@media only screen and (min-width: 1367px) and (orientation: landscape) {
+  html {
+    font-size: 100px !important;
+  }
+}
