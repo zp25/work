@@ -9,6 +9,7 @@ import es from 'event-stream';
 import dotenv from 'dotenv';
 import {
   AUTOPREFIXER_CONFIG,
+  HTMLMINIFIER,
   PATHS,
 } from './constants';
 import { tmpConcat, concat } from './gulpfile.concat.babel';
@@ -182,17 +183,7 @@ function html() {
 
   return gulp.src(PATHS.html.src)
     .pipe($.useref({ searchPath: PATHS.assets }))
-    .pipe($.if('*.html', $.htmlmin({
-      collapseWhitespace: true,
-      collapseBooleanAttributes: true,
-      removeAttributeQuotes: true,
-      removeComments: true,
-      removeEmptyAttributes: true,
-      removeOptionalTags: true,
-      removeRedundantAttributes: true,
-      removeScriptTypeAttributes: true,
-      removeStyleLinkTypeAttributes: true,
-    })))
+    .pipe($.if('*.html', $.htmlmin(HTMLMINIFIER)))
     .pipe($.if('*.html', $.size({ title: 'html', showFiles: true })))
     .pipe($.if('*.css', $.postcss(processors)))
     .pipe($.replace({

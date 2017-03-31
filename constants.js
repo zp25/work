@@ -1,5 +1,17 @@
 const AUTOPREFIXER_CONFIG = { browsers: ['last 2 versions'] };
 
+const HTMLMINIFIER = {
+  collapseWhitespace: true,
+  collapseBooleanAttributes: true,
+  removeAttributeQuotes: true,
+  removeComments: true,
+  removeEmptyAttributes: true,
+  removeOptionalTags: true,
+  removeRedundantAttributes: true,
+  removeScriptTypeAttributes: true,
+  removeStyleLinkTypeAttributes: true,
+};
+
 const PATHS = {
   root: './',
   html: {
@@ -43,6 +55,7 @@ const VENDOR = ['babel-polyfill'];
 
 export {
   AUTOPREFIXER_CONFIG,
+  HTMLMINIFIER,
   PATHS,
   VENDOR,
 };
