@@ -2,15 +2,11 @@ const path = require('path');
 const fs = require('fs');
 const Handlebars = require('handlebars');
 const shortid = require('shortid');
-const dotenv = require('dotenv');
 
-dotenv.config({ silent: true });
+// const dotenv = require('dotenv');
+// dotenv.config({ silent: true });
 
 const partials = [
-  {
-    file: `${process.env.SCRIPT}.hbs`,
-    name: 'Scripts',
-  },
   {
     file: 'anchor.hbs',
     name: 'Anchors',

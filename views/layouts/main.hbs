@@ -36,6 +36,16 @@
     <p class="ᕦ⊙෴⊙ᕤ">&#x1F602;</p>
   </div>
 
-{{> Scripts}}
+<!-- build:remove -->
+<script src="scripts/dev.js"></script>
+<!-- endbuild -->
+<!-- build:js scripts/handlebars.runtime.min.js -->
+<script src="handlebars/dist/handlebars.runtime.min.js"></script>
+<!-- endbuild -->
+<script src="scripts/vendor.js"></script>
+{{#each templates}}
+<script src="scripts/template.{{this}}.js"></script>
+{{/each}}
+<script src="scripts/bundle.js"></script>
 </body>
 </html>

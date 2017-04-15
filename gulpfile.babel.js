@@ -6,7 +6,6 @@ import browserSync from 'browser-sync';
 import gulpLoadPlugins from 'gulp-load-plugins';
 import Handlebars from 'handlebars';
 import es from 'event-stream';
-import dotenv from 'dotenv';
 import {
   AUTOPREFIXER_CONFIG,
   HTMLMINIFIER,
@@ -15,15 +14,12 @@ import {
 import { tmpConcat, concat } from './gulpfile.concat.babel';
 import { tmpBundle, bundle, vendor } from './gulpfile.bundle.babel';
 
-dotenv.config({ silent: true });
-
 const $ = gulpLoadPlugins({
   rename: {
     'gulp-rev-replace': 'replace',
   },
 });
 const BS = browserSync.create();
-const BUNDLE = process.env.SCRIPT === 'bundle';
 
 // Lint JavaScript
 function lint() {
@@ -208,13 +204,9 @@ function serve() {
   gulp.watch(PATHS.images.src, tmpWebp);
   gulp.watch(Object.values(PATHS.templates), tmpTemplates);
 
-  if (BUNDLE) {
-    gulp.watch(PATHS.scripts.src, lint);
-    // 不打包PATHS.scripts.watch中文件，不会触发reload
-    gulp.watch(PATHS.scripts.watch).on('change', BS.reload);
-  } else {
-    gulp.watch(PATHS.scripts.src, gulp.parallel(lint, 'tmpScript'));
-  }
+  gulp.watch(PATHS.scripts.src, lint);
+  gulp.watch(PATHS.scripts.concat, tmpConcat(BS));
+  gulp.watch(PATHS.scripts.watch).on('change', BS.reload);
 }
 
 // Serve distribution
@@ -233,11 +225,11 @@ function clean() {
 }
 
 // Tasks
-gulp.task('tmpScript', (BUNDLE ? tmpBundle(BS) : tmpConcat(BS)));
-gulp.task('script', (BUNDLE ? bundle : concat));
+gulp.task('tmpScript', gulp.parallel(tmpBundle(BS), tmpConcat(BS)));
+gulp.task('script', gulp.parallel(bundle, concat));
 gulp.task(vendor);
 
-gulp.task('clean:all', (BUNDLE ? gulp.series(clean, vendor) : clean));
+gulp.task('clean:all', gulp.series(clean, vendor));
 gulp.task('clean:cache', done => $.cache.clearAll(done));
 
 // Build production files, the default task
