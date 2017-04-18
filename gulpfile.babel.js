@@ -209,16 +209,6 @@ function serve() {
   gulp.watch(PATHS.scripts.watch).on('change', BS.reload);
 }
 
-// Serve distribution
-function serveDist() {
-  BS.init({
-    notify: false,
-    logPrefix: 'work',
-    server: 'dist',
-    port: 3001,
-  });
-}
-
 // Clean output directory
 function clean() {
   return del(['.tmp', 'dist/*']);
@@ -248,6 +238,3 @@ gulp.task('serve',
     serve
   )
 );
-
-// Build and serve the output from the dist build
-gulp.task('serve:dist', gulp.series('default', serveDist));
