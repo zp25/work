@@ -23,10 +23,10 @@
   "license": "MIT",
   "dependencies": {
     "babel-polyfill": "^6.23.0",
-    "normalize.css": "^6.0.0"
+    "normalize.css": "^7.0.0"
   },
   "devDependencies": {
-    "autoprefixer": "^6.7.7",
+    "autoprefixer": "^7.0.1",
     "babel-core": "^6.24.1",
     "babel-preset-es2015": "^6.24.1",
     "babel-preset-stage-0": "^6.24.1",
@@ -56,7 +56,7 @@
     "gulp-imagemin": "^3.2.0",
     "gulp-load-plugins": "^1.5.0",
     "gulp-newer": "^1.3.0",
-    "gulp-postcss": "^6.4.0",
+    "gulp-postcss": "^7.0.0",
     "gulp-rev": "^7.1.2",
     "gulp-rev-replace": "^0.4.3",
     "gulp-sass": "^3.1.0",
@@ -67,7 +67,7 @@
     "gulp-util": "^3.0.8",
     "gulp-webp": "^2.3.0",
     "gulp-wrap": "^0.13.0",
-    "handlebars": "^4.0.6",
+    "handlebars": "^4.0.8",
     "shortid": "^2.2.8",
     "vinyl-buffer": "^1.0.0",
     "vinyl-source-stream": "^1.1.0",
