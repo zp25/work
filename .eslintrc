@@ -9,10 +9,7 @@
     "Template": false
   },
   "rules": {
-    "no-cond-assign": ["error", "except-parens"],
-    "no-param-reassign": [
-      "error", { "props": false }
-    ]
+    "no-cond-assign": ["error", "except-parens"]
   },
   "extends": "airbnb-base"
 }
