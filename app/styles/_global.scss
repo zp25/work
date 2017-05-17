@@ -9,7 +9,12 @@ $colorMap: (
     @return map-get($colorMap, $key);
   }
 
-  @return #{$key};
+  @if type-of($key) == color {
+    @return #{$key};
+  }
+
+  @warn 'Unknown `#{$key}` in $colorMap.';
+  @return null;
 }
 
 @function torem($px) {
@@ -30,9 +35,12 @@ $sizeMap: (
     @return map-get($sizeMap, $key);
   }
 
-  @return torem($key);
-  // @warn 'Unknown `#{$key}` in $sizeMap.';
-  // @return null;
+  @if type-of($key) == number and unit($key) == 'px' {
+    @return torem($key);
+  }
+
+  @warn 'Unknown `#{$key}` in $sizeMap.';
+  @return null;
 }
 
 .page-wrap {
