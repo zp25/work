@@ -1,4 +1,2 @@
-/* eslint no-unused-vars:1 */
-
 // development mode
-const DEV = true;
+const DEV = true; // eslint-disable-line no-unused-vars
