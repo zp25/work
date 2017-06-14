@@ -1,3 +1,5 @@
+@import 'color.map';
+
 @function color($key: normal) {
   @if map-has-key($colorMap, $key) {
     @return map-get($colorMap, $key);
