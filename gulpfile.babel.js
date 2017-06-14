@@ -1,5 +1,5 @@
 import gulp from 'gulp';
-import del from 'del';
+import rimraf from 'rimraf';
 import autoprefixer from 'autoprefixer';
 import cssnano from 'cssnano';
 import browserSync from 'browser-sync';
@@ -210,8 +210,8 @@ function serve() {
 }
 
 // Clean output directory
-function clean() {
-  return del(['.tmp', 'dist/*']);
+function clean(done) {
+  rimraf(`{${PATHS.clean.join(',')}}`, done);
 }
 
 // Tasks

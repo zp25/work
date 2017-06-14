@@ -47,6 +47,7 @@ const PATHS = {
     index: 'app/templates/index/*.hbs',
   },
   copy: ['app/*', '!app/*.html', '!app/templates'],
+  clean: ['.tmp', 'dist/*'],
   manifest: './rev-manifest.json',
   assets: ['.tmp', 'app', 'node_modules'],
 };
