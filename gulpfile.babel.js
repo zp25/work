@@ -7,7 +7,6 @@ import gulpLoadPlugins from 'gulp-load-plugins';
 import Handlebars from 'handlebars';
 import es from 'event-stream';
 import {
-  AUTOPREFIXER_CONFIG,
   HTMLMINIFIER,
   PATHS,
 } from './constants';
@@ -69,7 +68,7 @@ function copy() {
 // Styles
 function tmpSass() {
   const processors = [
-    autoprefixer(AUTOPREFIXER_CONFIG)
+    autoprefixer(),
   ];
 
   return gulp.src(PATHS.styles.src)
@@ -90,8 +89,8 @@ function tmpSass() {
 
 function sass() {
   const processors = [
-    autoprefixer(AUTOPREFIXER_CONFIG),
-    cssnano()
+    autoprefixer(),
+    cssnano(),
   ];
 
   return gulp.src(PATHS.styles.src)
@@ -172,21 +171,16 @@ function templates(done) {
 }
 
 // HTML
-function html() {
-  const processors = [
-    cssnano()
-  ];
-
-  return gulp.src(PATHS.html.src)
-    .pipe($.useref({ searchPath: PATHS.assets }))
-    .pipe($.if('*.html', $.htmlmin(HTMLMINIFIER)))
-    .pipe($.if('*.html', $.size({ title: 'html', showFiles: true })))
-    .pipe($.if('*.css', $.postcss(processors)))
-    .pipe($.replace({
-      manifest: gulp.src(PATHS.manifest),
-    }))
-    .pipe(gulp.dest(PATHS.html.dest));
-}
+const html = () => gulp.src(PATHS.html.src)
+  .pipe($.useref({
+    searchPath: PATHS.assets,
+  }))
+  .pipe($.replace({
+    manifest: gulp.src(PATHS.manifest),
+  }))
+  .pipe($.if('*.html', $.htmlmin(HTMLMINIFIER)))
+  .pipe($.if('*.html', $.size({ title: 'html', showFiles: true })))
+  .pipe(gulp.dest(PATHS.html.dest));
 
 // Serve
 function serve() {
