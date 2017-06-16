@@ -39,31 +39,6 @@ $sizeMap: (
   @return null;
 }
 
-.page-wrap {
-  width: 100%;
-  max-width: 1000px;
-}
-
-.iconbg {
-  background-color: color(grey-bg);
-  background-position: 50% 50%;
-  background-size: cover;
-  background-repeat: no-repeat;
-}
-
-.ellipsis {
-  overflow: hidden;
-  white-space: nowrap;
-  text-overflow: ellipsis;
-}
-
-// http://www.cssmojo.com/latest_new_clearfix_so_far/
-.cf::after {
-  content: '';
-  display: table;
-  clear: both;
-}
-
 /**
  * mixins
  */

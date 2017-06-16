@@ -3,16 +3,19 @@
   height: 100%;
   @include flexbox(column, nowrap, flex-start, center);
 
+  .container {
+    width: 100%;
+    max-width: 1000px;
+  }
+
   .header {
     flex: 0 0 auto;
-    @extend .page-wrap;
     padding: 0 torem(5px);
   }
 
   .zp {
     flex: 1 0 torem(300px);
     @include flexbox(column, nowrap, center, center);
-    @extend .page-wrap;
     overflow: hidden;
 
     img {
@@ -22,7 +25,6 @@
 
   .anchors {
     flex: 0 0 auto;
-    @extend .page-wrap;
     list-style-position: inside;
     padding: 0 torem(5px);
   }

@@ -7,9 +7,9 @@
 }
 
 // http://www.outlinenone.com/
-:focus {
-  outline: none;
-}
+// :focus {
+//   outline: none;
+// }
 
 html, button, input, textarea, select {
   padding: 0;
@@ -44,6 +44,19 @@ html {
     font-size: fontSize();
     line-height: 1.5;
   }
+}
+
+.ellipsis {
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
+// http://www.cssmojo.com/latest_new_clearfix_so_far/
+.cf::after {
+  content: '';
+  display: table;
+  clear: both;
 }
 
 // iphone5
