@@ -1,6 +1,8 @@
 const HTMLMINIFIER = {
   collapseWhitespace: true,
   collapseBooleanAttributes: true,
+  minifyCSS: true,
+  minifyJS: true,
   removeAttributeQuotes: true,
   removeComments: true,
   removeEmptyAttributes: true,
@@ -20,6 +22,10 @@ const PATHS = {
     src: 'app/styles/**/*.{scss,css}',
     tmp: '.tmp/styles',
     dest: 'dist/styles',
+    // gulp-sass includePaths
+    includePaths: [
+      'node_modules/normalize.css',
+    ],
   },
   scripts: {
     src: 'app/scripts/**/*.js',
