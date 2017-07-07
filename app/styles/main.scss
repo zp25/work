@@ -1,5 +1,9 @@
 @import 'normalize';
-@import 'global';
-@import 'root';
+
+@import 'color.map';
+
+// zp-ui
+@import 'styles/global';
+@import 'styles/root';
 
 @import 'app';

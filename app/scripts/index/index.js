@@ -1,4 +1,4 @@
-import Base from './base';
+import Base from '../constants';
 
 document.addEventListener('DOMContentLoaded', () => {
   const result = Template.index.header({

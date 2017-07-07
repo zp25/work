@@ -1,6 +1,5 @@
 {
-  "bundle.js": "bundle-d8cff76b09.js",
-  "main.css": "main-7cbe4568de.css",
-  "template.index.js": "template-9449e63f79.index.js",
-  "vendor.js": "vendor-1039b3bfb6.js"
+  "bundle.index.js": "bundle-3e479b5ee1.index.js",
+  "main.css": "main-1fa667c2f1.css",
+  "template.index.js": "template-5ea40e65d2.index.js"
 }

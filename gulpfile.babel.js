@@ -220,7 +220,8 @@ gulp.task('clean:cache', done => $.cache.clearAll(done));
 gulp.task('default',
   gulp.series(
     'clean:all', lint,
-    gulp.parallel('script', sass, images, webp, copy, templates),
+    gulp.parallel('script', sass, images, webp, copy),
+    templates,
     html,
   )
 );
@@ -228,7 +229,8 @@ gulp.task('default',
 // run scripts, sass first and run browserSync before watch
 gulp.task('serve',
   gulp.series(
-    gulp.parallel('tmpScript', tmpSass, tmpWebp, tmpTemplates),
-    serve
+    gulp.parallel('tmpScript', tmpSass, tmpWebp),
+    tmpTemplates,
+    serve,
   )
 );

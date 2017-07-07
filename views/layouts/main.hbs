@@ -8,7 +8,7 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="white">
   <meta name="format-detection" content="telephone=no">
   <meta name="format-detection" content="email=no">
-  <title>Template</title>
+  <title>{{title}}</title>
   <!-- app icon -->
   <link rel="apple-touch-icon" sizes="120x120" href="images/icon@iphone.png">
   <link rel="apple-touch-icon" sizes="180x180" href="images/icon@iphone-plus.png">
@@ -18,31 +18,20 @@
   <link rel="stylesheet" href="styles/main.css">
 </head>
 <body>
-  <div id="app">
-    <header class="header container"></header>
-
-    <picture class="zp">
-      <source srcset="images/zp.webp" type="image/webp">
-      <img src="images/zp.jpg" alt="zp">
-    </picture>
-
-    <ul class="anchors container">
-      {{> Anchors}}
-    </ul>
-
-    <p class="ᕦ⊙෴⊙ᕤ">&#x1F602;</p>
-  </div>
+  {{> App}}
 
 <!-- build:remove -->
-<script src="scripts/dev.js"></script>
+<script src="scripts/misc/dev.js"></script>
 <!-- endbuild -->
+{{#if hbs}}
 <!-- build:js scripts/handlebars.runtime.min.js -->
 <script src="handlebars/dist/handlebars.runtime.min.js"></script>
 <!-- endbuild -->
+<script src="scripts/template.{{page}}.js"></script>
+{{/if}}
+{{#if vendor}}
 <script src="scripts/vendor.js"></script>
-{{#each templates}}
-<script src="scripts/template.{{this}}.js"></script>
-{{/each}}
-<script src="scripts/bundle.js"></script>
+{{/if}}
+<script src="scripts/bundle.{{page}}.js"></script>
 </body>
 </html>

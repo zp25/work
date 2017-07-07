@@ -25,19 +25,20 @@ const PATHS = {
     // gulp-sass includePaths
     includePaths: [
       'node_modules/normalize.css',
+      'node_modules/zp-ui',
     ],
   },
   scripts: {
     src: 'app/scripts/**/*.js',
     // browserify
-    entries: [
-      'app/scripts/index.js',
-    ],
+    entries: {
+      index: 'app/scripts/index/index.js',
+    },
     // concat
     concat: [],
     // production不使用
     watch: [
-      'app/scripts/dev.js',
+      'app/scripts/misc/**/*.js',
     ],
     tmp: '.tmp/scripts',
     dest: 'dist/scripts',
@@ -56,7 +57,7 @@ const PATHS = {
   assets: ['.tmp', 'app', 'node_modules'],
 };
 
-const VENDOR = ['babel-polyfill'];
+const VENDOR = [];
 
 export {
   HTMLMINIFIER,
