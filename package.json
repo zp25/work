@@ -21,7 +21,7 @@
     "babel-runtime": "^6.23.0",
     "handlebars": "^4.0.10",
     "normalize.css": "^7.0.0",
-    "zp-ui": "^0.0.1"
+    "zp-ui": "^0.0.2"
   },
   "devDependencies": {
     "autoprefixer": "^7.1.2",

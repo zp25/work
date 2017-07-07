@@ -7471,6 +7471,6 @@ yeast@0.1.2:
   version "0.1.2"
   resolved "http://registry.npm.taobao.org/yeast/download/yeast-0.1.2.tgz#008e06d8094320c372dbc2f8ed76a0ca6c8ac419"
 
-zp-ui@^0.0.1:
-  version "0.0.1"
-  resolved "http://registry.npm.taobao.org/zp-ui/download/zp-ui-0.0.1.tgz#b0f05c554401219ed87f7753ad7191150a919652"
+zp-ui@^0.0.2:
+  version "0.0.2"
+  resolved "http://registry.npm.taobao.org/zp-ui/download/zp-ui-0.0.2.tgz#dadd02cf90b72bd23f959a2d9f7a4fefa4869d13"
