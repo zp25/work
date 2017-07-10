@@ -1,3 +1,5 @@
+import 'core-js/fn/array/includes';
+
 import Base from '../constants';
 
 document.addEventListener('DOMContentLoaded', () => {
