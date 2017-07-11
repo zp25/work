@@ -22,7 +22,7 @@
     "core-js": "^2.4.1",
     "handlebars": "^4.0.10",
     "normalize.css": "^7.0.0",
-    "zp-ui": "^0.0.2"
+    "zp-ui": "^0.0.3"
   },
   "devDependencies": {
     "autoprefixer": "^7.1.2",
@@ -33,7 +33,7 @@
     "babelify": "^7.3.0",
     "browser-sync": "^2.18.12",
     "browserify": "^14.4.0",
-    "compression": "^1.6.2",
+    "compression": "^1.7.0",
     "cssnano": "^3.10.0",
     "cz-conventional-changelog": "^2.0.0",
     "dotenv": "^4.0.0",
