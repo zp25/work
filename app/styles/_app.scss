@@ -1,6 +1,7 @@
 #app {
   min-height: 100vh;
   @include flexbox(column, nowrap, flex-start, center);
+  font-size: fontSize();
 
   .container {
     width: 100%;
