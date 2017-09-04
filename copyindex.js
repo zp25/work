@@ -11,15 +11,19 @@ const pages = {
       anchors: [
         {
           title: 'Home',
-          path: 'https://zp25.ninja',
+          path: 'https://zp25.ninja/',
         },
         {
           title: 'Blog',
-          path: 'https://blog.zp25.ninja',
+          path: 'https://blog.zp25.ninja/',
         },
         {
           title: 'Demo',
-          path: 'https://demo.zp25.ninja',
+          path: 'https://demo.zp25.ninja/',
+        },
+        {
+          title: 'UI',
+          path: 'https://ui.zp25.ninja/',
         },
       ],
       hbs: true,
