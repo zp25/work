@@ -178,6 +178,10 @@ const html = () => gulp.src(PATHS.html.src)
   .pipe($.replace({
     manifest: gulp.src(PATHS.manifest),
   }))
+  .pipe($.inlineSource({
+    rootpath: PATHS.html.dest,
+    compress: false,
+  }))
   .pipe($.if('*.html', $.htmlmin(HTMLMINIFIER)))
   .pipe($.if('*.html', $.size({ title: 'html', showFiles: true })))
   .pipe(gulp.dest(PATHS.html.dest));

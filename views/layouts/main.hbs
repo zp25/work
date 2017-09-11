@@ -15,7 +15,11 @@
   <!-- favicon -->
   <link rel="icon" type="image/png" sizes="192x192" href="images/favicon.png">
   <!-- styles -->
-  <link rel="stylesheet" href="styles/main.css">
+  {{#if inlineStyle}}
+  <link rel="stylesheet" href="styles/{{page}}.css" inline>
+  {{else}}
+  <link rel="stylesheet" href="styles/{{page}}.css">
+  {{/if}}
 </head>
 <body>
   {{> App}}
@@ -23,15 +27,22 @@
 <!-- build:remove -->
 <script src="scripts/misc/dev.js"></script>
 <!-- endbuild -->
+
 {{#if hbs}}
 <!-- build:js scripts/handlebars.runtime.min.js -->
 <script src="handlebars/dist/handlebars.runtime.min.js"></script>
 <!-- endbuild -->
 <script src="scripts/template.{{page}}.js"></script>
 {{/if}}
+
 {{#if vendor}}
 <script src="scripts/vendor.js"></script>
 {{/if}}
+
+{{#if inlineScript}}
+<script src="scripts/bundle.{{page}}.js" inline></script>
+{{else}}
 <script src="scripts/bundle.{{page}}.js"></script>
+{{/if}}
 </body>
 </html>

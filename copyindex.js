@@ -2,35 +2,7 @@ const path = require('path');
 const fs = require('fs');
 const Handlebars = require('handlebars');
 const shortid = require('shortid');
-
-const pages = {
-  index: {
-    file: 'index.hbs',
-    data: {
-      title: 'Template',
-      anchors: [
-        {
-          title: 'Home',
-          path: 'https://zp25.ninja/',
-        },
-        {
-          title: 'Blog',
-          path: 'https://blog.zp25.ninja/',
-        },
-        {
-          title: 'Demo',
-          path: 'https://demo.zp25.ninja/',
-        },
-        {
-          title: 'UI',
-          path: 'https://ui.zp25.ninja/',
-        },
-      ],
-      hbs: true,
-      vendor: false,
-    },
-  },
-};
+const pages = require('./config.json');
 
 // 所有页面通用配置
 const context = {
