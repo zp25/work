@@ -2,11 +2,16 @@
   "presets": [
     ["env", {
       "targets": {
-        "browsers": ["last 2 versions", "not ie < 11"]
+        "browsers": [
+          "> 1%",
+          "last 2 versions",
+          "Firefox ESR",
+          "not ie < 11",
+          "chrome >= 43"
+        ]
       },
-      "useBuiltIns": false
+      "useBuiltIns": true
     }],
     "stage-0"
-  ],
-  "plugins": ["transform-runtime"]
+  ]
 }
