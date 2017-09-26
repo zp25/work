@@ -1,4 +1,4 @@
-import 'core-js/fn/array/includes';
+import 'babel-polyfill';
 
 import Base from '../constants';
 
