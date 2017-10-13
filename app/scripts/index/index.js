@@ -1,5 +1,3 @@
-import 'babel-polyfill';
-
 import Base from '../constants';
 
 document.addEventListener('DOMContentLoaded', () => {
