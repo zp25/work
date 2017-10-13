@@ -1,16 +1,7 @@
 {
   "presets": [
     ["env", {
-      "targets": {
-        "browsers": [
-          "> 1%",
-          "last 2 versions",
-          "Firefox ESR",
-          "not ie < 11",
-          "chrome >= 43"
-        ]
-      },
-      "useBuiltIns": true
+      "useBuiltIns": "usage"
     }],
     "stage-0"
   ]

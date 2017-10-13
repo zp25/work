@@ -1,5 +1,7 @@
 {
-  "bundle.index.js": "bundle-7c654e9349.index.js",
+  "common.js": "common-d324482b90.js",
+  "copy.css": "copy-a0766c5b53.css",
+  "copy.js": "copy-f14053a376.js",
   "index.css": "index-a0766c5b53.css",
-  "template.index.js": "template-5ea40e65d2.index.js"
+  "index.js": "index-c97ba6da78.js"
 }

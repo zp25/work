@@ -24,25 +24,12 @@
 <body>
   {{> App}}
 
-<!-- build:remove -->
-<script src="scripts/misc/dev.js"></script>
-<!-- endbuild -->
-
-{{#if hbs}}
-<!-- build:js scripts/handlebars.runtime.min.js -->
-<script src="handlebars/dist/handlebars.runtime.min.js"></script>
-<!-- endbuild -->
-<script src="scripts/template.{{page}}.js"></script>
-{{/if}}
-
-{{#if vendor}}
-<script src="scripts/vendor.js"></script>
-{{/if}}
-
 {{#if inlineScript}}
-<script src="scripts/bundle.{{page}}.js" inline></script>
+<script src="scripts/common.js" inline></script>
+<script src="scripts/{{page}}.js" inline></script>
 {{else}}
-<script src="scripts/bundle.{{page}}.js"></script>
+<script src="scripts/common.js"></script>
+<script src="scripts/{{page}}.js"></script>
 {{/if}}
 </body>
 </html>
