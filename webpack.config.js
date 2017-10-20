@@ -11,7 +11,7 @@ export default {
     filename: '[name].js',
   },
   resolve: {
-    extensions: ['.js', '.jsx', '.json'],
+    extensions: ['.js', '.json'],
     modules: [PATHS.scripts.context, 'node_modules'],
   },
   module: {
