@@ -24,49 +24,37 @@ const $ = gulpLoadPlugins({
 const BS = browserSync.create();
 
 // Lint JavaScript
-function lint() {
-  return gulp.src(PATHS.scripts.src)
-    .pipe($.eslint())
-    .pipe($.eslint.format())
-    .pipe($.if(!BS.active, $.eslint.failOnError()))
-}
+const lint = () => gulp.src(PATHS.scripts.src)
+  .pipe($.eslint())
+  .pipe($.eslint.format())
+  .pipe($.if(!BS.active, $.eslint.failOnError()));
 
 // Image Optimazation
 const makeHashKey = entry => file => [file.contents.toString('utf8'), entry].join('');
 
-function images() {
-  return gulp.src(PATHS.images.src)
-    .pipe($.cache($.imagemin({
-      progressive: true,
-      interlaced: true,
-      multipass: true,
-    }), {
-      key: makeHashKey('images'),
-    }))
-    .pipe(gulp.dest(PATHS.images.dest))
-    .pipe($.size({ title: 'images' }));
-}
+const images = () => gulp.src(PATHS.images.src)
+  .pipe($.imagemin({
+    progressive: true,
+    interlaced: true,
+    multipass: true,
+  }))
+  .pipe(gulp.dest(PATHS.images.dest))
+  .pipe($.size({ title: 'images' }));
 
-function tmpWebp() {
-  return gulp.src(PATHS.images.src)
-    .pipe($.cache($.webp({ quality: 75 }), { key: makeHashKey('webp') }))
-    .pipe(gulp.dest(PATHS.images.tmp))
-    .pipe(BS.stream({ once: true }));
-}
+const tmpWebp = () => gulp.src(PATHS.images.src)
+  .pipe($.cache($.webp({ quality: 75 }), { key: makeHashKey('webp') }))
+  .pipe(gulp.dest(PATHS.images.tmp))
+  .pipe(BS.stream({ once: true }));
 
-function webp() {
-  return gulp.src(PATHS.images.src)
-    .pipe($.cache($.webp({ quality: 75 }), { key: makeHashKey('webp') }))
-    .pipe(gulp.dest(PATHS.images.dest))
-    .pipe($.size({ title: 'webp' }));
-}
+const webp = () => gulp.src(PATHS.images.src)
+  .pipe($.cache($.webp({ quality: 75 }), { key: makeHashKey('webp') }))
+  .pipe(gulp.dest(PATHS.images.dest))
+  .pipe($.size({ title: 'webp' }));
 
 // Copy
-function copy() {
-  return gulp.src(PATHS.copy)
-    .pipe(gulp.dest('dist'))
-    .pipe($.size({ title: 'copy' }));
-}
+const copy = () => gulp.src(PATHS.copy)
+  .pipe(gulp.dest('dist'))
+  .pipe($.size({ title: 'copy' }));
 
 // Styles
 function tmpSass() {
@@ -118,36 +106,32 @@ function sass() {
 }
 
 // Scripts
-const tmpScript = () => {
-  return gulp.src(PATHS.scripts.src)
-    .pipe(named())
-    .pipe(gulpWebpack(tmpWebpackConfig, webpack))
-    .pipe(gulp.dest(PATHS.scripts.tmp))
-    .pipe(BS.stream({ once: true }));
-};
+const tmpScript = () => gulp.src(PATHS.scripts.src)
+  .pipe(named())
+  .pipe(gulpWebpack(tmpWebpackConfig, webpack))
+  .pipe(gulp.dest(PATHS.scripts.tmp))
+  .pipe(BS.stream({ once: true }));
 
-const script = () => {
-  return gulp.src(PATHS.scripts.src)
-    .pipe(named())
-    .pipe(gulpWebpack(webpackConfig, webpack))
-    .pipe($.sourcemaps.init({ loadMaps: true }))
-      .pipe(through.obj(function through2(file, enc, cb) {
-        // Dont pipe through any source map files as it will be handled by gulp-sourcemaps
-        if (!/\.map$/.test(file.path)) {
-          this.push(file);
-        }
+const script = () => gulp.src(PATHS.scripts.src)
+  .pipe(named())
+  .pipe(gulpWebpack(webpackConfig, webpack))
+  .pipe($.sourcemaps.init({ loadMaps: true }))
+    .pipe(through.obj(function through2(file, enc, cb) {
+      // Dont pipe through any source map files as it will be handled by gulp-sourcemaps
+      if (!/\.map$/.test(file.path)) {
+        this.push(file);
+      }
 
-        cb();
-      }))
-    .pipe($.rev())
-    .pipe($.sourcemaps.write('.'))
-    .pipe(gulp.dest(PATHS.scripts.dest))
-    .pipe($.rev.manifest({
-      base: process.cwd(),
-      merge: true,
+      cb();
     }))
-    .pipe(gulp.dest(PATHS.root));
-};
+  .pipe($.rev())
+  .pipe($.sourcemaps.write('.'))
+  .pipe(gulp.dest(PATHS.scripts.dest))
+  .pipe($.rev.manifest({
+    base: process.cwd(),
+    merge: true,
+  }))
+  .pipe(gulp.dest(PATHS.root));
 
 // HTML
 const html = () => gulp.src(PATHS.html.src)
