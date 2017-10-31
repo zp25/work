@@ -1,6 +1,7 @@
 #app {
-  min-height: 100vh;
   @include flexbox(column, nowrap, flex-start, center);
+
+  min-height: 100vh;
   color: color(text);
   font-size: fontSize();
 
@@ -9,7 +10,7 @@
 
     @media only screen and (min-width: 1001px) {
       & {
-        width: 95%
+        width: 95%;
       }
     }
   }
