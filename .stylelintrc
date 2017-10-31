@@ -1,0 +1,29 @@
+{
+  "extends": "stylelint-config-standard",
+  "rules": {
+    "at-rule-empty-line-before": null,
+    "at-rule-no-unknown": [true, {
+      "ignoreAtRules": [
+        "extends",
+        "for",
+        "function",
+        "if",
+        "include",
+        "mixin",
+        "return",
+        "warn"
+      ]
+    }],
+    "declaration-colon-newline-after": null,
+    "function-name-case": ["lower", {
+      "ignoreFunctions": ["fontSize"]
+    }],
+    "selector-pseudo-class-no-unknown": [true, {
+      "ignorePseudoClasses": ["global"]
+    }],
+    "unit-no-unknown": [true, {
+      "ignoreUnits": ["x"]
+    }],
+    "value-list-comma-newline-after": null
+  }
+}

@@ -20,11 +20,23 @@ const $ = gulpLoadPlugins({
 });
 const BS = browserSync.create();
 
-// Lint JavaScript
+// Lint
 const lint = () => gulp.src(PATHS.scripts.src)
   .pipe($.eslint())
   .pipe($.eslint.format())
   .pipe($.if(!BS.active, $.eslint.failOnError()));
+
+const stylelint = () => gulp.src(PATHS.styles.src)
+  .pipe($.stylelint({
+    failAfterError: false,
+    reporters: [
+      {
+        formatter: 'verbose',
+        console: true,
+      },
+    ],
+    syntax: 'scss',
+  }));
 
 // Image Optimazation
 const makeHashKey = entry => file => [file.contents.toString('utf8'), entry].join('');
@@ -186,7 +198,7 @@ function serve() {
   });
 
   gulp.watch(PATHS.html.src).on('change', BS.reload);
-  gulp.watch(PATHS.styles.src, tmpSass);
+  gulp.watch(PATHS.styles.src, gulp.parallel(stylelint, tmpSass));
   gulp.watch(PATHS.images.src, tmpWebp);
   gulp.watch(Object.values(PATHS.templates), tmpTemplates);
 
@@ -212,7 +224,7 @@ gulp.task('clean:cache', done => $.cache.clearAll(done));
 gulp.task('default',
   gulp.series(
     'clean:all', lint,
-    gulp.parallel('script', sass, images, webp, copy),
+    gulp.parallel('script', stylelint, sass, images, webp, copy),
     templates,
     html,
   )
