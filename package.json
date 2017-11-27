@@ -18,10 +18,10 @@
   "author": "zp25",
   "license": "MIT",
   "dependencies": {
-    "babel-polyfill": "^7.0.0-beta.3",
+    "@babel/polyfill": "7.0.0-beta.5",
     "handlebars": "^4.0.11",
     "normalize.css": "^7.0.0",
-    "zp-ui": "^0.1.6"
+    "zp-ui": "^0.1.7"
   },
   "devDependencies": {
     "autoprefixer": "^7.1.6",
@@ -69,7 +69,7 @@
     "gulp-wrap": "^0.13.0",
     "rimraf": "^2.6.2",
     "shortid": "^2.2.8",
-    "stylelint": "^8.3.0",
+    "stylelint": "^8.3.1",
     "stylelint-config-standard": "^18.0.0",
     "vinyl-buffer": "^1.0.0",
     "vinyl-source-stream": "^1.1.0",
