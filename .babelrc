@@ -1,8 +1,8 @@
 {
   "presets": [
-    ["env", {
+    ["@babel/env", {
       "useBuiltIns": "usage"
     }],
-    "stage-0"
+    "@babel/stage-0"
   ]
 }
