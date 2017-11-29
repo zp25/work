@@ -18,17 +18,16 @@
   "author": "zp25",
   "license": "MIT",
   "dependencies": {
-    "@babel/polyfill": "7.0.0-beta.5",
+    "babel-polyfill": "^6.26.0",
     "handlebars": "^4.0.11",
     "normalize.css": "^7.0.0",
-    "zp-ui": "^0.1.7"
+    "zp-ui": "^0.1.8"
   },
   "devDependencies": {
     "autoprefixer": "^7.1.6",
     "babel-core": "^6.26.0",
     "babel-preset-env": "^1.6.1",
     "babel-preset-stage-0": "^6.24.1",
-    "babel-register": "^6.26.0",
     "babelify": "^8.0.0",
     "browser-sync": "^2.18.13",
     "browserify": "^14.5.0",
@@ -87,7 +86,9 @@
     "> 1%",
     "last 2 versions",
     "Firefox ESR",
-    "not ie < 11",
-    "chrome >= 43"
+    "chrome >= 43",
+    "safari >= 8",
+    "ios >= 8",
+    "not ie < 11"
   ]
 }
