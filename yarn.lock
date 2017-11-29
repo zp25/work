@@ -8742,12 +8742,12 @@ yeast@0.1.2:
   version "0.1.2"
   resolved "http://registry.npm.taobao.org/yeast/download/yeast-0.1.2.tgz#008e06d8094320c372dbc2f8ed76a0ca6c8ac419"
 
-zp-lib@^0.0.6:
-  version "0.0.6"
-  resolved "http://registry.npm.taobao.org/zp-lib/download/zp-lib-0.0.6.tgz#aa86c21296f6ab4d2491ceb18233ad9f8e3e5cf0"
+zp-lib@^0.0.7:
+  version "0.0.7"
+  resolved "http://registry.npm.taobao.org/zp-lib/download/zp-lib-0.0.7.tgz#c2ed41dcae251ee143bb84f97cf13d4935d1ff7f"
   dependencies:
     whatwg-fetch "^2.0.3"
 
-zp-ui@^0.1.7:
-  version "0.1.7"
-  resolved "http://registry.npm.taobao.org/zp-ui/download/zp-ui-0.1.7.tgz#fd49d0e58f9cfd651be6698eef23ee7b9dce703d"
+zp-ui@^0.1.8:
+  version "0.1.8"
+  resolved "http://registry.npm.taobao.org/zp-ui/download/zp-ui-0.1.8.tgz#eb20ac28e5de68f80b2ac5c218a996ab54357a27"
