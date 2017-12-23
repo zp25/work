@@ -4,7 +4,7 @@ import { PATHS } from './constants';
 
 export default {
   target: 'web',
-  devtool: 'hidden-source-map',
+  devtool: 'inline-source-map',
   context: PATHS.scripts.context,
   entry: PATHS.scripts.entry,
   output: {
