@@ -33,7 +33,7 @@ const production = entry => b => b.bundle()
         },
       },
     }))
-    .pipe($.size({ title: 'scripts' }))
+    .pipe($.size({ title: 'scripts', showFiles: true }))
     .pipe($.rev())
   .pipe($.sourcemaps.write('.'))
   .pipe(gulp.dest(PATHS.scripts.dest));

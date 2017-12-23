@@ -105,7 +105,7 @@ function sass() {
         .on('error', $.sass.logError)
       )
       .pipe($.postcss(processors))
-      .pipe($.size({ title: 'styles' }))
+      .pipe($.size({ title: 'styles', showFiles: true }))
       .pipe($.rev())
     .pipe($.sourcemaps.write('.'))
     .pipe(gulp.dest(PATHS.styles.dest))

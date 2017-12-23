@@ -47,7 +47,7 @@ const concat = (done) => {
           },
         },
       }))
-      .pipe($.size({ title: 'scripts' }))
+      .pipe($.size({ title: 'concat' }))
       .pipe($.rev())
     .pipe($.sourcemaps.write('.'))
     .pipe(gulp.dest(PATHS.scripts.dest))
