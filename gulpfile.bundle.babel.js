@@ -1,5 +1,6 @@
 import gulp from 'gulp';
 import gulpLoadPlugins from 'gulp-load-plugins';
+import log from 'fancy-log';
 import browserify from 'browserify';
 import watchify from 'watchify';
 import babelify from 'babelify';
@@ -15,13 +16,13 @@ const $ = gulpLoadPlugins();
 const pwd = process.cwd();
 
 const development = entry => b => BS => b.bundle()
-  .on('error', $.util.log.bind($.util, 'Browserify Error'))
+  .on('error', log.bind(log, 'Browserify Error'))
   .pipe(source(`bundle.${entry}.js`))
   .pipe(gulp.dest(PATHS.scripts.tmp))
   .pipe(BS.stream({ once: true }));
 
 const production = entry => b => b.bundle()
-  .on('error', $.util.log.bind($.util, 'Browserify Error'))
+  .on('error', log.bind(log, 'Browserify Error'))
   .pipe(source(`bundle.${entry}.js`))
   .pipe(buffer())
   .pipe($.sourcemaps.init({ loadMaps: true }))
@@ -58,7 +59,8 @@ const tmpBundle = BS => (done) => {
 
     // 只有执行bundle()后watchify才能监听update事件
     b.on('update', () => development(entry)(b)(BS));
-    b.on('log', $.util.log);
+    // watchify监听log事件，输出内容X bytes written (Y seconds)，fancy-log添加时间
+    b.on('log', log);
 
     return development(entry)(b)(BS);
   });
@@ -81,8 +83,6 @@ const bundle = (done) => {
     VENDOR.forEach((lib) => {
       b.exclude(lib);
     });
-
-    b.on('log', $.util.log);
 
     return production(entry)(b);
   });
@@ -116,10 +116,8 @@ const vendor = (done) => {
     b.require(lib);
   });
 
-  b.on('log', $.util.log);
-
   return b.bundle()
-    .on('error', $.util.log.bind($.util, 'Browserify Error'))
+    .on('error', log.bind(log, 'Browserify Error'))
     .pipe(source('vendor.js'))
     .pipe(buffer())
     .pipe($.sourcemaps.init({ loadMaps: true }))
