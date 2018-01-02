@@ -682,10 +682,6 @@ acorn@^4.0.3:
   version "4.0.13"
   resolved "http://registry.npm.taobao.org/acorn/download/acorn-4.0.13.tgz#105495ae5361d697bd195c825192e1ad7f253787"
 
-after@0.8.1:
-  version "0.8.1"
-  resolved "http://registry.npm.taobao.org/after/download/after-0.8.1.tgz#ab5d4fb883f596816d3515f8f791c0af486dd627"
-
 after@0.8.2:
   version "0.8.2"
   resolved "http://registry.npm.taobao.org/after/download/after-0.8.2.tgz#fedb394f9f0e02aa9768e702bda23b505fae7e1f"
@@ -1317,14 +1313,15 @@ browser-sync-ui@v1.0.1:
     socket.io-client "2.0.4"
     stream-throttle "^0.1.3"
 
-browser-sync@^2.21.0:
-  version "2.21.0"
-  resolved "http://registry.npm.taobao.org/browser-sync/download/browser-sync-2.21.0.tgz#91cde3a8452f22f355ebe717ca1b3c1dbf9ca096"
+browser-sync@^2.23.2:
+  version "2.23.2"
+  resolved "http://registry.npm.taobao.org/browser-sync/download/browser-sync-2.23.2.tgz#fb3e7e5f18d9da75c1892bc5183bcdf15c96b53d"
   dependencies:
     browser-sync-ui v1.0.1
     bs-recipes "1.3.4"
     chokidar "1.7.0"
     connect "3.5.0"
+    connect-history-api-fallback "^1.5.0"
     dev-ip "^1.0.1"
     easy-extender "2.3.2"
     eazy-logger "3.0.2"
@@ -1345,7 +1342,6 @@ browser-sync@^2.21.0:
     serve-static "1.12.2"
     server-destroy "1.0.1"
     socket.io "2.0.4"
-    socket.io-client "1.6.0"
     ua-parser-js "0.7.12"
     yargs "6.4.0"
 
@@ -1862,10 +1858,6 @@ component-bind@1.0.0:
   version "1.0.0"
   resolved "http://registry.npm.taobao.org/component-bind/download/component-bind-1.0.0.tgz#00c608ab7dcd93897c0009651b1d3a8e1e73bbd1"
 
-component-emitter@1.1.2:
-  version "1.1.2"
-  resolved "http://registry.npm.taobao.org/component-emitter/download/component-emitter-1.1.2.tgz#296594f2753daa63996d2af08d15a95116c9aec3"
-
 component-emitter@1.2.1, component-emitter@^1.2.1:
   version "1.2.1"
   resolved "http://registry.npm.taobao.org/component-emitter/download/component-emitter-1.2.1.tgz#137918d6d78283f7df7a6b7c5a63e140e69425e6"
@@ -1910,7 +1902,7 @@ concat-with-sourcemaps@^1.0.0:
   dependencies:
     source-map "^0.5.1"
 
-connect-history-api-fallback@^1.1.0:
+connect-history-api-fallback@^1.1.0, connect-history-api-fallback@^1.5.0:
   version "1.5.0"
   resolved "http://registry.npm.taobao.org/connect-history-api-fallback/download/connect-history-api-fallback-1.5.0.tgz#b06873934bc5e344fef611a196a6faae0aee015a"
 
@@ -2234,18 +2226,6 @@ debug-fabulous@1.X:
     memoizee "0.4.X"
     object-assign "4.X"
 
-debug@2.2.0, debug@~2.2.0:
-  version "2.2.0"
-  resolved "http://registry.npm.taobao.org/debug/download/debug-2.2.0.tgz#f87057e995b1a1f6ae6a4960664137bc56f039da"
-  dependencies:
-    ms "0.7.1"
-
-debug@2.3.3:
-  version "2.3.3"
-  resolved "http://registry.npm.taobao.org/debug/download/debug-2.3.3.tgz#40c453e67e6e13c901ddec317af8986cda9eff8c"
-  dependencies:
-    ms "0.7.2"
-
 debug@2.6.4:
   version "2.6.4"
   resolved "http://registry.npm.taobao.org/debug/download/debug-2.6.4.tgz#7586a9b3c39741c0282ae33445c4e8ac74734fe0"
@@ -2269,6 +2249,12 @@ debug@3.X, debug@^3.0.0, debug@^3.0.1, debug@^3.1.0:
   resolved "http://registry.npm.taobao.org/debug/download/debug-3.1.0.tgz#5bb5a0672628b64149566ba16819e61518c67261"
   dependencies:
     ms "2.0.0"
+
+debug@~2.2.0:
+  version "2.2.0"
+  resolved "http://registry.npm.taobao.org/debug/download/debug-2.2.0.tgz#f87057e995b1a1f6ae6a4960664137bc56f039da"
+  dependencies:
+    ms "0.7.1"
 
 decamelize-keys@^1.0.0:
   version "1.1.0"
@@ -2645,23 +2631,6 @@ end-of-stream@^1.0.0, end-of-stream@^1.1.0:
   dependencies:
     once "^1.4.0"
 
-engine.io-client@1.8.0:
-  version "1.8.0"
-  resolved "http://registry.npm.taobao.org/engine.io-client/download/engine.io-client-1.8.0.tgz#7b730e4127414087596d9be3c88d2bc5fdb6cf5c"
-  dependencies:
-    component-emitter "1.2.1"
-    component-inherit "0.0.3"
-    debug "2.3.3"
-    engine.io-parser "1.3.1"
-    has-cors "1.1.0"
-    indexof "0.0.1"
-    parsejson "0.0.3"
-    parseqs "0.0.5"
-    parseuri "0.0.5"
-    ws "1.1.1"
-    xmlhttprequest-ssl "1.5.3"
-    yeast "0.1.2"
-
 engine.io-client@~3.1.0:
   version "3.1.4"
   resolved "http://registry.npm.taobao.org/engine.io-client/download/engine.io-client-3.1.4.tgz#4fcf1370b47163bd2ce9be2733972430350d4ea1"
@@ -2677,17 +2646,6 @@ engine.io-client@~3.1.0:
     ws "~3.3.1"
     xmlhttprequest-ssl "~1.5.4"
     yeast "0.1.2"
-
-engine.io-parser@1.3.1:
-  version "1.3.1"
-  resolved "http://registry.npm.taobao.org/engine.io-parser/download/engine.io-parser-1.3.1.tgz#9554f1ae33107d6fbd170ca5466d2f833f6a07cf"
-  dependencies:
-    after "0.8.1"
-    arraybuffer.slice "0.0.6"
-    base64-arraybuffer "0.1.5"
-    blob "0.0.4"
-    has-binary "0.1.6"
-    wtf-8 "1.0.0"
 
 engine.io-parser@~2.1.0, engine.io-parser@~2.1.1:
   version "2.1.1"
@@ -3209,7 +3167,7 @@ extsprintf@^1.2.0:
   version "1.4.0"
   resolved "http://registry.npm.taobao.org/extsprintf/download/extsprintf-1.4.0.tgz#e2689f8f356fad62cca65a3a91c5df5f9551692f"
 
-fancy-log@^1.1.0, fancy-log@^1.2.0:
+fancy-log@^1.1.0, fancy-log@^1.2.0, fancy-log@^1.3.2:
   version "1.3.2"
   resolved "http://registry.npm.taobao.org/fancy-log/download/fancy-log-1.3.2.tgz#f41125e3d84f2e7d89a43d06d958c8f78be16be1"
   dependencies:
@@ -3812,14 +3770,14 @@ graceful-fs@4.X, graceful-fs@^4.0.0, graceful-fs@^4.1.11, graceful-fs@^4.1.2, gr
   version "1.0.1"
   resolved "http://registry.npm.taobao.org/graceful-readlink/download/graceful-readlink-1.0.1.tgz#4cafad76bc62f02fa039b2f94e9a3dd3a391a725"
 
-gulp-cache@^1.0.1:
-  version "1.0.1"
-  resolved "http://registry.npm.taobao.org/gulp-cache/download/gulp-cache-1.0.1.tgz#611c914e70dad936ec429a9172316c355895fa53"
+gulp-cache@^1.0.2:
+  version "1.0.2"
+  resolved "http://registry.npm.taobao.org/gulp-cache/download/gulp-cache-1.0.2.tgz#064ed713de47b0ff26b491abd899590891e426f4"
   dependencies:
     babel-runtime "^6.26.0"
     cache-swap "^0.3.0"
-    gulp-util "^3.0.8"
     object.pick "^1.3.0"
+    plugin-error "^0.1.2"
     through2 "^2.0.3"
     vinyl "^2.1.0"
 
@@ -3888,13 +3846,14 @@ gulp-if@^2.0.0, gulp-if@^2.0.2:
     ternary-stream "^2.0.1"
     through2 "^2.0.1"
 
-gulp-imagemin@^4.0.0:
-  version "4.0.0"
-  resolved "http://registry.npm.taobao.org/gulp-imagemin/download/gulp-imagemin-4.0.0.tgz#fa0b1939e86a8b387a09013399bf141c1e2f7196"
+gulp-imagemin@^4.1.0:
+  version "4.1.0"
+  resolved "http://registry.npm.taobao.org/gulp-imagemin/download/gulp-imagemin-4.1.0.tgz#5ce347f1d1706fed3cc8f1777ca9094a583b50b7"
   dependencies:
     chalk "^2.1.0"
-    gulp-util "^3.0.8"
+    fancy-log "^1.3.2"
     imagemin "^5.3.1"
+    plugin-error "^0.1.2"
     plur "^2.1.2"
     pretty-bytes "^4.0.2"
     through2-concurrent "^1.1.1"
@@ -3938,11 +3897,12 @@ gulp-newer@^1.3.0:
     gulp-util "^3.0.7"
     kew "^0.7.0"
 
-gulp-postcss@^7.0.0:
-  version "7.0.0"
-  resolved "http://registry.npm.taobao.org/gulp-postcss/download/gulp-postcss-7.0.0.tgz#cfb62a19fa947f8be67ce9ecae89ceb959f0cf93"
+gulp-postcss@^7.0.1:
+  version "7.0.1"
+  resolved "http://registry.npm.taobao.org/gulp-postcss/download/gulp-postcss-7.0.1.tgz#3f1c36db1197140c399c252ddff339129638e395"
   dependencies:
-    gulp-util "^3.0.8"
+    fancy-log "^1.3.2"
+    plugin-error "^0.1.2"
     postcss "^6.0.0"
     postcss-load-config "^1.2.0"
     vinyl-sourcemaps-apply "^0.2.1"
@@ -3981,15 +3941,15 @@ gulp-sass@^3.1.0:
     through2 "^2.0.0"
     vinyl-sourcemaps-apply "^0.2.0"
 
-gulp-size@^2.0.0:
-  version "2.1.0"
-  resolved "http://registry.npm.taobao.org/gulp-size/download/gulp-size-2.1.0.tgz#1c2b64f17f9071d5abd99d154b7b3481f8fba128"
+gulp-size@^3.0.0:
+  version "3.0.0"
+  resolved "http://registry.npm.taobao.org/gulp-size/download/gulp-size-3.0.0.tgz#cb1ac8e6ba83dede52430c47fd039324f003ff82"
   dependencies:
-    chalk "^1.0.0"
-    gulp-util "^3.0.0"
-    gzip-size "^3.0.0"
-    object-assign "^4.0.1"
-    pretty-bytes "^3.0.1"
+    chalk "^2.3.0"
+    fancy-log "^1.3.2"
+    gzip-size "^4.1.0"
+    plugin-error "^0.1.2"
+    pretty-bytes "^4.0.2"
     stream-counter "^1.0.0"
     through2 "^2.0.0"
 
@@ -4033,21 +3993,21 @@ gulp-stylelint@^5.0.0:
     stylelint "^8.0.0"
     through2 "^2.0.3"
 
-gulp-useref@^3.1.3:
-  version "3.1.3"
-  resolved "http://registry.npm.taobao.org/gulp-useref/download/gulp-useref-3.1.3.tgz#6d4c6c64489ffc7fda00510c7a032fdb7341ce9a"
+gulp-useref@^3.1.4:
+  version "3.1.4"
+  resolved "http://registry.npm.taobao.org/gulp-useref/download/gulp-useref-3.1.4.tgz#3678f00b96fed21147021b9be43d77a26d6d14ea"
   dependencies:
     event-stream "^3.3.1"
     glob "^7.0.3"
     gulp-concat "^2.5.2"
     gulp-if "^2.0.0"
-    gulp-util "^3.0.1"
     is-relative-url "1.0.0"
+    plugin-error "^0.1.2"
     through2 "^2.0.1"
     useref "^1.2.0"
-    vinyl-fs "^2.2.1"
+    vinyl-fs "^3.0.0"
 
-gulp-util@^3.0, gulp-util@^3.0.0, gulp-util@^3.0.1, gulp-util@^3.0.7, gulp-util@^3.0.8, gulp-util@~3.0.6:
+gulp-util@^3.0, gulp-util@^3.0.1, gulp-util@^3.0.7, gulp-util@^3.0.8, gulp-util@~3.0.6:
   version "3.0.8"
   resolved "http://registry.npm.taobao.org/gulp-util/download/gulp-util-3.0.8.tgz#0054e1e744502e27c04c187c3ecc505dd54bbb4f"
   dependencies:
@@ -4070,13 +4030,13 @@ gulp-util@^3.0, gulp-util@^3.0.0, gulp-util@^3.0.1, gulp-util@^3.0.7, gulp-util@
     through2 "^2.0.0"
     vinyl "^0.5.0"
 
-gulp-webp@^2.3.0:
-  version "2.3.0"
-  resolved "http://registry.npm.taobao.org/gulp-webp/download/gulp-webp-2.3.0.tgz#c5137fa207525d19ed9cf5d0c4808996072c2ed1"
+gulp-webp@^3.0.0:
+  version "3.0.0"
+  resolved "http://registry.npm.taobao.org/gulp-webp/download/gulp-webp-3.0.0.tgz#6def3e5e4da369af57adb76df6c696d86339da13"
   dependencies:
-    gulp-util "^3.0.0"
     imagemin-webp "^3.0.1"
     modify-error-event "^1.0.0"
+    plugin-error "^0.1.2"
 
 "gulp@github:gulpjs/gulp#4.0":
   version "4.0.0-alpha.3"
@@ -4093,11 +4053,12 @@ gulplog@^1.0.0:
   dependencies:
     glogg "^1.0.0"
 
-gzip-size@^3.0.0:
-  version "3.0.0"
-  resolved "http://registry.npm.taobao.org/gzip-size/download/gzip-size-3.0.0.tgz#546188e9bdc337f673772f81660464b389dce520"
+gzip-size@^4.1.0:
+  version "4.1.0"
+  resolved "http://registry.npm.taobao.org/gzip-size/download/gzip-size-4.1.0.tgz#8ae096257eabe7d69c45be2b67c448124ffb517c"
   dependencies:
     duplexer "^0.1.1"
+    pify "^3.0.0"
 
 handlebars@^4.0.11:
   version "4.0.11"
@@ -4151,18 +4112,6 @@ has-binary2@~1.0.2:
   resolved "http://registry.npm.taobao.org/has-binary2/download/has-binary2-1.0.2.tgz#e83dba49f0b9be4d026d27365350d9f03f54be98"
   dependencies:
     isarray "2.0.1"
-
-has-binary@0.1.6:
-  version "0.1.6"
-  resolved "http://registry.npm.taobao.org/has-binary/download/has-binary-0.1.6.tgz#25326f39cfa4f616ad8787894e3af2cfbc7b6e10"
-  dependencies:
-    isarray "0.0.1"
-
-has-binary@0.1.7:
-  version "0.1.7"
-  resolved "http://registry.npm.taobao.org/has-binary/download/has-binary-0.1.7.tgz#68e61eb16210c9545a0a5cce06a873912fe1e68c"
-  dependencies:
-    isarray "0.0.1"
 
 has-cors@1.1.0:
   version "1.1.0"
@@ -5119,10 +5068,6 @@ json-stringify-safe@~5.0.1:
   version "5.0.1"
   resolved "http://registry.npm.taobao.org/json-stringify-safe/download/json-stringify-safe-5.0.1.tgz#1296a2d58fd45f19a0f6ce01d65701e2c735b6eb"
 
-json3@3.3.2:
-  version "3.3.2"
-  resolved "http://registry.npm.taobao.org/json3/download/json3-3.3.2.tgz#3c0434743df93e2f5c42aee7b19bcb483575f4e1"
-
 json5@^0.5.0, json5@^0.5.1:
   version "0.5.1"
   resolved "http://registry.npm.taobao.org/json5/download/json5-0.5.1.tgz#1eade7acc012034ad84e2396767ead9fa5495821"
@@ -5816,10 +5761,6 @@ ms@0.7.1:
   version "0.7.1"
   resolved "http://registry.npm.taobao.org/ms/download/ms-0.7.1.tgz#9cd13c03adbff25b65effde7ce864ee952017098"
 
-ms@0.7.2:
-  version "0.7.2"
-  resolved "http://registry.npm.taobao.org/ms/download/ms-0.7.2.tgz#ae25cf2512b3885a1d95d7f037868d8431124765"
-
 ms@0.7.3:
   version "0.7.3"
   resolved "http://registry.npm.taobao.org/ms/download/ms-0.7.3.tgz#708155a5e44e33f5fd0fc53e81d0d40a91be1fff"
@@ -6253,10 +6194,6 @@ optionator@^0.8.2:
     type-check "~0.3.2"
     wordwrap "~1.0.0"
 
-options@>=0.0.5:
-  version "0.0.6"
-  resolved "http://registry.npm.taobao.org/options/download/options-0.0.6.tgz#ec22d312806bb53e731773e7cdaefcf1c643128f"
-
 optipng-bin@^3.0.0:
   version "3.1.4"
   resolved "http://registry.npm.taobao.org/optipng-bin/download/optipng-bin-3.1.4.tgz#95d34f2c488704f6fd70606bfea0c659f1d95d84"
@@ -6412,12 +6349,6 @@ parse-json@^4.0.0:
 parse-passwd@^1.0.0:
   version "1.0.0"
   resolved "http://registry.npm.taobao.org/parse-passwd/download/parse-passwd-1.0.0.tgz#6d5b934a456993b23d37f40a382d6f1666a8e5c6"
-
-parsejson@0.0.3:
-  version "0.0.3"
-  resolved "http://registry.npm.taobao.org/parsejson/download/parsejson-0.0.3.tgz#ab7e3759f209ece99437973f7d0f1f64ae0e64ab"
-  dependencies:
-    better-assert "~1.0.0"
 
 parseqs@0.0.5:
   version "0.0.5"
@@ -6913,12 +6844,6 @@ prepend-http@^1.0.0, prepend-http@^1.0.1:
 preserve@^0.2.0:
   version "0.2.0"
   resolved "http://registry.npm.taobao.org/preserve/download/preserve-0.2.0.tgz#815ed1f6ebc65926f865b310c0713bcb3315ce4b"
-
-pretty-bytes@^3.0.1:
-  version "3.0.1"
-  resolved "http://registry.npm.taobao.org/pretty-bytes/download/pretty-bytes-3.0.1.tgz#27d0008d778063a0b4811bb35c79f1bd5d5fbccf"
-  dependencies:
-    number-is-nan "^1.0.0"
 
 pretty-bytes@^4.0.2:
   version "4.0.2"
@@ -7849,22 +7774,6 @@ socket.io-adapter@~1.1.0:
   version "1.1.1"
   resolved "http://registry.npm.taobao.org/socket.io-adapter/download/socket.io-adapter-1.1.1.tgz#2a805e8a14d6372124dd9159ad4502f8cb07f06b"
 
-socket.io-client@1.6.0:
-  version "1.6.0"
-  resolved "http://registry.npm.taobao.org/socket.io-client/download/socket.io-client-1.6.0.tgz#5b668f4f771304dfeed179064708386fa6717853"
-  dependencies:
-    backo2 "1.0.2"
-    component-bind "1.0.0"
-    component-emitter "1.2.1"
-    debug "2.3.3"
-    engine.io-client "1.8.0"
-    has-binary "0.1.7"
-    indexof "0.0.1"
-    object-component "0.0.3"
-    parseuri "0.0.5"
-    socket.io-parser "2.3.1"
-    to-array "0.1.4"
-
 socket.io-client@2.0.4:
   version "2.0.4"
   resolved "http://registry.npm.taobao.org/socket.io-client/download/socket.io-client-2.0.4.tgz#0918a552406dc5e540b380dcd97afc4a64332f8e"
@@ -7882,15 +7791,6 @@ socket.io-client@2.0.4:
     parseuri "0.0.5"
     socket.io-parser "~3.1.1"
     to-array "0.1.4"
-
-socket.io-parser@2.3.1:
-  version "2.3.1"
-  resolved "http://registry.npm.taobao.org/socket.io-parser/download/socket.io-parser-2.3.1.tgz#dd532025103ce429697326befd64005fcfe5b4a0"
-  dependencies:
-    component-emitter "1.1.2"
-    debug "2.2.0"
-    isarray "0.0.1"
-    json3 "3.3.2"
 
 socket.io-parser@~3.1.1:
   version "3.1.2"
@@ -8789,10 +8689,6 @@ uid-number@^0.0.6:
   version "0.0.6"
   resolved "http://registry.npm.taobao.org/uid-number/download/uid-number-0.0.6.tgz#0ea10e8035e8eb5b8e4449f06da1c730663baa81"
 
-ultron@1.0.x:
-  version "1.0.2"
-  resolved "http://registry.npm.taobao.org/ultron/download/ultron-1.0.2.tgz#ace116ab557cd197386a4e88f4685378c8b2e4fa"
-
 ultron@~1.1.0:
   version "1.1.1"
   resolved "http://registry.npm.taobao.org/ultron/download/ultron-1.1.1.tgz#9fe1536a10a664a65266a1e3ccf85fd36302bc9c"
@@ -9095,7 +8991,7 @@ vinyl-file@^3.0.0:
     strip-bom-stream "^2.0.0"
     vinyl "^2.0.1"
 
-vinyl-fs@^2.2.0, vinyl-fs@^2.2.1:
+vinyl-fs@^2.2.0:
   version "2.4.4"
   resolved "http://registry.npm.taobao.org/vinyl-fs/download/vinyl-fs-2.4.4.tgz#be6ff3270cb55dfd7d3063640de81f25d7532239"
   dependencies:
@@ -9346,13 +9242,6 @@ write@^0.2.1:
   dependencies:
     mkdirp "^0.5.1"
 
-ws@1.1.1:
-  version "1.1.1"
-  resolved "http://registry.npm.taobao.org/ws/download/ws-1.1.1.tgz#082ddb6c641e85d4bb451f03d52f06eabdb1f018"
-  dependencies:
-    options ">=0.0.5"
-    ultron "1.0.x"
-
 ws@~3.3.1:
   version "3.3.3"
   resolved "http://registry.npm.taobao.org/ws/download/ws-3.3.3.tgz#f1cf84fe2d5e901ebce94efaece785f187a228f2"
@@ -9360,10 +9249,6 @@ ws@~3.3.1:
     async-limiter "~1.0.0"
     safe-buffer "~5.1.0"
     ultron "~1.1.0"
-
-wtf-8@1.0.0:
-  version "1.0.0"
-  resolved "http://registry.npm.taobao.org/wtf-8/download/wtf-8-1.0.0.tgz#392d8ba2d0f1c34d1ee2d630f15d0efb68e1048a"
 
 x-is-function@^1.0.4:
   version "1.0.4"
@@ -9376,10 +9261,6 @@ x-is-string@^0.1.0:
 xml-char-classes@^1.0.0:
   version "1.0.0"
   resolved "http://registry.npm.taobao.org/xml-char-classes/download/xml-char-classes-1.0.0.tgz#64657848a20ffc5df583a42ad8a277b4512bbc4d"
-
-xmlhttprequest-ssl@1.5.3:
-  version "1.5.3"
-  resolved "http://registry.npm.taobao.org/xmlhttprequest-ssl/download/xmlhttprequest-ssl-1.5.3.tgz#185a888c04eca46c3e4070d99f7b49de3528992d"
 
 xmlhttprequest-ssl@~1.5.4:
   version "1.5.4"
