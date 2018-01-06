@@ -779,6 +779,13 @@ anymatch@^1.3.0:
     micromatch "^2.1.5"
     normalize-path "^2.0.0"
 
+anymatch@^2.0.0:
+  version "2.0.0"
+  resolved "http://registry.npm.taobao.org/anymatch/download/anymatch-2.0.0.tgz#bcb24b4f37934d9aa7ac17b4adaf89e7c76ef2eb"
+  dependencies:
+    micromatch "^3.1.4"
+    normalize-path "^2.1.1"
+
 append-buffer@^1.0.2:
   version "1.0.2"
   resolved "http://registry.npm.taobao.org/append-buffer/download/append-buffer-1.0.2.tgz#d8220cf466081525efea50614f3de6514dfa58f1"
@@ -1034,15 +1041,15 @@ autoprefixer@^6.3.1:
     postcss "^5.2.16"
     postcss-value-parser "^3.2.3"
 
-autoprefixer@^7.1.2, autoprefixer@^7.2.3:
-  version "7.2.3"
-  resolved "http://registry.npm.taobao.org/autoprefixer/download/autoprefixer-7.2.3.tgz#c2841e38b7940c2d0a9bbffd72c75f33637854f8"
+autoprefixer@^7.1.2, autoprefixer@^7.2.4:
+  version "7.2.4"
+  resolved "http://registry.npm.taobao.org/autoprefixer/download/autoprefixer-7.2.4.tgz#29b367c03876a29bfd3721260d945e3545666c8d"
   dependencies:
-    browserslist "^2.10.0"
-    caniuse-lite "^1.0.30000783"
+    browserslist "^2.10.2"
+    caniuse-lite "^1.0.30000784"
     normalize-range "^0.1.2"
     num2fraction "^1.2.2"
-    postcss "^6.0.14"
+    postcss "^6.0.15"
     postcss-value-parser "^3.2.3"
 
 aws-sign2@~0.6.0:
@@ -1313,9 +1320,9 @@ browser-sync-ui@v1.0.1:
     socket.io-client "2.0.4"
     stream-throttle "^0.1.3"
 
-browser-sync@^2.23.2:
-  version "2.23.2"
-  resolved "http://registry.npm.taobao.org/browser-sync/download/browser-sync-2.23.2.tgz#fb3e7e5f18d9da75c1892bc5183bcdf15c96b53d"
+browser-sync@^2.23.3:
+  version "2.23.3"
+  resolved "http://registry.npm.taobao.org/browser-sync/download/browser-sync-2.23.3.tgz#0ad79c6a9ac67115d575ba4de88a9111121b177e"
   dependencies:
     browser-sync-ui v1.0.1
     bs-recipes "1.3.4"
@@ -1404,7 +1411,14 @@ browserslist@^1.3.6, browserslist@^1.5.2, browserslist@^1.7.6:
     caniuse-db "^1.0.30000639"
     electron-to-chromium "^1.2.7"
 
-browserslist@^2.10.0, browserslist@^2.4.0:
+browserslist@^2.10.2:
+  version "2.11.0"
+  resolved "http://registry.npm.taobao.org/browserslist/download/browserslist-2.11.0.tgz#50350d6873a82ebe0f3ae5483658c571ae5f9d7d"
+  dependencies:
+    caniuse-lite "^1.0.30000784"
+    electron-to-chromium "^1.3.30"
+
+browserslist@^2.4.0:
   version "2.10.0"
   resolved "http://registry.npm.taobao.org/browserslist/download/browserslist-2.10.0.tgz#bac5ee1cc69ca9d96403ffb8a3abdc5b6aed6346"
   dependencies:
@@ -1560,9 +1574,13 @@ caniuse-db@^1.0.30000529, caniuse-db@^1.0.30000634, caniuse-db@^1.0.30000639:
   version "1.0.30000784"
   resolved "http://registry.npm.taobao.org/caniuse-db/download/caniuse-db-1.0.30000784.tgz#1be95012d9489c7719074f81aee57dbdffe6361b"
 
-caniuse-lite@^1.0.30000780, caniuse-lite@^1.0.30000783:
+caniuse-lite@^1.0.30000780:
   version "1.0.30000784"
   resolved "http://registry.npm.taobao.org/caniuse-lite/download/caniuse-lite-1.0.30000784.tgz#129ced74e9a1280a441880b6cd2bce30ef59e6c0"
+
+caniuse-lite@^1.0.30000784:
+  version "1.0.30000787"
+  resolved "http://registry.npm.taobao.org/caniuse-lite/download/caniuse-lite-1.0.30000787.tgz#a76c4fa1d6ac00640447ec83c1e7c6b33dd615c5"
 
 capture-stack-trace@^1.0.0:
   version "1.0.0"
@@ -1634,7 +1652,7 @@ chardet@^0.4.0:
   version "0.4.2"
   resolved "http://registry.npm.taobao.org/chardet/download/chardet-0.4.2.tgz#b5473b33dc97c424e5d98dc87d55d4d8a29c8bf2"
 
-chokidar@1.7.0, chokidar@^1.4.3, chokidar@^1.7.0:
+chokidar@1.7.0, chokidar@^1.7.0:
   version "1.7.0"
   resolved "http://registry.npm.taobao.org/chokidar/download/chokidar-1.7.0.tgz#798e689778151c8076b4b360e5edd28cda2bb468"
   dependencies:
@@ -1644,6 +1662,23 @@ chokidar@1.7.0, chokidar@^1.4.3, chokidar@^1.7.0:
     inherits "^2.0.1"
     is-binary-path "^1.0.0"
     is-glob "^2.0.0"
+    path-is-absolute "^1.0.0"
+    readdirp "^2.0.0"
+  optionalDependencies:
+    fsevents "^1.0.0"
+
+chokidar@^2.0.0:
+  version "2.0.0"
+  resolved "http://registry.npm.taobao.org/chokidar/download/chokidar-2.0.0.tgz#6686313c541d3274b2a5c01233342037948c911b"
+  dependencies:
+    anymatch "^2.0.0"
+    async-each "^1.0.0"
+    braces "^2.3.0"
+    glob-parent "^3.1.0"
+    inherits "^2.0.1"
+    is-binary-path "^1.0.0"
+    is-glob "^4.0.0"
+    normalize-path "^2.1.1"
     path-is-absolute "^1.0.0"
     readdirp "^2.0.0"
   optionalDependencies:
@@ -2595,7 +2630,7 @@ electron-releases@^2.1.0:
   version "2.1.0"
   resolved "http://registry.npm.taobao.org/electron-releases/download/electron-releases-2.1.0.tgz#c5614bf811f176ce3c836e368a0625782341fd4e"
 
-electron-to-chromium@^1.2.7, electron-to-chromium@^1.3.28:
+electron-to-chromium@^1.2.7, electron-to-chromium@^1.3.28, electron-to-chromium@^1.3.30:
   version "1.3.30"
   resolved "http://registry.npm.taobao.org/electron-to-chromium/download/electron-to-chromium-1.3.30.tgz#9666f532a64586651fc56a72513692e820d06a80"
   dependencies:
@@ -3608,12 +3643,12 @@ glob-stream@^6.1.0:
     to-absolute-glob "^2.0.0"
     unique-stream "^2.0.2"
 
-glob-watcher@^4.0.0:
-  version "4.0.0"
-  resolved "http://registry.npm.taobao.org/glob-watcher/download/glob-watcher-4.0.0.tgz#9e63a8ff6e61e932de6cc2caece5071a6d737329"
+glob-watcher@^5.0.0:
+  version "5.0.0"
+  resolved "http://registry.npm.taobao.org/glob-watcher/download/glob-watcher-5.0.0.tgz#5e147887f8733134c212bc19697dda19a029eb2e"
   dependencies:
     async-done "^1.2.0"
-    chokidar "^1.4.3"
+    chokidar "^2.0.0"
     just-debounce "^1.0.0"
     object.defaults "^1.1.0"
 
@@ -3821,12 +3856,13 @@ gulp-decompress@^1.2.0:
     gulp-util "^3.0.1"
     readable-stream "^2.0.2"
 
-gulp-eslint@^4.0.0:
-  version "4.0.0"
-  resolved "http://registry.npm.taobao.org/gulp-eslint/download/gulp-eslint-4.0.0.tgz#16d9ea4d696e7b7a9d65eeb1aa5bc4ba0a22c7f7"
+gulp-eslint@^4.0.1:
+  version "4.0.1"
+  resolved "http://registry.npm.taobao.org/gulp-eslint/download/gulp-eslint-4.0.1.tgz#9df256a802e8e6b32ee75b54f315dd2d8efd9edc"
   dependencies:
     eslint "^4.0.0"
-    gulp-util "^3.0.8"
+    fancy-log "^1.3.2"
+    plugin-error "^0.1.2"
 
 gulp-htmlmin@^4.0.0:
   version "4.0.0"
@@ -3889,13 +3925,13 @@ gulp-match@^1.0.3:
   dependencies:
     minimatch "^3.0.3"
 
-gulp-newer@^1.3.0:
-  version "1.3.0"
-  resolved "http://registry.npm.taobao.org/gulp-newer/download/gulp-newer-1.3.0.tgz#d50ecacbb822eda492b57324a6c85a07fd9a55c1"
+gulp-newer@^1.4.0:
+  version "1.4.0"
+  resolved "http://registry.npm.taobao.org/gulp-newer/download/gulp-newer-1.4.0.tgz#25243ed6eac8f5462b95894e0d41937b112e65f3"
   dependencies:
     glob "^7.0.3"
-    gulp-util "^3.0.7"
     kew "^0.7.0"
+    plugin-error "^0.1.2"
 
 gulp-postcss@^7.0.1:
   version "7.0.1"
@@ -3963,9 +3999,9 @@ gulp-sourcemaps@1.6.0:
     through2 "^2.0.0"
     vinyl "^1.0.0"
 
-gulp-sourcemaps@^2.6.2:
-  version "2.6.2"
-  resolved "http://registry.npm.taobao.org/gulp-sourcemaps/download/gulp-sourcemaps-2.6.2.tgz#4f41c72b35a7ea06b666d2e3f57917e2c0e71c4e"
+gulp-sourcemaps@^2.6.3:
+  version "2.6.3"
+  resolved "http://registry.npm.taobao.org/gulp-sourcemaps/download/gulp-sourcemaps-2.6.3.tgz#11b033f759f909e0a5f15b7bdf47ac29cc54efa4"
   dependencies:
     "@gulp-sourcemaps/identity-map" "1.X"
     "@gulp-sourcemaps/map-sources" "1.X"
@@ -3979,18 +4015,18 @@ gulp-sourcemaps@^2.6.2:
     strip-bom-string "1.X"
     through2 "2.X"
 
-gulp-stylelint@^5.0.0:
-  version "5.0.0"
-  resolved "http://registry.npm.taobao.org/gulp-stylelint/download/gulp-stylelint-5.0.0.tgz#c507f5e314602e7122eff599f2880eb0b62657b0"
+gulp-stylelint@^6.0.0:
+  version "6.0.0"
+  resolved "http://registry.npm.taobao.org/gulp-stylelint/download/gulp-stylelint-6.0.0.tgz#b65b1fcd4ddfeff9564457eaa7fee264a5d71e5e"
   dependencies:
-    chalk "^2.0.1"
+    chalk "^2.3.0"
     deep-extend "^0.5.0"
-    gulp-util "^3.0.8"
+    fancy-log "^1.3.2"
     mkdirp "^0.5.1"
+    plugin-error "^0.1.2"
     promise "^8.0.1"
-    source-map "^0.5.6"
+    source-map "^0.6.1"
     strip-ansi "^4.0.0"
-    stylelint "^8.0.0"
     through2 "^2.0.3"
 
 gulp-useref@^3.1.4:
@@ -4007,7 +4043,7 @@ gulp-useref@^3.1.4:
     useref "^1.2.0"
     vinyl-fs "^3.0.0"
 
-gulp-util@^3.0, gulp-util@^3.0.1, gulp-util@^3.0.7, gulp-util@^3.0.8, gulp-util@~3.0.6:
+gulp-util@^3.0, gulp-util@^3.0.1, gulp-util@^3.0.7, gulp-util@~3.0.6:
   version "3.0.8"
   resolved "http://registry.npm.taobao.org/gulp-util/download/gulp-util-3.0.8.tgz#0054e1e744502e27c04c187c3ecc505dd54bbb4f"
   dependencies:
@@ -4038,11 +4074,11 @@ gulp-webp@^3.0.0:
     modify-error-event "^1.0.0"
     plugin-error "^0.1.2"
 
-"gulp@github:gulpjs/gulp#4.0":
-  version "4.0.0-alpha.3"
-  resolved "https://codeload.github.com/gulpjs/gulp/tar.gz/71c094a51c7972d26f557899ddecab0210ef3776"
+gulp@^4.0.0:
+  version "4.0.0"
+  resolved "http://registry.npm.taobao.org/gulp/download/gulp-4.0.0.tgz#95766c601dade4a77ed3e7b2b6dc03881b596366"
   dependencies:
-    glob-watcher "^4.0.0"
+    glob-watcher "^5.0.0"
     gulp-cli "^2.0.0"
     undertaker "^1.0.0"
     vinyl-fs "^3.0.0"
@@ -4659,7 +4695,7 @@ is-extglob@^1.0.0:
   version "1.0.0"
   resolved "http://registry.npm.taobao.org/is-extglob/download/is-extglob-1.0.0.tgz#ac468177c4943405a092fc8f29760c6ffc6206c0"
 
-is-extglob@^2.1.0:
+is-extglob@^2.1.0, is-extglob@^2.1.1:
   version "2.1.1"
   resolved "http://registry.npm.taobao.org/is-extglob/download/is-extglob-2.1.1.tgz#a88c02535791f02ed37c76a1b9ea9773c833f8c2"
 
@@ -4720,6 +4756,12 @@ is-glob@^3.1.0:
   resolved "http://registry.npm.taobao.org/is-glob/download/is-glob-3.1.0.tgz#7ba5ae24217804ac70707b96922567486cc3e84a"
   dependencies:
     is-extglob "^2.1.0"
+
+is-glob@^4.0.0:
+  version "4.0.0"
+  resolved "http://registry.npm.taobao.org/is-glob/download/is-glob-4.0.0.tgz#9521c76845cc2610a85203ddf080a958c2ffabc0"
+  dependencies:
+    is-extglob "^2.1.1"
 
 is-gzip@^1.0.0:
   version "1.0.0"
@@ -5642,7 +5684,7 @@ micromatch@2.3.11, micromatch@^2.1.5, micromatch@^2.3.11, micromatch@^2.3.7, mic
     parse-glob "^3.0.4"
     regex-cache "^0.4.2"
 
-micromatch@^3.0.4:
+micromatch@^3.0.4, micromatch@^3.1.4:
   version "3.1.4"
   resolved "http://registry.npm.taobao.org/micromatch/download/micromatch-3.1.4.tgz#bb812e741a41f982c854e42b421a7eac458796f4"
   dependencies:
@@ -6766,10 +6808,10 @@ postcss-sass@^0.2.0:
     postcss "^6.0.6"
 
 postcss-scss@^1.0.2:
-  version "1.0.2"
-  resolved "http://registry.npm.taobao.org/postcss-scss/download/postcss-scss-1.0.2.tgz#ff45cf3354b879ee89a4eb68680f46ac9bb14f94"
+  version "1.0.3"
+  resolved "http://registry.npm.taobao.org/postcss-scss/download/postcss-scss-1.0.3.tgz#4c00ab440fc1c994134e3d4e600c23341af6cd27"
   dependencies:
-    postcss "^6.0.3"
+    postcss "^6.0.15"
 
 postcss-selector-parser@^2.0.0, postcss-selector-parser@^2.2.2:
   version "2.2.3"
@@ -6825,13 +6867,21 @@ postcss@^5.0.10, postcss@^5.0.11, postcss@^5.0.12, postcss@^5.0.13, postcss@^5.0
     source-map "^0.5.6"
     supports-color "^3.2.3"
 
-postcss@^6.0.0, postcss@^6.0.14, postcss@^6.0.3, postcss@^6.0.6, postcss@^6.0.8:
+postcss@^6.0.0:
   version "6.0.14"
   resolved "http://registry.npm.taobao.org/postcss/download/postcss-6.0.14.tgz#5534c72114739e75d0afcf017db853099f562885"
   dependencies:
     chalk "^2.3.0"
     source-map "^0.6.1"
     supports-color "^4.4.0"
+
+postcss@^6.0.14, postcss@^6.0.15, postcss@^6.0.6, postcss@^6.0.8:
+  version "6.0.16"
+  resolved "http://registry.npm.taobao.org/postcss/download/postcss-6.0.16.tgz#112e2fe2a6d2109be0957687243170ea5589e146"
+  dependencies:
+    chalk "^2.3.0"
+    source-map "^0.6.1"
+    supports-color "^5.1.0"
 
 prelude-ls@~1.1.2:
   version "1.1.2"
@@ -8163,7 +8213,7 @@ stylelint-config-standard@^18.0.0:
   dependencies:
     stylelint-config-recommended "^2.0.0"
 
-stylelint@^8.0.0:
+stylelint@^8.4.0:
   version "8.4.0"
   resolved "http://registry.npm.taobao.org/stylelint/download/stylelint-8.4.0.tgz#c2dbaeb17236917819f9206e1c0df5fddf6f83c3"
   dependencies:
@@ -8232,6 +8282,12 @@ supports-color@^3.2.3:
 supports-color@^4.0.0, supports-color@^4.2.1, supports-color@^4.4.0:
   version "4.5.0"
   resolved "http://registry.npm.taobao.org/supports-color/download/supports-color-4.5.0.tgz#be7a0de484dec5c5cddf8b3d59125044912f635b"
+  dependencies:
+    has-flag "^2.0.0"
+
+supports-color@^5.1.0:
+  version "5.1.0"
+  resolved "http://registry.npm.taobao.org/supports-color/download/supports-color-5.1.0.tgz#058a021d1b619f7ddf3980d712ea3590ce7de3d5"
   dependencies:
     has-flag "^2.0.0"
 
