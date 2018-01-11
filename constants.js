@@ -48,7 +48,7 @@ const PATHS = {
     tmp: '.tmp/images',
     dest: 'dist/images',
   },
-  copy: ['app/*', '!app/*.html', '!app/templates'],
+  copy: ['app/*', '!app/*.html'],
   clean: ['.tmp', 'dist/*'],
   manifest: './rev-manifest.json',
   assets: ['.tmp', 'app', 'node_modules'],
