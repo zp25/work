@@ -1,9 +1,8 @@
-import Base from '../constants';
 import Template from '../templates';
 
 document.addEventListener('DOMContentLoaded', () => {
   const result = Template.header({
-    title: Base.text,
+    title: 'Hello World!',
   });
 
   const elem = document.querySelector('.header');
