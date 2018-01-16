@@ -14,7 +14,7 @@ const static = path.resolve(__dirname, 'dist');
 app.set('port', process.env.PORT || 3001);
 
 /** middleware */
-app.use(compression())
+app.use(compression());
 app.use(express.static(static));
 
 /** error handling middleware should be loaded after the loading the routes */
