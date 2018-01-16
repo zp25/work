@@ -1,9 +1,9 @@
 import 'babel-polyfill';
-import Base from '../constants';
+import Template from '../templates';
 
 document.addEventListener('DOMContentLoaded', () => {
-  const result = Template.index.header({
-    header: { title: Base.text },
+  const result = Template.header({
+    title: 'Hello World!',
   });
 
   const elem = document.querySelector('.header');

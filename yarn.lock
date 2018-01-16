@@ -2,6 +2,12 @@
 # yarn lockfile v1
 
 
+"@browserify/acorn5-object-spread@^5.0.1":
+  version "5.0.1"
+  resolved "http://registry.npm.taobao.org/@browserify/acorn5-object-spread/download/@browserify/acorn5-object-spread-5.0.1.tgz#92e9b37f97beac9ec429a3cc479ded380297540c"
+  dependencies:
+    acorn "^5.2.1"
+
 "@gulp-sourcemaps/identity-map@1.X":
   version "1.0.1"
   resolved "http://registry.npm.taobao.org/@gulp-sourcemaps/identity-map/download/@gulp-sourcemaps/identity-map-1.0.1.tgz#cfa23bc5840f9104ce32a65e74db7e7a974bbee1"
@@ -49,12 +55,6 @@ acorn-jsx@^3.0.0:
   resolved "http://registry.npm.taobao.org/acorn-jsx/download/acorn-jsx-3.0.1.tgz#afdf9488fb1ecefc8348f6fb22f464e32a58b36b"
   dependencies:
     acorn "^3.0.4"
-
-acorn5-object-spread@^5.0.0:
-  version "5.0.0"
-  resolved "http://registry.npm.taobao.org/acorn5-object-spread/download/acorn5-object-spread-5.0.0.tgz#922755b4e9dfda581e2664f177dc921804d2c1d4"
-  dependencies:
-    acorn "^5.2.1"
 
 acorn@5.X, acorn@^5.0.3, acorn@^5.2.1:
   version "5.2.1"
@@ -398,7 +398,7 @@ autoprefixer@^6.3.1:
     postcss "^5.2.16"
     postcss-value-parser "^3.2.3"
 
-autoprefixer@^7.1.2, autoprefixer@^7.2.4:
+autoprefixer@^7.1.2:
   version "7.2.4"
   resolved "http://registry.npm.taobao.org/autoprefixer/download/autoprefixer-7.2.4.tgz#29b367c03876a29bfd3721260d945e3545666c8d"
   dependencies:
@@ -407,6 +407,17 @@ autoprefixer@^7.1.2, autoprefixer@^7.2.4:
     normalize-range "^0.1.2"
     num2fraction "^1.2.2"
     postcss "^6.0.15"
+    postcss-value-parser "^3.2.3"
+
+autoprefixer@^7.2.5:
+  version "7.2.5"
+  resolved "http://registry.npm.taobao.org/autoprefixer/download/autoprefixer-7.2.5.tgz#04ccbd0c6a61131b6d13f53d371926092952d192"
+  dependencies:
+    browserslist "^2.11.1"
+    caniuse-lite "^1.0.30000791"
+    normalize-range "^0.1.2"
+    num2fraction "^1.2.2"
+    postcss "^6.0.16"
     postcss-value-parser "^3.2.3"
 
 aws-sign2@~0.6.0:
@@ -1259,9 +1270,9 @@ browser-sync-ui@v1.0.1:
     socket.io-client "2.0.4"
     stream-throttle "^0.1.3"
 
-browser-sync@^2.23.3:
-  version "2.23.3"
-  resolved "http://registry.npm.taobao.org/browser-sync/download/browser-sync-2.23.3.tgz#0ad79c6a9ac67115d575ba4de88a9111121b177e"
+browser-sync@^2.23.5:
+  version "2.23.5"
+  resolved "http://registry.npm.taobao.org/browser-sync/download/browser-sync-2.23.5.tgz#088bc5c3bb4dfc1507bad0278f140d8060fe4299"
   dependencies:
     browser-sync-ui v1.0.1
     bs-recipes "1.3.4"
@@ -1276,7 +1287,7 @@ browser-sync@^2.23.3:
     fresh "^0.5.2"
     fs-extra "3.0.1"
     http-proxy "1.15.2"
-    immutable "3.8.1"
+    immutable "3.8.2"
     localtunnel "1.8.3"
     micromatch "2.3.11"
     opn "4.0.2"
@@ -1395,9 +1406,9 @@ browserify@^14.0.0:
     vm-browserify "~0.0.1"
     xtend "^4.0.0"
 
-browserify@^15.0.0:
-  version "15.0.0"
-  resolved "http://registry.npm.taobao.org/browserify/download/browserify-15.0.0.tgz#37fa47b46846cddd820e084870a66ff6def5164a"
+browserify@^15.2.0:
+  version "15.2.0"
+  resolved "http://registry.npm.taobao.org/browserify/download/browserify-15.2.0.tgz#1e121ba1fa72cf9fd2d8df002f8674b68b45df89"
   dependencies:
     JSONStream "^1.0.3"
     assert "^1.4.0"
@@ -1422,7 +1433,8 @@ browserify@^15.0.0:
     inherits "~2.0.1"
     insert-module-globals "^7.0.0"
     labeled-stream-splicer "^2.0.0"
-    module-deps "^5.0.0"
+    mkdirp "^0.5.0"
+    module-deps "^5.0.1"
     os-browserify "~0.3.0"
     parents "^1.0.1"
     path-browserify "~0.0.0"
@@ -1466,6 +1478,13 @@ browserslist@^2.10.2:
   resolved "http://registry.npm.taobao.org/browserslist/download/browserslist-2.11.0.tgz#50350d6873a82ebe0f3ae5483658c571ae5f9d7d"
   dependencies:
     caniuse-lite "^1.0.30000784"
+    electron-to-chromium "^1.3.30"
+
+browserslist@^2.11.1:
+  version "2.11.1"
+  resolved "http://registry.npm.taobao.org/browserslist/download/browserslist-2.11.1.tgz#02fda29d9a2164b879100126e7b0d0b57e43a7bb"
+  dependencies:
+    caniuse-lite "^1.0.30000789"
     electron-to-chromium "^1.3.30"
 
 bs-recipes@1.3.4:
@@ -1619,6 +1638,10 @@ caniuse-lite@^1.0.30000770:
 caniuse-lite@^1.0.30000784:
   version "1.0.30000787"
   resolved "http://registry.npm.taobao.org/caniuse-lite/download/caniuse-lite-1.0.30000787.tgz#a76c4fa1d6ac00640447ec83c1e7c6b33dd615c5"
+
+caniuse-lite@^1.0.30000789, caniuse-lite@^1.0.30000791:
+  version "1.0.30000791"
+  resolved "http://registry.npm.taobao.org/caniuse-lite/download/caniuse-lite-1.0.30000791.tgz#8e35745efd483a3e23bb7d350990326d2319fc16"
 
 capture-stack-trace@^1.0.0:
   version "1.0.0"
@@ -2483,12 +2506,12 @@ detective@^4.0.0:
     acorn "^5.2.1"
     defined "^1.0.0"
 
-detective@^5.0.1:
-  version "5.0.1"
-  resolved "http://registry.npm.taobao.org/detective/download/detective-5.0.1.tgz#864348b5c9ffc6000592b034fc10f46c758eb955"
+detective@^5.0.2:
+  version "5.0.2"
+  resolved "http://registry.npm.taobao.org/detective/download/detective-5.0.2.tgz#84ec2e1c581e74211e2ae4ffce1edf52c3263f84"
   dependencies:
+    "@browserify/acorn5-object-spread" "^5.0.1"
     acorn "^5.2.1"
-    acorn5-object-spread "^5.0.0"
     defined "^1.0.0"
 
 dev-ip@^1.0.1:
@@ -4389,11 +4412,7 @@ imagemin@^5.3.1:
     pify "^2.3.0"
     replace-ext "^1.0.0"
 
-immutable@3.8.1:
-  version "3.8.1"
-  resolved "http://registry.npm.taobao.org/immutable/download/immutable-3.8.1.tgz#200807f11ab0f72710ea485542de088075f68cd2"
-
-immutable@^3.7.6:
+immutable@3.8.2, immutable@^3.7.6:
   version "3.8.2"
   resolved "http://registry.npm.taobao.org/immutable/download/immutable-3.8.2.tgz#c2439951455bb39913daf281376f1530e104adf3"
 
@@ -5741,16 +5760,16 @@ module-deps@^4.0.8:
     through2 "^2.0.0"
     xtend "^4.0.0"
 
-module-deps@^5.0.0:
-  version "5.0.0"
-  resolved "http://registry.npm.taobao.org/module-deps/download/module-deps-5.0.0.tgz#af88d8d399d2d6125c1e6e5c86b64e572268fee9"
+module-deps@^5.0.1:
+  version "5.0.1"
+  resolved "http://registry.npm.taobao.org/module-deps/download/module-deps-5.0.1.tgz#3bc47c14b0a6d925aff2ec4a177b456a96ae0396"
   dependencies:
     JSONStream "^1.0.3"
     browser-resolve "^1.7.0"
     cached-path-relative "^1.0.0"
     concat-stream "~1.6.0"
     defined "^1.0.0"
-    detective "^5.0.1"
+    detective "^5.0.2"
     duplexer2 "^0.1.2"
     inherits "^2.0.1"
     parents "^1.0.0"
@@ -6779,6 +6798,14 @@ postcss@^6.0.0:
 postcss@^6.0.14, postcss@^6.0.15, postcss@^6.0.6, postcss@^6.0.8:
   version "6.0.15"
   resolved "http://registry.npm.taobao.org/postcss/download/postcss-6.0.15.tgz#f460cd6269fede0d1bf6defff0b934a9845d974d"
+  dependencies:
+    chalk "^2.3.0"
+    source-map "^0.6.1"
+    supports-color "^5.1.0"
+
+postcss@^6.0.16:
+  version "6.0.16"
+  resolved "http://registry.npm.taobao.org/postcss/download/postcss-6.0.16.tgz#112e2fe2a6d2109be0957687243170ea5589e146"
   dependencies:
     chalk "^2.3.0"
     source-map "^0.6.1"
@@ -8983,6 +9010,10 @@ watchify@^3.9.0:
     through2 "^2.0.0"
     xtend "^4.0.0"
 
+whatwg-fetch@^2.0.3:
+  version "2.0.3"
+  resolved "http://registry.npm.taobao.org/whatwg-fetch/download/whatwg-fetch-2.0.3.tgz#9c84ec2dcf68187ff00bc64e1274b442176e1c84"
+
 whet.extend@~0.9.9:
   version "0.9.9"
   resolved "http://registry.npm.taobao.org/whet.extend/download/whet.extend-0.9.9.tgz#f877d5bf648c97e5aa542fadc16d6a259b9c11a1"
@@ -9199,6 +9230,12 @@ yeast@0.1.2:
   version "0.1.2"
   resolved "http://registry.npm.taobao.org/yeast/download/yeast-0.1.2.tgz#008e06d8094320c372dbc2f8ed76a0ca6c8ac419"
 
-zp-ui@^0.1.8:
-  version "0.1.8"
-  resolved "http://registry.npm.taobao.org/zp-ui/download/zp-ui-0.1.8.tgz#eb20ac28e5de68f80b2ac5c218a996ab54357a27"
+zp-lib@^0.0.7:
+  version "0.0.7"
+  resolved "http://registry.npm.taobao.org/zp-lib/download/zp-lib-0.0.7.tgz#c2ed41dcae251ee143bb84f97cf13d4935d1ff7f"
+  dependencies:
+    whatwg-fetch "^2.0.3"
+
+zp-ui@^0.1.9:
+  version "0.1.9"
+  resolved "http://registry.npm.taobao.org/zp-ui/download/zp-ui-0.1.9.tgz#498d48e07d19cb3ce997c0b0e09c914cd857ac6e"

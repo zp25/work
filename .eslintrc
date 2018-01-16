@@ -5,8 +5,7 @@
     "es6": true
   },
   "globals": {
-    "DEV": true,
-    "Template": false
+    "DEV": false
   },
   "rules": {
     "no-cond-assign": ["error", "except-parens"]
