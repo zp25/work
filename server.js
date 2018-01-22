@@ -10,10 +10,12 @@ const app = express();
 
 const static = path.resolve(__dirname, 'dist');
 
-/** const */
 app.set('port', process.env.PORT || 3001);
 
-/** middleware */
+// Use Helmet
+app.disable('x-powered-by');
+
+// middleware
 app.use(compression());
 app.use(express.static(static));
 
