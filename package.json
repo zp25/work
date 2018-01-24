@@ -21,7 +21,7 @@
     "babel-polyfill": "^6.26.0",
     "normalize.css": "^7.0.0",
     "zp-lib": "^0.0.7",
-    "zp-ui": "^0.1.9"
+    "zp-ui": "^0.2.2"
   },
   "devDependencies": {
     "autoprefixer": "^7.2.5",
