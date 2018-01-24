@@ -9469,6 +9469,6 @@ zp-lib@^0.0.7:
   dependencies:
     whatwg-fetch "^2.0.3"
 
-zp-ui@^0.1.9:
-  version "0.1.9"
-  resolved "http://registry.npm.taobao.org/zp-ui/download/zp-ui-0.1.9.tgz#498d48e07d19cb3ce997c0b0e09c914cd857ac6e"
+zp-ui@^0.2.2:
+  version "0.2.2"
+  resolved "http://registry.npm.taobao.org/zp-ui/download/zp-ui-0.2.2.tgz#dc526a9d70f6660fea3a7dce8d5e37f5a6397148"
