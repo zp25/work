@@ -20,6 +20,12 @@ const $ = gulpLoadPlugins({
 });
 const BS = browserSync.create();
 
+const fnTmpBundle = tmpBundle(BS);
+const fnTmpConcat = tmpConcat(BS);
+
+fnTmpBundle.displayName = 'tmpBundle';
+fnTmpConcat.displayName = 'tmpConcat';
+
 // Lint
 const lint = () => gulp.src(PATHS.scripts.src)
   .pipe($.eslint())
@@ -205,7 +211,7 @@ function serve() {
   gulp.watch(Object.values(PATHS.templates), tmpTemplates);
 
   gulp.watch(PATHS.scripts.src, lint);
-  gulp.watch(PATHS.scripts.concat, tmpConcat(BS));
+  gulp.watch(PATHS.scripts.concat, fnTmpConcat);
   gulp.watch(PATHS.scripts.watch).on('change', BS.reload);
 }
 
@@ -215,7 +221,7 @@ function clean(done) {
 }
 
 // Tasks
-gulp.task('tmpScript', gulp.parallel(tmpBundle(BS), tmpConcat(BS)));
+gulp.task('tmpScript', gulp.parallel(fnTmpBundle, fnTmpConcat));
 gulp.task('script', gulp.parallel(bundle, concat));
 gulp.task(vendor);
 
