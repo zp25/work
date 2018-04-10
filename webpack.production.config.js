@@ -2,51 +2,31 @@ import path from 'path';
 import webpack from 'webpack';
 import { PATHS } from './constants';
 
+const {
+  context,
+  entry,
+} = PATHS.scripts;
+
 export default {
   target: 'web',
+  mode: 'production',
   devtool: 'inline-source-map',
-  context: PATHS.scripts.context,
-  entry: PATHS.scripts.entry,
+  context,
+  entry,
   output: {
     filename: '[name].js',
   },
   resolve: {
     extensions: ['.js', '.json'],
-    modules: [PATHS.scripts.context, 'node_modules'],
+    modules: [context, 'node_modules'],
   },
   module: {
     rules: [
       {
         test: /\.js$/,
-        include: PATHS.scripts.context,
+        include: context,
         use: ['babel-loader'],
       },
     ],
   },
-  plugins: [
-    new webpack.LoaderOptionsPlugin({
-      minimize: true,
-      debug: false,
-    }),
-    new webpack.DefinePlugin({
-      'process.env': {
-        'NODE_ENV': JSON.stringify('production'),
-      },
-    }),
-    new webpack.optimize.CommonsChunkPlugin({
-      name: 'common',
-      filename: 'common.js',
-      minChunks: 2,
-    }),
-    new webpack.optimize.ModuleConcatenationPlugin(),
-    new webpack.optimize.UglifyJsPlugin({
-      sourceMap: true,
-      output: {
-        comments: false,
-      },
-      compress: {
-        warnings: false,
-      },
-    }),
-  ],
 };
