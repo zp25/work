@@ -17,7 +17,7 @@ const HTMLMINIFIER = {
   removeStyleLinkTypeAttributes: true,
 };
 
-const CONTEXT = path.resolve(__dirname, process.env.CONTEXT);
+const CONTEXT = path.resolve(__dirname, process.env.CONTEXT || 'app');
 
 const PATHS = {
   // manifest
