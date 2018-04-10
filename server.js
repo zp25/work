@@ -10,6 +10,7 @@ const app = express();
 
 const static = path.resolve(__dirname, 'dist');
 
+app.set('host', process.env.HOST || 'localhost');
 app.set('port', process.env.PORT || 3001);
 
 // Use Helmet
@@ -23,6 +24,6 @@ app.use(express.static(static));
 app.use(errorHandler());
 
 /** engine start! */
-app.listen(app.get('port'), () => {
+app.listen(app.get('port'), app.get('host'), () => {
   console.log(`Express server listening on port ${app.get('port')}`);
 });

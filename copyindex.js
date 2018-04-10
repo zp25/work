@@ -3,6 +3,9 @@ const fs = require('fs');
 const Handlebars = require('handlebars');
 const shortid = require('shortid');
 const pages = require('./config.json');
+const dotenv = require('dotenv');
+
+dotenv.config({ silent: true });
 
 // 所有页面通用配置
 const context = {
@@ -26,7 +29,7 @@ const source = fs.readFileSync(layout, 'utf8');
 const template = Handlebars.compile(source);
 
 Object.entries(pages).forEach(([page, opts]) => {
-  const indexTo = `app/${page}.html`;
+  const indexTo = path.resolve(process.env.CONTEXT, `${page}.html`);
   const { file, data } = opts;
 
   registerPartials(file, 'App');
