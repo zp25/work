@@ -1,5 +1,4 @@
 import path from 'path';
-import webpack from 'webpack';
 import { PATHS } from './constants';
 
 const {
