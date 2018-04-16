@@ -41,7 +41,6 @@ const stylelint = () => gulp.src(PATHS.styles.src)
         console: true,
       },
     ],
-    syntax: 'scss',
   }));
 
 // Image Optimazation
