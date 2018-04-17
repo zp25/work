@@ -11,7 +11,7 @@ const app = express();
 const static = path.resolve(__dirname, 'dist');
 
 app.set('host', process.env.HOST || 'localhost');
-app.set('port', process.env.PORT || 3001);
+app.set('port', process.env.PROD_PORT || 3001);
 
 // Use Helmet
 app.disable('x-powered-by');

@@ -8,6 +8,7 @@ import named from 'vinyl-named';
 import webpack from 'webpack';
 import gulpWebpack from 'webpack-stream';
 import through2 from 'through2';
+import dotenv from 'dotenv';
 import {
   HTMLMINIFIER,
   PATHS,
@@ -15,6 +16,8 @@ import {
 
 import tmpWebpackConfig from './webpack.config';
 import webpackConfig from './webpack.production.config';
+
+dotenv.config({ silent: true });
 
 const $ = gulpLoadPlugins({
   rename: {
@@ -172,7 +175,7 @@ function serve() {
     server: {
       baseDir: PATHS.assets,
     },
-    port: 3000,
+    port: process.env.PORT || 3000,
   });
 
   gulp.watch(PATHS.html.src).on('change', BS.reload);
