@@ -10,6 +10,12 @@ const {
   entry,
 } = PATHS.scripts;
 
+const plugins = process.env.BUILD_ENV === 'debug' ? [
+  new BundleAnalyzerPlugin({
+    analyzerPort: process.env.PROD_PORT || 3001,
+  }),
+] : [];
+
 export default {
   target: 'web',
   mode: 'production',
@@ -31,9 +37,5 @@ export default {
       },
     ],
   },
-  plugins: [
-    new BundleAnalyzerPlugin({
-      analyzerPort: process.env.PROD_PORT || 3001,
-    }),
-  ],
+  plugins,
 };

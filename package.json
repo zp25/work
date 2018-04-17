@@ -9,6 +9,7 @@
     "postinstall": "npm run copyindex",
     "gulp": "gulp",
     "build": "npm run copyindex && npm run gulp",
+    "build:debug": "cross-env BUILD_ENV=debug npm run gulp",
     "serve": "node server.js"
   },
   "repository": {
@@ -32,6 +33,7 @@
     "babel-loader": "^8.0.0-beta.2",
     "browser-sync": "^2.23.6",
     "compression": "^1.7.2",
+    "cross-env": "^5.1.4",
     "cssnano": "^3.10.0",
     "cz-conventional-changelog": "^2.1.0",
     "dotenv": "^5.0.1",
