@@ -131,19 +131,16 @@ const tmpScript = () => gulp.src(PATHS.scripts.src)
 const script = () => gulp.src(PATHS.scripts.src)
   .pipe(named())
   .pipe(gulpWebpack(webpackConfig, webpack))
-  // @link https://github.com/shama/webpack-stream/blob/master/readme.md
-  .pipe($.sourcemaps.init({ loadMaps: true }))
-    .pipe(through2.obj(function (file, enc, next) {
-      // Dont pipe through any source map files as it will be handled by gulp-sourcemaps
-      if (!/\.map$/.test(file.path)) {
-        this.push(file);
-      }
+  .pipe(through2.obj(function (file, enc, next) {
+    // Dont pipe through any source map files as it will be handled by gulp-sourcemaps
+    if (!/\.map$/.test(file.path)) {
+      this.push(file);
+    }
 
-      next();
-    }))
-    .pipe($.size({ title: 'scripts', showFiles: true }))
-    .pipe($.rev())
-  .pipe($.sourcemaps.write('.'))
+    next();
+  }))
+  // .pipe($.size({ title: 'scripts', showFiles: true }))
+  .pipe($.rev())
   .pipe(gulp.dest(PATHS.scripts.dest))
   .pipe($.rev.manifest({
     base: process.cwd(),

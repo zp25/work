@@ -1,5 +1,9 @@
 import path from 'path';
+import { BundleAnalyzerPlugin } from 'webpack-bundle-analyzer';
+import dotenv from 'dotenv';
 import { PATHS } from './constants';
+
+dotenv.config({ silent: true });
 
 const {
   context,
@@ -9,7 +13,6 @@ const {
 export default {
   target: 'web',
   mode: 'production',
-  devtool: 'inline-source-map',
   context,
   entry,
   output: {
@@ -28,4 +31,9 @@ export default {
       },
     ],
   },
+  plugins: [
+    new BundleAnalyzerPlugin({
+      analyzerPort: process.env.PROD_PORT || 3001,
+    }),
+  ],
 };
