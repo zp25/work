@@ -20,7 +20,7 @@
   "dependencies": {
     "babel-polyfill": "^6.26.0",
     "normalize.css": "^8.0.0",
-    "zp-lib": "^0.0.8",
+    "zp-lib": "^0.0.9",
     "zp-ui": "^0.4.0"
   },
   "devDependencies": {
