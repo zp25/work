@@ -9514,9 +9514,9 @@ yeast@0.1.2:
   version "0.1.2"
   resolved "http://registry.npm.taobao.org/yeast/download/yeast-0.1.2.tgz#008e06d8094320c372dbc2f8ed76a0ca6c8ac419"
 
-zp-lib@^0.0.8:
-  version "0.0.8"
-  resolved "http://registry.npm.taobao.org/zp-lib/download/zp-lib-0.0.8.tgz#2d63e4eddd94fd2556fc9adde0a8fd35244ac8f9"
+zp-lib@^0.0.9:
+  version "0.0.9"
+  resolved "http://registry.npm.taobao.org/zp-lib/download/zp-lib-0.0.9.tgz#85dc35f604df6eea6d4d75a85037deacf36f6683"
   dependencies:
     whatwg-fetch "^2.0.4"
 
