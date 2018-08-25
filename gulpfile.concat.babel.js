@@ -6,27 +6,32 @@ import {
 
 const $ = gulpLoadPlugins();
 
+const {
+  root: rootPath,
+  scripts: {
+    concat: files,
+    tmp: tmpPath,
+    dest: destPath,
+  },
+} = PATHS;
+
 // Scripts
 const tmpConcat = BS => (done) => {
-  const files = PATHS.scripts.concat;
-
   if (files.length === 0) {
     done();
     return;
   }
 
   return gulp.src(files)
-    .pipe($.newer(PATHS.scripts.tmp))
+    .pipe($.newer(tmpPath))
     .pipe($.sourcemaps.init())
       .pipe($.babel())
     .pipe($.sourcemaps.write())
-    .pipe(gulp.dest(PATHS.scripts.tmp))
+    .pipe(gulp.dest(tmpPath))
     .pipe(BS.stream({ once: true }));
 }
 
 const concat = (done) => {
-  const files = PATHS.scripts.concat;
-
   if (files.length === 0) {
     done();
     return;
@@ -50,12 +55,12 @@ const concat = (done) => {
       .pipe($.size({ title: 'concat' }))
       .pipe($.rev())
     .pipe($.sourcemaps.write('.'))
-    .pipe(gulp.dest(PATHS.scripts.dest))
+    .pipe(gulp.dest(destPath))
     .pipe($.rev.manifest({
       base: process.cwd(),
       merge: true,
     }))
-    .pipe(gulp.dest(PATHS.root));
+    .pipe(gulp.dest(rootPath));
 }
 
 export { tmpConcat, concat };

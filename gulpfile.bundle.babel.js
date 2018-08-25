@@ -15,10 +15,20 @@ import {
 const $ = gulpLoadPlugins();
 const pwd = process.cwd();
 
+const {
+  root: rootPath,
+  scripts: {
+    entries: entriesPath,
+    tmp: tmpPath,
+    dest: destPath,
+  },
+  manifest: manifestPath,
+} = PATHS;
+
 const development = entry => b => BS => b.bundle()
   .on('error', log.bind(log, 'Browserify Error'))
   .pipe(source(`bundle.${entry}.js`))
-  .pipe(gulp.dest(PATHS.scripts.tmp))
+  .pipe(gulp.dest(tmpPath))
   .pipe(BS.stream({ once: true }));
 
 const production = entry => b => b.bundle()
@@ -37,13 +47,13 @@ const production = entry => b => b.bundle()
     .pipe($.size({ title: 'scripts', showFiles: true }))
     .pipe($.rev())
   .pipe($.sourcemaps.write('.'))
-  .pipe(gulp.dest(PATHS.scripts.dest));
+  .pipe(gulp.dest(destPath));
 
 // Scripts
 const tmpBundle = BS => (done) => {
-  const tasks = Object.keys(PATHS.scripts.entries).map((entry) => {
+  const tasks = Object.keys(entriesPath).map((entry) => {
     const b = browserify({
-      entries: PATHS.scripts.entries[entry],
+      entries: entriesPath[entry],
       cache: {},
       packageCache: {},
       transform: [babelify],
@@ -69,9 +79,9 @@ const tmpBundle = BS => (done) => {
 };
 
 const bundle = (done) => {
-  const tasks = Object.keys(PATHS.scripts.entries).map((entry) => {
+  const tasks = Object.keys(entriesPath).map((entry) => {
     const b = browserify({
-      entries: PATHS.scripts.entries[entry],
+      entries: entriesPath[entry],
       cache: {},
       packageCache: {},
       transform: [babelify],
@@ -87,14 +97,14 @@ const bundle = (done) => {
     return production(entry)(b);
   });
 
-  const manifest = gulp.src(PATHS.manifest);
+  const manifest = gulp.src(manifestPath);
 
   es.merge(tasks.concat(manifest))
     .pipe($.rev.manifest({
       base: pwd,
       merge: true,
     }))
-    .pipe(gulp.dest(PATHS.root))
+    .pipe(gulp.dest(rootPath))
     .on('end', done);
 };
 
@@ -122,17 +132,17 @@ const vendor = (done) => {
     .pipe(buffer())
     .pipe($.sourcemaps.init({ loadMaps: true }))
       .pipe($.sourcemaps.write())
-      .pipe(gulp.dest(PATHS.scripts.tmp))
+      .pipe(gulp.dest(tmpPath))
       .pipe($.uglify())
       .pipe($.size({ title: 'vendor' }))
       .pipe($.rev())
     .pipe($.sourcemaps.write('.'))
-    .pipe(gulp.dest(PATHS.scripts.dest))
+    .pipe(gulp.dest(destPath))
     .pipe($.rev.manifest({
       base: pwd,
       merge: true,
     }))
-    .pipe(gulp.dest(PATHS.root));
+    .pipe(gulp.dest(rootPath));
 };
 
 export { tmpBundle, bundle, vendor };

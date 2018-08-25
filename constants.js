@@ -49,7 +49,7 @@ const PATHS = {
     dest: 'dist/images',
   },
   templates: {
-    index: 'app/templates/index/*.hbs',
+    // index: 'app/templates/index/*.hbs',
   },
   copy: ['app/*', '!app/*.html', '!app/templates'],
   clean: ['.tmp', 'dist/*'],

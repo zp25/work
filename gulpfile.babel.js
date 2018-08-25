@@ -123,10 +123,17 @@ function sass() {
 
 // Templates
 function tmpTemplates(done) {
-  const tasks = Object.keys(PATHS.templates).map((key) => {
+  const entries = Object.entries(PATHS.templates);
+
+  if (entries.length === 0) {
+    done();
+    return;
+  }
+
+  const tasks = entries.map(([key, ]) => {
     const fname = `template.${key}.js`;
 
-    return gulp.src(PATHS.templates[key])
+    return gulp.src(hbs)
       .pipe($.newer(`${PATHS.scripts.tmp}/${fname}`))
       .pipe($.handlebars({
         handlebars: Handlebars,
@@ -145,10 +152,17 @@ function tmpTemplates(done) {
 }
 
 function templates(done) {
-  const tasks = Object.keys(PATHS.templates).map((key) => {
+  const entries = Object.entries(PATHS.templates);
+
+  if (entries.length === 0) {
+    done();
+    return;
+  }
+
+  const tasks = entries.map(([key, hbs]) => {
     const fname = `template.${key}.js`;
 
-    return gulp.src(PATHS.templates[key])
+    return gulp.src(hbs)
       .pipe($.handlebars({
         handlebars: Handlebars,
       }))
