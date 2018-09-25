@@ -4,6 +4,7 @@
     "color-named": ["never", {
       "ignore": ["inside-function"]
     }],
+    "function-parentheses-space-inside": "never-single-line",
     "max-nesting-depth": 6,
     "order/properties-alphabetical-order": null,
     "scss/at-function-pattern": "^[a-z]+([a-zA-Z0-9-]+[a-zA-Z0-9]+)?$",
