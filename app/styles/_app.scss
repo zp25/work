@@ -1,8 +1,13 @@
+:root {
+  --text: #222;
+  --black: #010101;
+}
+
 #app {
   @include flexbox(column, nowrap, flex-start, center);
 
   min-height: 100vh;
-  color: color(text);
+  color: var(--text);
   font-size: fontSize();
 
   .container {
