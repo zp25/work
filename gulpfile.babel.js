@@ -1,3 +1,4 @@
+import path from 'path';
 import gulp from 'gulp';
 import rimraf from 'rimraf';
 import autoprefixer from 'autoprefixer';
@@ -192,6 +193,16 @@ function templates(done) {
 }
 
 // HTML
+const cleanCondition = (file) => {
+  const basename = path.basename(file.path);
+
+  if (PATHS.styles.clean.includes(basename)) {
+    return true;
+  }
+
+  return false;
+};
+
 const html = () => gulp.src(PATHS.html.src)
   .pipe($.useref({
     searchPath: PATHS.assets,
@@ -203,6 +214,7 @@ const html = () => gulp.src(PATHS.html.src)
     rootpath: PATHS.html.dest,
     compress: false,
   }))
+  .pipe($.if(cleanCondition, $.cleanCss()))
   .pipe($.if('*.html', $.htmlmin(HTMLMINIFIER)))
   .pipe($.if('*.html', $.size({ title: 'html', showFiles: true })))
   .pipe(gulp.dest(PATHS.html.dest));

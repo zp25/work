@@ -27,6 +27,10 @@ const PATHS = {
       'node_modules/normalize.css',
       'node_modules/zp-ui',
     ],
+    // gulp-clean-css
+    clean: [
+      'normalize.css',
+    ],
   },
   scripts: {
     src: 'app/scripts/**/*.js',
