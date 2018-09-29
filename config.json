@@ -21,8 +21,8 @@
           "path": "https://ui.zp25.ninja/"
         }
       ],
-      "hbs": false,
-      "vendor": false,
+      "hbs": true,
+      "vendor": true,
       "inlineStyle": false,
       "inlineScript": false
     }

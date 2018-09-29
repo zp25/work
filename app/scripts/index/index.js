@@ -1,12 +1,17 @@
-import Template from '../templates';
+import Templates from '../templates';
 
 document.addEventListener('DOMContentLoaded', () => {
-  const result = Template.header({
+  // Template literals
+  const header = Templates.header({
     title: 'Hello World!',
   });
 
-  const elem = document.querySelector('.header');
-  elem.insertAdjacentHTML('afterbegin', result);
+  // Handlebars
+  const footer = Template.index.footer({ email: 'zebrap25@gmail.com' });
+
+  const app = document.querySelector('#app');
+  app.insertAdjacentHTML('afterbegin', header);
+  app.insertAdjacentHTML('beforeend', footer);
 });
 
 window.addEventListener('load', () => {

@@ -1,5 +1,7 @@
 import { templater } from 'zp-lib';
 
 export default templater`
-  <h1>${'title'}</h1>
+  <header class="header container">
+    <h1>${'title'}</h1>
+  </header>
 `;
