@@ -18,13 +18,70 @@ const pwd = process.cwd();
 const {
   root: rootPath,
   scripts: {
+    src: srcPath,
     entries: entriesPath,
+    concat: files,
     tmp: tmpPath,
     dest: destPath,
   },
   manifest: manifestPath,
 } = PATHS;
 
+// Lint
+const lint = BS => () => gulp.src(srcPath)
+  .pipe($.eslint())
+  .pipe($.eslint.format())
+  .pipe($.if(!BS.active, $.eslint.failOnError()));
+
+// Concat
+const tmpConcat = BS => (done) => {
+  if (files.length === 0) {
+    done();
+    return;
+  }
+
+  return gulp.src(files)
+    .pipe($.newer(tmpPath))
+    .pipe($.sourcemaps.init())
+      .pipe($.babel())
+    .pipe($.sourcemaps.write())
+    .pipe(gulp.dest(tmpPath))
+    .pipe(BS.stream({ once: true }));
+}
+
+function concat(done) {
+  if (files.length === 0) {
+    done();
+    return;
+  }
+
+  return gulp.src(files)
+    .pipe($.sourcemaps.init())
+      .pipe($.babel())
+      .pipe($.concat({
+        path: 'concat.js',
+        cwd: '',
+      }))
+      .pipe($.uglify({
+        // preserveComments: 'license',
+        compress: {
+          global_defs: {
+            'DEV': false,
+          },
+        },
+      }))
+      .pipe($.size({ title: 'concat' }))
+      .pipe($.rev())
+    .pipe($.sourcemaps.write('.'))
+    .pipe(gulp.dest(destPath))
+    .pipe($.rev.manifest({
+      base: process.cwd(),
+      merge: true,
+    }))
+    .pipe(gulp.dest(rootPath));
+}
+
+// Bundle
 const development = entry => b => BS => b.bundle()
   .on('error', log.bind(log, 'Browserify Error'))
   .pipe(source(`bundle.${entry}.js`))
@@ -49,7 +106,6 @@ const production = entry => b => b.bundle()
   .pipe($.sourcemaps.write('.'))
   .pipe(gulp.dest(destPath));
 
-// Scripts
 const tmpBundle = BS => (done) => {
   const tasks = Object.keys(entriesPath).map((entry) => {
     const b = browserify({
@@ -78,7 +134,7 @@ const tmpBundle = BS => (done) => {
   es.merge(tasks).on('end', done);
 };
 
-const bundle = (done) => {
+function bundle(done) {
   const tasks = Object.keys(entriesPath).map((entry) => {
     const b = browserify({
       entries: entriesPath[entry],
@@ -106,9 +162,9 @@ const bundle = (done) => {
     }))
     .pipe(gulp.dest(rootPath))
     .on('end', done);
-};
+}
 
-const vendor = (done) => {
+function vendor(done) {
   if (!VENDOR || VENDOR.length === 0) {
     done();
     return;
@@ -143,6 +199,13 @@ const vendor = (done) => {
       merge: true,
     }))
     .pipe(gulp.dest(rootPath));
-};
+}
 
-export { tmpBundle, bundle, vendor };
+export {
+  lint,
+  tmpConcat,
+  concat,
+  tmpBundle,
+  bundle,
+  vendor,
+};

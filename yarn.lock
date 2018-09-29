@@ -3451,10 +3451,10 @@ event-stream@^3.3.4:
     stream-combiner "^0.2.2"
     through "^2.3.8"
 
-event-stream@^4.0.0:
-  version "4.0.0"
-  resolved "http://registry.npm.taobao.org/event-stream/download/event-stream-4.0.0.tgz#2477e13a4ea5bf62fbb292a3f96d78bd4906f7c1"
-  integrity sha1-JHfhOk6lv2L7spKj+W14vUkG98E=
+event-stream@^4.0.1:
+  version "4.0.1"
+  resolved "http://registry.npm.taobao.org/event-stream/download/event-stream-4.0.1.tgz#4092808ec995d0dd75ea4580c1df6a74db2cde65"
+  integrity sha1-QJKAjsmV0N116kWAwd9qdNss3mU=
   dependencies:
     duplexer "^0.1.1"
     from "^0.1.7"

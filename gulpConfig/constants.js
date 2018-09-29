@@ -53,7 +53,7 @@ const PATHS = {
     dest: 'dist/images',
   },
   templates: {
-    // index: 'app/templates/index/*.hbs',
+    index: 'app/templates/index/*.hbs',
   },
   copy: ['app/*', '!app/*.html', '!app/templates'],
   clean: ['.tmp', 'dist/*'],
@@ -61,7 +61,7 @@ const PATHS = {
   assets: ['.tmp', 'app', 'node_modules'],
 };
 
-const VENDOR = [];
+const VENDOR = ['zp-lib'];
 
 export {
   HTMLMINIFIER,

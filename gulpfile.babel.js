@@ -1,266 +1,93 @@
-import path from 'path';
 import gulp from 'gulp';
-import rimraf from 'rimraf';
-import autoprefixer from 'autoprefixer';
-import cssnano from 'cssnano';
 import browserSync from 'browser-sync';
-import gulpLoadPlugins from 'gulp-load-plugins';
-import Handlebars from 'handlebars';
-import es from 'event-stream';
 import dotenv from 'dotenv';
+import { PATHS } from './gulpConfig/constants';
+import html from './gulpConfig/html';
 import {
-  HTMLMINIFIER,
-  PATHS,
-} from './constants';
-import { tmpConcat, concat } from './gulpfile.concat.babel';
-import { tmpBundle, bundle, vendor } from './gulpfile.bundle.babel';
+  images,
+  tmpWebp,
+  webp,
+} from './gulpConfig/images';
+import {
+  lint,
+  tmpConcat,
+  concat,
+  tmpBundle,
+  bundle,
+  vendor,
+} from './gulpConfig/scripts';
+import {
+  stylelint,
+  tmpSass,
+  sass,
+} from './gulpConfig/styles';
+import {
+  tmpTemplates,
+  templates,
+} from './gulpConfig/templates';
+import {
+  copy,
+  clean,
+  cleanCache,
+} from './gulpConfig/utils';
+import { name } from './package.json';
 
 dotenv.config({ silent: true });
 
-const $ = gulpLoadPlugins({
-  rename: {
-    'gulp-rev-replace': 'replace',
-  },
-});
 const BS = browserSync.create();
 
-const fnTmpBundle = tmpBundle(BS);
-const fnTmpConcat = tmpConcat(BS);
+// Tasks
+gulp.task('tmpWebp', tmpWebp(BS));
 
-fnTmpBundle.displayName = 'tmpBundle';
-fnTmpConcat.displayName = 'tmpConcat';
+gulp.task('lint', lint(BS));
+gulp.task('tmpConcat', tmpConcat(BS));
+gulp.task('tmpBundle', tmpBundle(BS));
+gulp.task(vendor);
 
-// Lint
-const lint = () => gulp.src(PATHS.scripts.src)
-  .pipe($.eslint())
-  .pipe($.eslint.format())
-  .pipe($.if(!BS.active, $.eslint.failOnError()));
+gulp.task('tmpSass', tmpSass(BS));
+gulp.task('tmpTemplates', tmpTemplates(BS));
 
-const stylelint = () => gulp.src(PATHS.styles.src)
-  .pipe($.stylelint({
-    failAfterError: false,
-    reporters: [
-      {
-        formatter: 'verbose',
-        console: true,
-      },
-    ],
-  }));
+gulp.task('clean:all', gulp.series(clean, vendor));
+gulp.task('clean:cache', cleanCache);
 
-// Image Optimazation
-const makeHashKey = entry => file => [file.contents.toString('utf8'), entry].join('');
-
-const images = () => gulp.src(PATHS.images.src)
-  .pipe($.cache($.imagemin({
-    progressive: true,
-    interlaced: true,
-    multipass: true,
-  }), {
-    key: makeHashKey('images'),
-  }))
-  .pipe(gulp.dest(PATHS.images.dest))
-  .pipe($.size({ title: 'images' }));
-
-const tmpWebp = () => gulp.src(PATHS.images.src)
-  .pipe($.cache($.webp({ quality: 75 }), { key: makeHashKey('webp') }))
-  .pipe(gulp.dest(PATHS.images.tmp))
-  .pipe(BS.stream({ once: true }));
-
-const webp = () => gulp.src(PATHS.images.src)
-  .pipe($.cache($.webp({ quality: 75 }), { key: makeHashKey('webp') }))
-  .pipe(gulp.dest(PATHS.images.dest))
-  .pipe($.size({ title: 'webp' }));
-
-// Copy
-const copy = () => gulp.src(PATHS.copy)
-  .pipe(gulp.dest('dist'))
-  .pipe($.size({ title: 'copy' }));
-
-// Styles
-function tmpSass() {
-  const processors = [
-    autoprefixer(),
-  ];
-
-  return gulp.src(PATHS.styles.src)
-    .pipe($.newer(PATHS.styles.tmp))
-    .pipe($.sourcemaps.init())
-      .pipe(
-        $.sass({
-          includePaths: PATHS.styles.includePaths,
-          precision: 10,
-        })
-        .on('error', $.sass.logError)
-      )
-      .pipe($.postcss(processors))
-    .pipe($.sourcemaps.write())
-    .pipe(gulp.dest(PATHS.styles.tmp))
-    .pipe(BS.stream({ once: true }));
-}
-
-function sass() {
-  const processors = [
-    autoprefixer(),
-    cssnano(),
-  ];
-
-  return gulp.src(PATHS.styles.src)
-    .pipe($.sourcemaps.init())
-      .pipe(
-        $.sass({
-          includePaths: PATHS.styles.includePaths,
-          precision: 10,
-        })
-        .on('error', $.sass.logError)
-      )
-      .pipe($.postcss(processors))
-      .pipe($.size({ title: 'styles', showFiles: true }))
-      .pipe($.rev())
-    .pipe($.sourcemaps.write('.'))
-    .pipe(gulp.dest(PATHS.styles.dest))
-    .pipe($.rev.manifest({
-      base: process.cwd(),
-      merge: true,
-    }))
-    .pipe(gulp.dest(PATHS.root));
-}
-
-// Templates
-function tmpTemplates(done) {
-  const entries = Object.entries(PATHS.templates);
-
-  if (entries.length === 0) {
-    done();
-    return;
-  }
-
-  const tasks = entries.map(([key, ]) => {
-    const fname = `template.${key}.js`;
-
-    return gulp.src(hbs)
-      .pipe($.newer(`${PATHS.scripts.tmp}/${fname}`))
-      .pipe($.handlebars({
-        handlebars: Handlebars,
-      }))
-      .pipe($.wrap('Handlebars.template(<%= contents %>)'))
-      .pipe($.declare({
-        namespace: `Template.${key}`,
-        noRedeclare: true,
-      }))
-      .pipe($.concat(fname))
-      .pipe(gulp.dest(PATHS.scripts.tmp))
-      .pipe(BS.stream({ once: true }));
-  });
-
-  es.merge(tasks).on('end', done);
-}
-
-function templates(done) {
-  const entries = Object.entries(PATHS.templates);
-
-  if (entries.length === 0) {
-    done();
-    return;
-  }
-
-  const tasks = entries.map(([key, hbs]) => {
-    const fname = `template.${key}.js`;
-
-    return gulp.src(hbs)
-      .pipe($.handlebars({
-        handlebars: Handlebars,
-      }))
-      .pipe($.wrap('Handlebars.template(<%= contents %>)'))
-      .pipe($.declare({
-        namespace: `Template.${key}`,
-        noRedeclare: true,
-      }))
-      .pipe($.concat({
-        path: fname,
-        cwd: '',
-      }))
-      .pipe($.uglify())
-      .pipe($.rev())
-      .pipe(gulp.dest(PATHS.scripts.dest));
-  });
-
-  const manifest = gulp.src(PATHS.manifest);
-
-  es.merge(tasks.concat(manifest))
-    .pipe($.rev.manifest({
-      base: process.cwd(),
-      merge: true,
-    }))
-    .pipe(gulp.dest(PATHS.root))
-    .on('end', done);
-}
-
-// HTML
-const cleanCondition = (file) => {
-  const basename = path.basename(file.path);
-
-  if (PATHS.styles.clean.includes(basename)) {
-    return true;
-  }
-
-  return false;
-};
-
-const html = () => gulp.src(PATHS.html.src)
-  .pipe($.useref({
-    searchPath: PATHS.assets,
-  }))
-  .pipe($.replace({
-    manifest: gulp.src(PATHS.manifest),
-  }))
-  .pipe($.inlineSource({
-    rootpath: PATHS.html.dest,
-    compress: false,
-  }))
-  .pipe($.if(cleanCondition, $.cleanCss()))
-  .pipe($.if('*.html', $.htmlmin(HTMLMINIFIER)))
-  .pipe($.if('*.html', $.size({ title: 'html', showFiles: true })))
-  .pipe(gulp.dest(PATHS.html.dest));
-
-// Serve
 function serve() {
+  const {
+    html: { src: htmlPath },
+    styles: { src: stylesPath },
+    scripts: {
+      src: scriptsPath,
+      concat: concatPath,
+      watch: watchPath,
+    },
+    images: { src: imageSrc },
+    templates: templatesPath,
+    assets: assetsPath,
+  } = PATHS;
+
   BS.init({
     notify: false,
-    logPrefix: 'work',
+    logPrefix: name,
     server: {
-      baseDir: PATHS.assets,
+      baseDir: assetsPath,
     },
     port: process.env.PORT || 3000,
   });
 
-  gulp.watch(PATHS.html.src).on('change', BS.reload);
-  gulp.watch(PATHS.styles.src, gulp.parallel(stylelint, tmpSass));
-  gulp.watch(PATHS.images.src, tmpWebp);
-  gulp.watch(Object.values(PATHS.templates), tmpTemplates);
+  gulp.watch(htmlPath).on('change', BS.reload);
+  gulp.watch(stylesPath, gulp.parallel(stylelint, 'tmpSass'));
+  gulp.watch(imageSrc, gulp.parallel('tmpWebp'));
+  gulp.watch(Object.values(templatesPath), gulp.parallel('tmpTemplates'));
 
-  gulp.watch(PATHS.scripts.src, lint);
-  gulp.watch(PATHS.scripts.concat, fnTmpConcat);
-  gulp.watch(PATHS.scripts.watch).on('change', BS.reload);
+  gulp.watch(scriptsPath, gulp.parallel('lint'));
+  gulp.watch(concatPath, gulp.parallel('tmpConcat'));
+  gulp.watch(watchPath).on('change', BS.reload);
 }
-
-// Clean output directory
-function clean(done) {
-  rimraf(`{${PATHS.clean.join(',')}}`, done);
-}
-
-// Tasks
-gulp.task('tmpScript', gulp.parallel(fnTmpBundle, fnTmpConcat));
-gulp.task('script', gulp.parallel(bundle, concat));
-gulp.task(vendor);
-
-gulp.task('clean:all', gulp.series(clean, vendor));
-gulp.task('clean:cache', done => $.cache.clearAll(done));
 
 // Build production files, the default task
 gulp.task('default',
   gulp.series(
-    'clean:all', lint,
-    gulp.parallel('script', stylelint, sass, images, webp, copy),
+    'clean:all', 'lint',
+    gulp.parallel(concat, bundle, stylelint, sass, images, webp, copy),
     templates,
     html,
   )
@@ -269,8 +96,8 @@ gulp.task('default',
 // run scripts, sass first and run browserSync before watch
 gulp.task('serve',
   gulp.series(
-    gulp.parallel('tmpScript', tmpSass, tmpWebp),
-    tmpTemplates,
+    gulp.parallel('tmpConcat', 'tmpBundle', 'tmpSass', 'tmpWebp'),
+    'tmpTemplates',
     serve,
   )
 );
