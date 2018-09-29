@@ -7,12 +7,15 @@ import browserSync from 'browser-sync';
 import gulpLoadPlugins from 'gulp-load-plugins';
 import Handlebars from 'handlebars';
 import es from 'event-stream';
+import dotenv from 'dotenv';
 import {
   HTMLMINIFIER,
   PATHS,
 } from './constants';
 import { tmpConcat, concat } from './gulpfile.concat.babel';
 import { tmpBundle, bundle, vendor } from './gulpfile.bundle.babel';
+
+dotenv.config({ silent: true });
 
 const $ = gulpLoadPlugins({
   rename: {
@@ -227,7 +230,7 @@ function serve() {
     server: {
       baseDir: PATHS.assets,
     },
-    port: 3000,
+    port: process.env.PORT || 3000,
   });
 
   gulp.watch(PATHS.html.src).on('change', BS.reload);
