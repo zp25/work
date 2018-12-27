@@ -1,3 +1,5 @@
+/* eslint import/no-extraneous-dependencies: ["error", { "peerDependencies": true }] */
+
 import gulp from 'gulp';
 import gulpLoadPlugins from 'gulp-load-plugins';
 import autoprefixer from 'autoprefixer';
@@ -37,14 +39,16 @@ const tmpSass = BS => () => {
   return gulp.src(srcPath)
     .pipe($.newer(tmpPath))
     .pipe($.sourcemaps.init())
-      .pipe(
-        $.sass({
-          includePaths,
-          precision: 10,
-        })
-        .on('error', $.sass.logError)
-      )
-      .pipe($.postcss(processors))
+    // sourcemap start
+    .pipe(
+      $.sass({
+        includePaths,
+        precision: 10,
+      })
+        .on('error', $.sass.logError),
+    )
+    .pipe($.postcss(processors))
+    // sourcemap end
     .pipe($.sourcemaps.write())
     .pipe(gulp.dest(tmpPath))
     .pipe(BS.stream({ once: true }));
@@ -58,16 +62,18 @@ function sass() {
 
   return gulp.src(srcPath)
     .pipe($.sourcemaps.init())
-      .pipe(
-        $.sass({
-          includePaths,
-          precision: 10,
-        })
-        .on('error', $.sass.logError)
-      )
-      .pipe($.postcss(processors))
-      .pipe($.size({ title: 'styles', showFiles: true }))
-      .pipe($.rev())
+    // sourcemap start
+    .pipe(
+      $.sass({
+        includePaths,
+        precision: 10,
+      })
+        .on('error', $.sass.logError),
+    )
+    .pipe($.postcss(processors))
+    .pipe($.size({ title: 'styles', showFiles: true }))
+    .pipe($.rev())
+    // sourcemap end
     .pipe($.sourcemaps.write('.'))
     .pipe(gulp.dest(destPath))
     .pipe($.rev.manifest({

@@ -84,20 +84,16 @@ function serve() {
 }
 
 // Build production files, the default task
-gulp.task('default',
-  gulp.series(
-    'clean:all', 'lint',
-    gulp.parallel(concat, bundle, stylelint, sass, images, webp, copy),
-    templates,
-    html,
-  )
-);
+gulp.task('default', gulp.series(
+  'clean:all', 'lint',
+  gulp.parallel(concat, bundle, stylelint, sass, images, webp, copy),
+  templates,
+  html,
+));
 
 // run scripts, sass first and run browserSync before watch
-gulp.task('serve',
-  gulp.series(
-    gulp.parallel('tmpConcat', 'tmpBundle', 'tmpSass', 'tmpWebp'),
-    'tmpTemplates',
-    serve,
-  )
-);
+gulp.task('serve', gulp.series(
+  gulp.parallel('tmpConcat', 'tmpBundle', 'tmpSass', 'tmpWebp'),
+  'tmpTemplates',
+  serve,
+));

@@ -1,3 +1,5 @@
+/* eslint import/no-extraneous-dependencies: ["error", { "peerDependencies": true }] */
+
 const path = require('path');
 const fs = require('fs');
 const Handlebars = require('handlebars');

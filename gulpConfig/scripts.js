@@ -1,3 +1,5 @@
+/* eslint import/no-extraneous-dependencies: ["error", { "peerDependencies": true }] */
+
 import gulp from 'gulp';
 import gulpLoadPlugins from 'gulp-load-plugins';
 import log from 'fancy-log';
@@ -37,41 +39,45 @@ const lint = BS => () => gulp.src(srcPath)
 const tmpConcat = BS => (done) => {
   if (files.length === 0) {
     done();
-    return;
+    return undefined;
   }
 
   return gulp.src(files)
     .pipe($.newer(tmpPath))
     .pipe($.sourcemaps.init())
-      .pipe($.babel())
+    // sourcemap start
+    .pipe($.babel())
+    // sourcemap end
     .pipe($.sourcemaps.write())
     .pipe(gulp.dest(tmpPath))
     .pipe(BS.stream({ once: true }));
-}
+};
 
 function concat(done) {
   if (files.length === 0) {
     done();
-    return;
+    return undefined;
   }
 
   return gulp.src(files)
     .pipe($.sourcemaps.init())
-      .pipe($.babel())
-      .pipe($.concat({
-        path: 'concat.js',
-        cwd: '',
-      }))
-      .pipe($.uglify({
-        // preserveComments: 'license',
-        compress: {
-          global_defs: {
-            'DEV': false,
-          },
+    // sourcemap start
+    .pipe($.babel())
+    .pipe($.concat({
+      path: 'concat.js',
+      cwd: '',
+    }))
+    .pipe($.uglify({
+      // preserveComments: 'license',
+      compress: {
+        global_defs: {
+          DEV: false,
         },
-      }))
-      .pipe($.size({ title: 'concat' }))
-      .pipe($.rev())
+      },
+    }))
+    .pipe($.size({ title: 'concat' }))
+    .pipe($.rev())
+    // sourcemap end
     .pipe($.sourcemaps.write('.'))
     .pipe(gulp.dest(destPath))
     .pipe($.rev.manifest({
@@ -93,16 +99,18 @@ const production = entry => b => b.bundle()
   .pipe(source(`bundle.${entry}.js`))
   .pipe(buffer())
   .pipe($.sourcemaps.init({ loadMaps: true }))
-    .pipe($.uglify({
-      // preserveComments: 'license',
-      compress: {
-        global_defs: {
-          'DEV': false,
-        },
+  // sourcemap start
+  .pipe($.uglify({
+    // preserveComments: 'license',
+    compress: {
+      global_defs: {
+        DEV: false,
       },
-    }))
-    .pipe($.size({ title: 'scripts', showFiles: true }))
-    .pipe($.rev())
+    },
+  }))
+  .pipe($.size({ title: 'scripts', showFiles: true }))
+  .pipe($.rev())
+  // sourcemap end
   .pipe($.sourcemaps.write('.'))
   .pipe(gulp.dest(destPath));
 
@@ -167,7 +175,7 @@ function bundle(done) {
 function vendor(done) {
   if (!VENDOR || VENDOR.length === 0) {
     done();
-    return;
+    return undefined;
   }
 
   const b = browserify({
@@ -187,11 +195,13 @@ function vendor(done) {
     .pipe(source('vendor.js'))
     .pipe(buffer())
     .pipe($.sourcemaps.init({ loadMaps: true }))
-      .pipe($.sourcemaps.write())
-      .pipe(gulp.dest(tmpPath))
-      .pipe($.uglify())
-      .pipe($.size({ title: 'vendor' }))
-      .pipe($.rev())
+    // sourcemap start
+    .pipe($.sourcemaps.write())
+    .pipe(gulp.dest(tmpPath))
+    .pipe($.uglify())
+    .pipe($.size({ title: 'vendor' }))
+    .pipe($.rev())
+    // sourcemap end
     .pipe($.sourcemaps.write('.'))
     .pipe(gulp.dest(destPath))
     .pipe($.rev.manifest({
