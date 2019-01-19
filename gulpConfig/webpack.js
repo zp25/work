@@ -28,7 +28,7 @@ const tmpWebpack = BS => () => gulp.src(srcPath)
 const webpackTask = () => gulp.src(srcPath)
   .pipe(named())
   .pipe(gulpWebpack({}, webpack))
-  .pipe(through2.obj(function (file, enc, next) {
+  .pipe(through2.obj((file, enc, next) => {
     // Dont pipe through any source map files as it will be handled by gulp-sourcemaps
     if (!/\.map$/.test(file.path)) {
       this.push(file);
@@ -47,5 +47,5 @@ const webpackTask = () => gulp.src(srcPath)
 
 export {
   tmpWebpack,
-  webpack: webpackTask,
+  webpackTask as webpack,
 };
