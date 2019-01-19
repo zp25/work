@@ -8,7 +8,7 @@ import watchify from 'watchify';
 import babelify from 'babelify';
 import source from 'vinyl-source-stream';
 import buffer from 'vinyl-buffer';
-import es from 'event-stream';
+import merge from 'merge-stream';
 import {
   PATHS,
   VENDOR,
@@ -139,7 +139,8 @@ const tmpBundle = BS => (done) => {
     return development(entry)(b)(BS);
   });
 
-  es.merge(tasks).on('end', done);
+  return merge(...tasks)
+    .on('end', done);
 };
 
 function bundle(done) {
@@ -163,7 +164,7 @@ function bundle(done) {
 
   const manifest = gulp.src(manifestPath);
 
-  es.merge(tasks.concat(manifest))
+  return merge(...tasks, manifest)
     .pipe($.rev.manifest({
       base: pwd,
       merge: true,

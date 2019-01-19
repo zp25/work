@@ -3,6 +3,7 @@
 import gulp from 'gulp';
 import gulpLoadPlugins from 'gulp-load-plugins';
 import Handlebars from 'handlebars';
+import merge from 'merge-stream';
 import es from 'event-stream';
 import { PATHS } from './constants';
 
@@ -44,7 +45,8 @@ const tmpTemplates = BS => (done) => {
       .pipe(BS.stream({ once: true }));
   });
 
-  es.merge(tasks).on('end', done);
+  return merge(...tasks)
+    .on('end', done);
 };
 
 function templates(done) {
@@ -78,7 +80,7 @@ function templates(done) {
 
   const manifest = gulp.src(manifestPath);
 
-  es.merge(tasks.concat(manifest))
+  return merge(...tasks, manifest)
     .pipe($.rev.manifest({
       base: process.cwd(),
       merge: true,

@@ -23,3 +23,4 @@ bundle任务使用browserify打包，concat任务使用gulp-concat合并，两�
 
 + [google/web-starter-kit](https://github.com/google/web-starter-kit "google/web-starter-kit")
 + [Including .css files with @import is non-standard behaviour which will be removed in future versions of LibSass.](https://github.com/sass/node-sass/issues/2362 "Including .css files with @import is non-standard behaviour which will be removed in future versions of LibSass.")
++ [merge-stream](https://github.com/grncdr/merge-stream "merge-stream")
