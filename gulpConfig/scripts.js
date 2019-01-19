@@ -114,7 +114,7 @@ const production = entry => b => b.bundle()
   .pipe($.sourcemaps.write('.'))
   .pipe(gulp.dest(destPath));
 
-const tmpBundle = BS => (done) => {
+const tmpBundle = BS => () => {
   const tasks = Object.keys(entriesPath).map((entry) => {
     const b = browserify({
       entries: entriesPath[entry],
@@ -139,11 +139,10 @@ const tmpBundle = BS => (done) => {
     return development(entry)(b)(BS);
   });
 
-  return merge(...tasks)
-    .on('end', done);
+  return merge(...tasks);
 };
 
-function bundle(done) {
+function bundle() {
   const tasks = Object.keys(entriesPath).map((entry) => {
     const b = browserify({
       entries: entriesPath[entry],
@@ -169,8 +168,7 @@ function bundle(done) {
       base: pwd,
       merge: true,
     }))
-    .pipe(gulp.dest(rootPath))
-    .on('end', done);
+    .pipe(gulp.dest(rootPath));
 }
 
 function vendor(done) {

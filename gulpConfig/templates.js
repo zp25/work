@@ -4,7 +4,6 @@ import gulp from 'gulp';
 import gulpLoadPlugins from 'gulp-load-plugins';
 import Handlebars from 'handlebars';
 import merge from 'merge-stream';
-import es from 'event-stream';
 import { PATHS } from './constants';
 
 const $ = gulpLoadPlugins();
@@ -24,7 +23,7 @@ const tmpTemplates = BS => (done) => {
 
   if (entries.length === 0) {
     done();
-    return;
+    return undefined;
   }
 
   const tasks = entries.map(([key, hbs]) => {
@@ -45,8 +44,7 @@ const tmpTemplates = BS => (done) => {
       .pipe(BS.stream({ once: true }));
   });
 
-  return merge(...tasks)
-    .on('end', done);
+  return merge(...tasks);
 };
 
 function templates(done) {
@@ -54,7 +52,7 @@ function templates(done) {
 
   if (entries.length === 0) {
     done();
-    return;
+    return undefined;
   }
 
   const tasks = entries.map(([key, hbs]) => {
@@ -85,8 +83,7 @@ function templates(done) {
       base: process.cwd(),
       merge: true,
     }))
-    .pipe(gulp.dest(rootPath))
-    .on('end', done);
+    .pipe(gulp.dest(rootPath));
 }
 
 export {
