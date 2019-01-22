@@ -114,7 +114,7 @@ const production = entry => b => b.bundle()
   .pipe($.sourcemaps.write('.'))
   .pipe(gulp.dest(destPath));
 
-const tmpBundle = BS => () => {
+const tmpBundle = BS => (done) => {
   const tasks = Object.keys(entriesPath).map((entry) => {
     const b = browserify({
       entries: entriesPath[entry],
@@ -139,10 +139,17 @@ const tmpBundle = BS => () => {
     return development(entry)(b)(BS);
   });
 
-  return merge(...tasks);
+  const streams = merge(...tasks);
+
+  if (streams.isEmpty) {
+    done();
+    return undefined;
+  }
+
+  return streams;
 };
 
-function bundle() {
+function bundle(done) {
   const tasks = Object.keys(entriesPath).map((entry) => {
     const b = browserify({
       entries: entriesPath[entry],
@@ -163,7 +170,14 @@ function bundle() {
 
   const manifest = gulp.src(manifestPath);
 
-  return merge(...tasks, manifest)
+  const streams = merge(...tasks, manifest);
+
+  if (streams.isEmpty) {
+    done();
+    return undefined;
+  }
+
+  return streams
     .pipe($.rev.manifest({
       base: pwd,
       merge: true,

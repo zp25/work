@@ -44,7 +44,14 @@ const tmpTemplates = BS => (done) => {
       .pipe(BS.stream({ once: true }));
   });
 
-  return merge(...tasks);
+  const streams = merge(...tasks);
+
+  if (streams.isEmpty) {
+    done();
+    return undefined;
+  }
+
+  return streams;
 };
 
 function templates(done) {
@@ -78,7 +85,14 @@ function templates(done) {
 
   const manifest = gulp.src(manifestPath);
 
-  return merge(...tasks, manifest)
+  const streams = merge(...tasks, manifest);
+
+  if (streams.isEmpty) {
+    done();
+    return undefined;
+  }
+
+  return streams
     .pipe($.rev.manifest({
       base: process.cwd(),
       merge: true,
