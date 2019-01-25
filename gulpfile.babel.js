@@ -35,12 +35,14 @@ dotenv.config({ silent: true });
 
 const BS = browserSync.create();
 
+// 资源路径
 const {
   assets,
   html: htmlPath,
   images: imagePath,
   styles: stylePath,
   includePaths,
+  vendor: vendorPath,
   entries,
   concats: concatPath,
   templates: templatePath,
@@ -56,6 +58,7 @@ const {
     'node_modules/zp-ui',
   ],
   // scripts
+  vendor: ['zp-lib'],
   entries: {
     index: 'app/scripts/index/index.js',
   },
@@ -77,14 +80,12 @@ const {
   ],
 };
 
-const VENDOR = ['zp-lib'];
-
 // Tasks
 gulp.task('tmpWebp', tmpWebp(BS)(imagePath));
 gulp.task('tmpSass', tmpSass(BS)(stylePath, { includePaths }));
 
 gulp.task('tmpConcat', tmpConcatBatch(BS)(concatPath));
-gulp.task('tmpBundle', tmpBundleBatch(BS)(entries, { exclude: VENDOR }));
+gulp.task('tmpBundle', tmpBundleBatch(BS)(entries, { exclude: vendorPath }));
 gulp.task('tmpTemplates', tmpTemplatesBatch(BS)(templatePath));
 
 gulp.task('lint', lint(BS));
@@ -126,7 +127,7 @@ gulp.task('serve', gulp.series(
   server,
 ));
 
-gulp.task('vendor', vendor(VENDOR));
+gulp.task('vendor', vendor(vendorPath));
 gulp.task('clean:all', gulp.series(clean, 'vendor'));
 gulp.task('clean:cache', cleanCache);
 
@@ -135,7 +136,7 @@ const concatList = Object.entries(concatPath).map(([key, src]) => (
 ));
 
 const bundleList = Object.entries(entries).map(([key, src]) => (
-  bundle(src, `scripts/bundle.${key}.js`, { exclude: VENDOR })
+  bundle(src, `scripts/bundle.${key}.js`, { exclude: vendorPath })
 ));
 
 const templateList = Object.entries(templatePath).map(([key, src]) => (

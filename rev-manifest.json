@@ -1,6 +1,8 @@
 {
-  "bundle.index.js": "bundle-26658f5d2d.index.js",
-  "index.css": "index-0d3659627e.css",
-  "template.index.js": "template-a19dc1310a.index.js",
-  "vendor.js": "vendor-854d19dc9c.js"
+  "scripts/bundle.index.js": "scripts/bundle-26658f5d2d.index.js",
+  "scripts/common.js": "scripts/common-1f85e519e3.js",
+  "scripts/main.js": "scripts/main-1c64cc67b0.js",
+  "scripts/template.index.js": "scripts/template-a19dc1310a.index.js",
+  "scripts/vendor.js": "scripts/vendor-854d19dc9c.js",
+  "styles/index.css": "styles/index-0d3659627e.css"
 }
