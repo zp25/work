@@ -2,40 +2,48 @@
 
 import gulp from 'gulp';
 import gulpLoadPlugins from 'gulp-load-plugins';
-import { PATHS } from './constants';
+import {
+  SRC,
+  OUTPUT,
+  TEMP,
+} from './constants';
 
 const $ = gulpLoadPlugins();
 
-const {
-  images: {
-    src: srcPath,
-    tmp: tmpPath,
-    dest: destPath,
-  },
-} = PATHS;
-
 const makeHashKey = entry => file => [file.contents.toString('utf8'), entry].join('');
 
-const images = () => gulp.src(srcPath)
-  .pipe($.cache($.imagemin({
-    progressive: true,
-    interlaced: true,
-    multipass: true,
-  }), {
-    key: makeHashKey('images'),
-  }))
-  .pipe(gulp.dest(destPath))
-  .pipe($.size({ title: 'images' }));
+function images(src) {
+  const task = () => gulp.src(src, { base: SRC })
+    .pipe($.cache($.imagemin({
+      progressive: true,
+      interlaced: true,
+      multipass: true,
+    }), {
+      key: makeHashKey('images'),
+    }))
+    .pipe(gulp.dest(OUTPUT))
+    .pipe($.size({ title: 'images' }));
 
-const tmpWebp = BS => () => gulp.src(srcPath)
+  task.displayName = 'images';
+
+  return task;
+}
+
+const tmpWebp = BS => src => () => gulp.src(src, { base: SRC })
   .pipe($.cache($.webp({ quality: 75 }), { key: makeHashKey('webp') }))
-  .pipe(gulp.dest(tmpPath))
+  .pipe(gulp.dest(TEMP))
   .pipe(BS.stream({ once: true }));
 
-const webp = () => gulp.src(srcPath)
-  .pipe($.cache($.webp({ quality: 75 }), { key: makeHashKey('webp') }))
-  .pipe(gulp.dest(destPath))
-  .pipe($.size({ title: 'webp' }));
+function webp(src) {
+  const task = () => gulp.src(src, { base: SRC })
+    .pipe($.cache($.webp({ quality: 75 }), { key: makeHashKey('webp') }))
+    .pipe(gulp.dest(OUTPUT))
+    .pipe($.size({ title: 'webp' }));
+
+  task.displayName = 'webp';
+
+  return task;
+}
 
 export {
   images,

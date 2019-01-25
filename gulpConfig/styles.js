@@ -1,43 +1,44 @@
 /* eslint import/no-extraneous-dependencies: ["error", { "peerDependencies": true }] */
 
+import path from 'path';
 import gulp from 'gulp';
 import gulpLoadPlugins from 'gulp-load-plugins';
 import autoprefixer from 'autoprefixer';
 import cssnano from 'cssnano';
-import { PATHS } from './constants';
+import {
+  SRC,
+  OUTPUT,
+  TEMP,
+} from './constants';
 
 const $ = gulpLoadPlugins();
 const pwd = process.cwd();
 
-const {
-  root: rootPath,
-  styles: {
-    src: srcPath,
-    tmp: tmpPath,
-    dest: destPath,
-    includePaths,
-  },
-} = PATHS;
-
 // Lint
-const stylelint = () => gulp.src(srcPath)
-  .pipe($.stylelint({
-    failAfterError: false,
-    reporters: [
-      {
-        formatter: 'verbose',
-        console: true,
-      },
-    ],
-  }));
+const stylelint = () => (
+  gulp.src(path.join(SRC, '**/*.{scss,css}'))
+    .pipe($.stylelint({
+      failAfterError: false,
+      reporters: [
+        {
+          formatter: 'verbose',
+          console: true,
+        },
+      ],
+    }))
+);
 
-const tmpSass = BS => () => {
+const tmpSass = BS => (src, opts = {}) => () => {
+  const {
+    includePaths = [],
+  } = opts;
+
   const processors = [
     autoprefixer(),
   ];
 
-  return gulp.src(srcPath)
-    .pipe($.newer(tmpPath))
+  return gulp.src(src, { base: SRC })
+    .pipe($.newer(TEMP))
     .pipe($.sourcemaps.init())
     // sourcemap start
     .pipe(
@@ -50,17 +51,21 @@ const tmpSass = BS => () => {
     .pipe($.postcss(processors))
     // sourcemap end
     .pipe($.sourcemaps.write())
-    .pipe(gulp.dest(tmpPath))
+    .pipe(gulp.dest(TEMP))
     .pipe(BS.stream({ once: true }));
 };
 
-function sass() {
+function sass(src, opts = {}) {
+  const {
+    includePaths = [],
+  } = opts;
+
   const processors = [
     autoprefixer(),
     cssnano(),
   ];
 
-  return gulp.src(srcPath)
+  const task = () => gulp.src(src, { base: SRC })
     .pipe($.sourcemaps.init())
     // sourcemap start
     .pipe(
@@ -75,12 +80,16 @@ function sass() {
     .pipe($.rev())
     // sourcemap end
     .pipe($.sourcemaps.write('.'))
-    .pipe(gulp.dest(destPath))
+    .pipe(gulp.dest(OUTPUT))
     .pipe($.rev.manifest({
       base: pwd,
       merge: true,
     }))
-    .pipe(gulp.dest(rootPath));
+    .pipe(gulp.dest(pwd));
+
+  task.displayName = 'sass';
+
+  return task;
 }
 
 export {

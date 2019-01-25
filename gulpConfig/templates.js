@@ -4,103 +4,94 @@ import gulp from 'gulp';
 import gulpLoadPlugins from 'gulp-load-plugins';
 import Handlebars from 'handlebars';
 import merge from 'merge-stream';
-import { PATHS } from './constants';
+import {
+  SRC,
+  OUTPUT,
+  TEMP,
+} from './constants';
 
 const $ = gulpLoadPlugins();
+const pwd = process.cwd();
 
-const {
-  root: rootPath,
-  scripts: {
-    tmp: tmpPath,
-    dest: destPath,
-  },
-  templates: templatesPath,
-  manifest: manifestPath,
-} = PATHS;
+const tmpTemplates = BS => (src, filename, opts = {}) => () => {
+  const {
+    namespace = 'main',
+  } = opts;
 
-const tmpTemplates = BS => (done) => {
-  const entries = Object.entries(templatesPath);
-
-  if (entries.length === 0) {
-    done();
-    return undefined;
-  }
-
-  const tasks = entries.map(([key, hbs]) => {
-    const fname = `template.${key}.js`;
-
-    return gulp.src(hbs)
-      .pipe($.newer(`${tmpPath}/${fname}`))
-      .pipe($.handlebars({
-        handlebars: Handlebars,
-      }))
-      .pipe($.wrap('Handlebars.template(<%= contents %>)'))
-      .pipe($.declare({
-        namespace: `Template.${key}`,
-        noRedeclare: true,
-      }))
-      .pipe($.concat(fname))
-      .pipe(gulp.dest(tmpPath))
-      .pipe(BS.stream({ once: true }));
-  });
-
-  const streams = merge(...tasks);
-
-  if (streams.isEmpty) {
-    done();
-    return undefined;
-  }
-
-  return streams;
+  return gulp.src(src, { base: SRC })
+    .pipe($.newer(`${TEMP}/${filename}`))
+    .pipe($.handlebars({
+      handlebars: Handlebars,
+    }))
+    .pipe($.wrap('Handlebars.template(<%= contents %>)'))
+    .pipe($.declare({
+      namespace: `Template.${namespace}`,
+      noRedeclare: true,
+    }))
+    .pipe($.concat(filename))
+    .pipe(gulp.dest(TEMP))
+    .pipe(BS.stream({ once: true }));
 };
 
-function templates(done) {
-  const entries = Object.entries(templatesPath);
+const tmpTemplatesBatch = BS => (
+  (files, filename = 'scripts/template.[name].js') => (done) => {
+    const tasks = Object.entries(files).map(([key, src]) => (
+      tmpTemplates(BS)(src, filename.replace('[name]', key), {
+        namespace: key,
+      })()
+    ));
 
-  if (entries.length === 0) {
-    done();
-    return undefined;
+    const streams = merge(...tasks);
+
+    if (streams.isEmpty) {
+      done();
+      return undefined;
+    }
+
+    return streams;
   }
+);
 
-  const tasks = entries.map(([key, hbs]) => {
-    const fname = `template.${key}.js`;
+/**
+ * handlebars模板
+ * @param {string} src - 模板文件
+ * @param {string} filename - 导出文件名
+ * @param {Object} opts
+ * @param {string} opts.namespace - 配置namespace
+ */
+function templates(src, filename, opts = {}) {
+  const {
+    namespace = 'main',
+  } = opts;
 
-    return gulp.src(hbs)
-      .pipe($.handlebars({
-        handlebars: Handlebars,
-      }))
-      .pipe($.wrap('Handlebars.template(<%= contents %>)'))
-      .pipe($.declare({
-        namespace: `Template.${key}`,
-        noRedeclare: true,
-      }))
-      .pipe($.concat({
-        path: fname,
-        cwd: '',
-      }))
-      .pipe($.uglify())
-      .pipe($.rev())
-      .pipe(gulp.dest(destPath));
-  });
-
-  const manifest = gulp.src(manifestPath);
-
-  const streams = merge(...tasks, manifest);
-
-  if (streams.isEmpty) {
-    done();
-    return undefined;
-  }
-
-  return streams
+  const task = () => gulp.src(src)
+    .pipe($.handlebars({
+      handlebars: Handlebars,
+    }))
+    .pipe($.wrap('Handlebars.template(<%= contents %>)'))
+    .pipe($.declare({
+      namespace: `Template.${namespace}`,
+      noRedeclare: true,
+    }))
+    .pipe($.concat({
+      path: filename,
+    }))
+    .pipe($.uglify())
+    .pipe($.rev())
+    .pipe(gulp.dest(OUTPUT))
     .pipe($.rev.manifest({
-      base: process.cwd(),
+      base: pwd,
       merge: true,
     }))
-    .pipe(gulp.dest(rootPath));
+    .pipe(gulp.dest(pwd));
+
+  task.displayName = 'templates';
+
+  return task;
 }
 
 export {
   tmpTemplates,
+  tmpTemplatesBatch,
   templates,
 };

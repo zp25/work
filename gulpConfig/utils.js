@@ -1,25 +1,46 @@
 /* eslint import/no-extraneous-dependencies: ["error", { "peerDependencies": true }] */
 
+import path from 'path';
 import gulp from 'gulp';
 import gulpLoadPlugins from 'gulp-load-plugins';
 import rimraf from 'rimraf';
-import { PATHS } from './constants';
+import {
+  SRC,
+  OUTPUT,
+  TEMP,
+} from './constants';
 
 const $ = gulpLoadPlugins();
 
-const {
-  copy: copyPath,
-  clean: cleanPath,
-} = PATHS;
+// 复制资源
+function copy(paths) {
+  const basePaths = [
+    path.join(SRC, '*'),
+    `!${path.join(SRC, '*.html')}`,
+  ];
 
-const copy = () => gulp.src(copyPath)
-  .pipe(gulp.dest('dist'))
-  .pipe($.size({ title: 'copy' }));
+  const task = () => (
+    gulp.src(paths ? basePaths.concat(paths) : basePaths, { base: 'app' })
+      .pipe(gulp.dest(OUTPUT))
+      .pipe($.size({ title: 'copy' }))
+  );
 
-function clean(done) {
-  rimraf(`{${cleanPath.join(',')}}`, done);
+  task.displayName = 'copy';
+
+  return task;
 }
 
+// 删除临时目录，删除目标目录中内容
+function clean(done) {
+  const paths = [
+    TEMP,
+    path.join(OUTPUT, '*'),
+  ];
+
+  rimraf(`{${paths.join(',')}}`, done);
+}
+
+// 清缓存
 const cleanCache = done => $.cache.clearAll(done);
 
 export {
