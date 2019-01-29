@@ -48,8 +48,9 @@ const cleanCondition = cleanPath => (file) => {
  */
 const filterCondition = noAssets => (file) => {
   const fname = path.relative(path.resolve(SRC), file.path);
+  const posixfname = fname.split(path.sep).join('/');
 
-  if (noAssets.includes(fname)) {
+  if (noAssets.includes(posixfname)) {
     return false;
   }
 
