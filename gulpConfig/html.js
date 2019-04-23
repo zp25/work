@@ -57,15 +57,28 @@ const filterCondition = noAssets => (file) => {
   return true;
 };
 
-function html(src, opts = {}) {
+function html(opts = {}) {
   const {
+    // html资源路径
+    src = [],
+    // useref资源路径
     searchPath = [],
+    // 需要压缩的css文件
     cleanCss = [],
     manifest = 'rev-manifest.json',
+    // 需要跳过useref操作的资源
     noAssets = [],
   } = opts;
 
-  const task = () => gulp.src(src, { base: SRC })
+  if (!Array.isArray(src)) {
+    throw new TypeError('invalid path');
+  }
+
+  const basePaths = [
+    path.join(SRC, '**/*.html'),
+  ];
+
+  const task = () => gulp.src(basePaths.concat(src), { base: SRC })
     .pipe($.useref({
       searchPath,
       noAssets: false,

@@ -22,8 +22,16 @@ const pwd = process.cwd();
 const getKey = filename => path.basename(filename, path.extname(filename));
 
 // Lint
-function lint(BS) {
-  const task = () => gulp.src(path.join(SRC, '**/*.js'))
+function lint(BS, paths = []) {
+  if (!Array.isArray(paths)) {
+    throw new TypeError('invalid path');
+  }
+
+  const basePaths = [
+    path.join(SRC, '**/*.js'),
+  ];
+
+  const task = () => gulp.src(basePaths.concat(paths))
     .pipe($.eslint())
     .pipe($.eslint.format())
     .pipe($.if(!BS.active, $.eslint.failOnError()));

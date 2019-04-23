@@ -38,9 +38,7 @@ const BS = browserSync.create();
 // 资源路径
 const {
   assets,
-  html: htmlPath,
   images: imagePath,
-  styles: stylePath,
   includePaths,
   vendor: vendorPath,
   entries,
@@ -49,9 +47,7 @@ const {
   watch,
 } = {
   assets: ['.tmp', 'app', 'node_modules'],
-  html: 'app/**/*.html',
   images: 'app/images/**/*',
-  styles: 'app/styles/**/*.{scss,css}',
   // gulp-sass includePaths
   includePaths: [
     // 'node_modules/normalize.css',
@@ -82,13 +78,14 @@ const {
 
 // Tasks
 gulp.task('tmpWebp', tmpWebp(BS)(imagePath));
-gulp.task('tmpSass', tmpSass(BS)(stylePath, { includePaths }));
+gulp.task('tmpSass', tmpSass(BS)({ includePaths }));
 
 gulp.task('tmpConcat', tmpConcatBatch(BS)(concatPath));
 gulp.task('tmpBundle', tmpBundleBatch(BS)(entries, { exclude: vendorPath }));
 gulp.task('tmpTemplates', tmpTemplatesBatch(BS)(templatePath));
 
 gulp.task('lint', lint(BS));
+gulp.task('stylelint', stylelint());
 
 function server() {
   const concatList = Object.values(concatPath).reduce((prev, files) => (
@@ -104,9 +101,9 @@ function server() {
     port: process.env.PORT || 3000,
   });
 
-  gulp.watch(htmlPath).on('change', BS.reload);
+  gulp.watch('app/**/*.html').on('change', BS.reload);
   gulp.watch(imagePath, gulp.parallel('tmpWebp'));
-  gulp.watch(stylePath, gulp.parallel(stylelint, 'tmpSass'));
+  gulp.watch('app/**/*.{scss,css}', gulp.parallel('stylelint', 'tmpSass'));
 
   gulp.watch('app/**/*.js', gulp.parallel('lint'));
   gulp.watch(concatList, gulp.parallel('tmpConcat'));
@@ -151,13 +148,13 @@ gulp.task('default', gulp.series(
   ...bundleList,
   ...templateList,
   gulp.parallel(
-    stylelint,
-    sass(stylePath, { includePaths }),
+    'stylelint',
+    sass({ includePaths }),
     images(imagePath),
     webp(imagePath),
     copy(['!app/templates']),
   ),
-  html(htmlPath, {
+  html({
     searchPath: assets,
     cleanCss: ['normalize.css'],
     noAssets: [

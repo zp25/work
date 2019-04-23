@@ -13,14 +13,18 @@ import {
 const $ = gulpLoadPlugins();
 
 // 复制资源
-function copy(paths) {
+function copy(paths = []) {
+  if (!Array.isArray(paths)) {
+    throw new TypeError('invalid path');
+  }
+
   const basePaths = [
     path.join(SRC, '*'),
     `!${path.join(SRC, '*.html')}`,
   ];
 
   const task = () => (
-    gulp.src(paths ? basePaths.concat(paths) : basePaths, { base: 'app' })
+    gulp.src(basePaths.concat(paths), { base: 'app' })
       .pipe(gulp.dest(OUTPUT))
       .pipe($.size({ title: 'copy' }))
   );

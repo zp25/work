@@ -14,9 +14,17 @@ import {
 const $ = gulpLoadPlugins();
 const pwd = process.cwd();
 
+const basePaths = [
+  path.join(SRC, '**/*.{scss,css}'),
+];
+
 // Lint
-const stylelint = () => (
-  gulp.src(path.join(SRC, '**/*.{scss,css}'))
+const stylelint = (src = []) => {
+  if (!Array.isArray(src)) {
+    throw new TypeError('invalid path');
+  }
+
+  const task = () => gulp.src(basePaths.concat(src))
     .pipe($.stylelint({
       failAfterError: false,
       reporters: [
@@ -25,19 +33,28 @@ const stylelint = () => (
           console: true,
         },
       ],
-    }))
-);
+    }));
 
-const tmpSass = BS => (src, opts = {}) => () => {
+  task.displayName = 'stylelint';
+
+  return task;
+};
+
+const tmpSass = BS => (opts = {}) => () => {
   const {
+    src = [],
     includePaths = [],
   } = opts;
+
+  if (!Array.isArray(src)) {
+    throw new TypeError('invalid path');
+  }
 
   const processors = [
     autoprefixer(),
   ];
 
-  return gulp.src(src, { base: SRC })
+  return gulp.src(basePaths.concat(src), { base: SRC })
     .pipe($.newer(TEMP))
     .pipe($.sourcemaps.init())
     // sourcemap start
@@ -55,17 +72,22 @@ const tmpSass = BS => (src, opts = {}) => () => {
     .pipe(BS.stream({ once: true }));
 };
 
-function sass(src, opts = {}) {
+function sass(opts = {}) {
   const {
+    src = [],
     includePaths = [],
   } = opts;
+
+  if (!Array.isArray(src)) {
+    throw new TypeError('invalid path');
+  }
 
   const processors = [
     autoprefixer(),
     cssnano(),
   ];
 
-  const task = () => gulp.src(src, { base: SRC })
+  const task = () => gulp.src(basePaths.concat(src), { base: SRC })
     .pipe($.sourcemaps.init())
     // sourcemap start
     .pipe(
