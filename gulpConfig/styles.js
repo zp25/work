@@ -43,6 +43,7 @@ const stylelint = (src = []) => {
 const tmpSass = BS => (opts = {}) => () => {
   const {
     src = [],
+    base = SRC,
     includePaths = [],
   } = opts;
 
@@ -54,7 +55,7 @@ const tmpSass = BS => (opts = {}) => () => {
     autoprefixer(),
   ];
 
-  return gulp.src(basePaths.concat(src), { base: SRC })
+  return gulp.src(basePaths.concat(src), { base })
     .pipe($.newer(TEMP))
     .pipe($.sourcemaps.init())
     // sourcemap start
@@ -75,6 +76,7 @@ const tmpSass = BS => (opts = {}) => () => {
 function sass(opts = {}) {
   const {
     src = [],
+    base = SRC,
     includePaths = [],
   } = opts;
 
@@ -87,7 +89,7 @@ function sass(opts = {}) {
     cssnano(),
   ];
 
-  const task = () => gulp.src(basePaths.concat(src), { base: SRC })
+  const task = () => gulp.src(basePaths.concat(src), { base })
     .pipe($.sourcemaps.init())
     // sourcemap start
     .pipe(

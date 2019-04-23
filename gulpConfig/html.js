@@ -61,6 +61,7 @@ function html(opts = {}) {
   const {
     // html资源路径
     src = [],
+    base = SRC,
     // useref资源路径
     searchPath = [],
     // 需要压缩的css文件
@@ -78,7 +79,7 @@ function html(opts = {}) {
     path.join(SRC, '**/*.html'),
   ];
 
-  const task = () => gulp.src(basePaths.concat(src), { base: SRC })
+  const task = () => gulp.src(basePaths.concat(src), { base })
     .pipe($.useref({
       searchPath,
       noAssets: false,
