@@ -13,8 +13,8 @@ import {
 const $ = gulpLoadPlugins();
 
 // 复制资源
-function copy(paths = []) {
-  if (!Array.isArray(paths)) {
+function copy(src = []) {
+  if (!Array.isArray(src)) {
     throw new TypeError('invalid path');
   }
 
@@ -24,7 +24,7 @@ function copy(paths = []) {
   ];
 
   const task = () => (
-    gulp.src(basePaths.concat(paths), { base: 'app' })
+    gulp.src(basePaths.concat(src), { base: 'app' })
       .pipe(gulp.dest(OUTPUT))
       .pipe($.size({ title: 'copy' }))
   );
