@@ -16,7 +16,7 @@
   <link rel="icon" type="image/png" sizes="192x192" href="images/favicon.png">
   <!-- styles -->
   <!-- build:css styles/normalize.css -->
-  <link rel="stylesheet" href="normalize.css/normalize.css"></script>
+  <link rel="stylesheet" href="normalize.css/normalize.css">
   <!-- endbuild -->
   {{#if inlineStyle}}
   <link rel="stylesheet" href="styles/{{page}}.css" inline>
@@ -28,7 +28,9 @@
   {{> App}}
 
 <!-- build:remove -->
-<script src="scripts/misc/dev.js"></script>
+<script>
+  const __DEV__ = true;
+</script>
 <!-- endbuild -->
 
 {{#if hbs}}

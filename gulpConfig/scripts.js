@@ -89,7 +89,7 @@ function concat(src, filename) {
         // preserveComments: 'license',
         compress: {
           global_defs: {
-            DEV: false,
+            __DEV__: process.env.NODE_ENV === 'development',
           },
         },
       }))
@@ -203,7 +203,7 @@ function bundle(entry, filename, opts = {}) {
         // preserveComments: 'license',
         compress: {
           global_defs: {
-            DEV: false,
+            __DEV__: process.env.NODE_ENV === 'development',
           },
         },
       }))

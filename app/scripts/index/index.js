@@ -15,7 +15,7 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 
 window.addEventListener('load', () => {
-  if (DEV) {
+  if (__DEV__) {
     console.log('Development Mode'); // eslint-disable-line no-console
   }
 });

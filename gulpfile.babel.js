@@ -31,7 +31,7 @@ import {
 } from './gulpConfig/utils';
 import { name } from './package.json';
 
-dotenv.config({ silent: true });
+dotenv.config();
 
 const BS = browserSync.create();
 
