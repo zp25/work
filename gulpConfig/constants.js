@@ -2,7 +2,7 @@
 
 import dotenv from 'dotenv';
 
-dotenv.config({ silent: true });
+dotenv.config();
 
 const SRC = process.env.SRC || 'app';
 const OUTPUT = process.env.OUTPUT || 'dist';

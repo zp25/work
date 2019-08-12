@@ -12,14 +12,11 @@ module.exports = (api) => {
   ];
 
   const plugins = [
-    '@babel/plugin-syntax-dynamic-import',
-    '@babel/plugin-syntax-import-meta',
     '@babel/plugin-proposal-class-properties',
-    '@babel/plugin-proposal-json-strings',
     [
       '@babel/plugin-proposal-decorators',
       {
-        legacy: true,
+        decoratorsBeforeExport: false,
       },
     ],
     '@babel/plugin-proposal-export-namespace-from',
@@ -27,6 +24,7 @@ module.exports = (api) => {
     [
       '@babel/plugin-transform-runtime',
       {
+        corejs: false,
         helpers: true,
         regenerator: false,
       },
