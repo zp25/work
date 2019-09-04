@@ -14,11 +14,11 @@ const makeHashKey = entry => file => [file.contents.toString('utf8'), entry].joi
 
 function images(src) {
   const task = () => gulp.src(src, { base: SRC })
-    .pipe($.cache($.imagemin({
-      progressive: true,
-      interlaced: true,
-      multipass: true,
-    }), {
+    .pipe($.cache($.imagemin([
+      $.imagemin.gifsicle({ interlaced: true }),
+      $.imagemin.jpegtran({ progressive: true }),
+      // $.imagemin.optipng({ optimizationLevel: 5 }),
+    ]), {
       key: makeHashKey('images'),
     }))
     .pipe(gulp.dest(OUTPUT))

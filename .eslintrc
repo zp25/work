@@ -9,6 +9,7 @@
     "Template": false
   },
   "rules": {
+    "arrow-parens": ["error", "as-needed", { "requireForBlockBody": true }],
     "no-cond-assign": ["error", "except-parens"]
   },
   "extends": "airbnb-base"
